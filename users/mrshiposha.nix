@@ -1,8 +1,6 @@
 { config, pkgs, ... }: with pkgs; {
   users.users.mrshiposha = {
     isNormalUser = true;
-
-    shell = zsh;
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -10,7 +8,7 @@
   };
 
   home-manager.users.mrshiposha = {
-    imports = [ ./programs ];
+    imports = [ ./common/programs ];
 
     programs.git = {
       enable = true;

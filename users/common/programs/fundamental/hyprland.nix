@@ -52,9 +52,12 @@
       env = "XCURSOR_SIZE,24";
 
       "$mainMod" = "Super";
+      "$terminal" = "alacritty";
 
       bind = [
-        "$mainMod+Shift, Return, exec, alacritty"
+        "$mainMod+Shift, Return, exec, $terminal"
+        "Super_L, P, exec, $terminal"
+
         "$mainMod, Return, exec, rofi -show drun -show-icons"
         "$mainMod, Q, killactive,"
         "$mainMod+Shift, E, exit,"
