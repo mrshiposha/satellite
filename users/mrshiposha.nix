@@ -1,6 +1,8 @@
 { config, pkgs, ... }: with pkgs; {
   users.users.mrshiposha = {
     isNormalUser = true;
+
+    shell = zsh;
     extraGroups = [
       "wheel"
       "networkmanager"

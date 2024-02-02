@@ -1,6 +1,8 @@
 { config, pkgs, ... }: with pkgs; {
   users.users.wally = {
     isNormalUser = true;
+
+    shell = zsh;
     extraGroups = [
       "networkmanager"
     ];
