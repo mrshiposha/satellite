@@ -9,7 +9,7 @@
         0;
       
       "files.insertFinalNewline" = true;
-      "editor.fontFamily" = "'Font Awesome 6 Free', 'Font Awesome 6 Brands'";
+      "editor.fontFamily" = "mononoki, Cambria Math";
       "window.zoomLevel" = 2;
     };
   };

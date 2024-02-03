@@ -85,21 +85,21 @@ in
         ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
 
-        "$mainMod+Shift, 1, workspace, 1"
-        "$mainMod+Shift, 2, workspace, 2"
-        "$mainMod+Shift, 3, workspace, 3"
-        "$mainMod+Shift, 4, workspace, 4"
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
 
-        "$mainMod+Ctrl, 1, movetoworkspacesilent, 1"
-        "$mainMod+Ctrl, 2, movetoworkspacesilent, 2"
-        "$mainMod+Ctrl, 3, movetoworkspacesilent, 3"
-        "$mainMod+Ctrl, 4, movetoworkspacesilent, 4"
+        "$mainMod+Shift, 1, movetoworkspacesilent, 1"
+        "$mainMod+Shift, 2, movetoworkspacesilent, 2"
+        "$mainMod+Shift, 3, movetoworkspacesilent, 3"
+        "$mainMod+Shift, 4, movetoworkspacesilent, 4"
 
-        "$mainMod+Shift, Right, workspace, e+1"
-        "$mainMod+Shift, Left, workspace, e-1"
+        "$mainMod, Right, workspace, e+1"
+        "$mainMod, Left, workspace, e-1"
 
-        "$mainMod+Ctrl, Right, movetoworkspace, e+1"
-        "$mainMod+Ctrl, Left, movetoworkspace, e-1"
+        "$mainMod+Shift, Right, movetoworkspace, e+1"
+        "$mainMod+Shift, Left, movetoworkspace, e-1"
       ];
 
       gestures = {

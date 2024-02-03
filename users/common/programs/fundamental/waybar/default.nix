@@ -41,12 +41,17 @@ in
           "codium" = "󰨞";
           "class<firefox>" = "";
           "class<firefox> title<.*youtube.*>" = "";
+          "class<firefox> title<.*Meet -.*>" = "<sub></sub>";
           "telegram" = "";
           "slack" = "";
-          "pavucontrol" = "<sub></sub>";
+          "discord" = "";
 
-          "class<firefox> title<.*Gmail.*>" = "";
-          "thunderbird" = "";          
+          "pavucontrol" = "<sub></sub>";
+          "nm-connection-editor" = "<sub></sub>";
+          "blueman" = "<sub></sub>";
+
+          "class<firefox> title<.*Gmail.*>" = "<sub></sub>";
+          "thunderbird" = "";
         };
       };
 
