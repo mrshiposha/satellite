@@ -1,17 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
-  optional = lib.optionalAttrs;
-in
-
-{
+{ pkgs, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       monitor = ",highres,auto,1";
 
       input = {
-        kb_layout = "us";
+        kb_layout = "us,ru";
+        kb_options = "grp:win_space_toggle";
 
         touchpad = {
           natural_scroll = true;

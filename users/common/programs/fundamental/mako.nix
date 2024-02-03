@@ -16,7 +16,7 @@ in
 
     maxVisible = -1;
     layer = "top";
-    font = "monospace 8";
+    font = "monospace 12";
     backgroundColor = "#4c566a9d";
     borderColor = "#4c566a9d";
     textColor = "#D8DEE9";

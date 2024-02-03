@@ -63,10 +63,10 @@ in
       backlight.format = "{percent}% ";
 
       pulseaudio = {
-        format = "{volume}%  / {format_source}";
+        format = "{volume}% <sub></sub> / {format_source}";
         format-muted = "<sub></sub> / {format_source}";
         format-source = "";
-        format-source-muted = "<sub></sub>";
+        format-source-muted = "";
         tooltip-format = "Sound Volume {volume}%";
         on-click = "pavucontrol";
       };
@@ -84,8 +84,8 @@ in
 
       network = {
         interface = "wlan0";
-        format-wifi = "<sub></sub>";
-        format-linked = "<sub></sub>";
+        format-wifi = "";
+        format-linked = "";
         format-disconnected = "<sub></sub>";
 
         tooltip-format-wifi = "{essid}\nIP: {ipaddr}\nStrength: {signalStrength}%";
