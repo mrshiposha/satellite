@@ -7,7 +7,10 @@
   };
 
   home-manager.users.wally = {
-    imports = [ ./common/programs ];
+    imports = [
+      ./common/programs
+      ./common/images/wallpapers.nix
+    ];
 
     home.stateVersion = config.system.stateVersion;
   };

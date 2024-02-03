@@ -1,4 +1,8 @@
-{
+{ pkgs, ... }: with pkgs; {
+  home.packages = [
+    duf
+  ];
+
   programs = {
     btop = {
       enable = true;

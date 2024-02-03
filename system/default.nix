@@ -7,7 +7,7 @@
     ./audio.nix
     ./docker.nix
     ./powersave.nix
-    ./auth-agent.nix
+    ./security.nix
     ./qt.nix
   ];
 

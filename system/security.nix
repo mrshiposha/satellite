@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  security.pam.services.swaylock = {};
+
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
@@ -13,5 +15,14 @@
           TimeoutStopSec = 10;
         };
     };
+  };
+
+  services.logind = {
+    extraConfig = ''
+      StopIdleSessionSec=900
+      IdleAction=lock
+    '';
+
+    lidSwitch = "suspend-then-hibernate";
   };
 }

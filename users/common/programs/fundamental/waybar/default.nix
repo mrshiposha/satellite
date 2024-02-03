@@ -11,7 +11,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    settings.main = {
+    settings.main = rec {
       layer = "top";
       position = "bottom";
 
@@ -28,8 +28,8 @@ in
         "pulseaudio"
         "network"
         "bluetooth"
-        "group/stats"
         "battery"
+        "group/stats"
       ];
 
       "hyprland/workspaces" = {
@@ -113,7 +113,10 @@ in
         format = "{usage}% ";
         on-click = "alacritty -e btop";
       };
-      memory.format = "{percentage}% RAM";
+      memory = {
+        format = "{percentage}% RAM";
+        on-click = cpu.on-click;
+      };
       disk.format = "{percentage_used}% ";
 
       battery = {

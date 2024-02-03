@@ -9,7 +9,10 @@
   };
 
   home-manager.users.mrshiposha = {
-    imports = [ ./common/programs ];
+    imports = [
+      ./common/programs
+      ./common/images/wallpapers.nix
+    ];
 
     home.packages = [ rustup ];
 

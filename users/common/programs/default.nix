@@ -2,7 +2,7 @@
   imports = [
     ./fundamental
     ./alacritty.nix
-    ./btop.nix
+    ./stats.nix
     ./firefox.nix
     ./vscode.nix
     ./connections.nix

@@ -8,7 +8,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = ",highres,auto,1";
 
       input = {
         kb_layout = "us";
@@ -19,7 +19,7 @@ in
           tap-to-click = false;
         };
 
-        sensitivity = 0;
+        sensitivity = 0.5;
       };
 
       misc.force_default_wallpaper = false;
@@ -75,18 +75,22 @@ in
         "$mainMod, Return, exec, rofi -show drun -show-icons"
         "$mainMod, Q, killactive,"
         "$mainMod+Shift, E, exit,"
+        "$mainMod, L, exec, swaylock"
         "$mainMod+Shift, C, exec, $reloadWaybar"
-        "$mainMod+Shift, F, togglefloating,"
+        "$mainMod, F, togglefloating,"
+        "$mainMod+Shift, F, fullscreen,"
 
         ", XF86AudioRaiseVolume, exec, pamixer --increase 5"
         ", XF86AudioLowerVolume, exec, pamixer --decrease 5"
         ", XF86AudioMute, exec, pamixer --toggle-mute"
-        ", XF86AudioMicMute, exec, pamixer --source 58 --toggle-mute"
+        ", XF86AudioMicMute, exec, pamixer --source alsa_input.pci-0000_00_1f.3.analog-stereo --toggle-mute"
 
         ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
 
         ", XF86Calculator, exec, qalculate-gtk"
+
+        ''Super_L+Shift_L, S, exec, grim -g "$(slurp -d)" - | wl-copy --type image/png''
 
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
@@ -114,11 +118,22 @@ in
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-    } // optional config.programs.waybar.enable {
+
       exec-once = [
         "waybar"
         (builtins.toString ./init-workspaces.sh)
+
+        "wpaperd"
       ];
     };
   };
+
+  programs.wpaperd.enable = true;
+  programs.swaylock.enable = true;
+
+  home.packages = with pkgs; [
+    grim
+    slurp
+    wl-clipboard
+  ];
 }

@@ -20,7 +20,7 @@
 
 window#waybar {
     background-color: @bg;
-    border-radius: 15px;
+    border-radius: 2em;
     padding: 0;
     margin: 0;
 }
@@ -28,20 +28,20 @@ window#waybar {
 #workspaces {
     background: @lightbg;
     margin: 0;
-    border-radius: 15px;
-    border: 0px;
+    border-radius: 2em;
+    border: 0;
     font-weight: bold;
     font-style: normal;
     opacity: 0.8;
-    font-size: 14px;
+    font-size: 16px;
     color: @workspaceicon;
 }
 
 #workspaces button {
-    padding: 0px 5px;
-    margin: 3px;
-    border-radius: 15px;
-    border: 0px;
+    margin: 0.2em;
+    padding: 0.15em 0.5em;
+    border-radius: 2em;
+    border: 0;
     color: @workspaceicon;
     background-color: @workspaceactive;
     transition: all 0.3s ease-in-out;
@@ -51,8 +51,8 @@ window#waybar {
 #workspaces button.active {
     color: @workspaceicon;
     background: @workspaceactive;
-    border-radius: 15px;
-    min-width: 40px;
+    border-radius: 2em;
+    min-width: 4em;
     transition: all 0.3s ease-in-out;
     opacity:1.0;
 }
@@ -60,7 +60,7 @@ window#waybar {
 #workspaces button:hover {
     color: @workspaceicon;
     background: @workspacehover;
-    border-radius: 15px;
+    border-radius: 2em;
 }
 
 #clock,
@@ -74,11 +74,11 @@ window#waybar {
 #battery
 {
     background-color: @nord_bg;
-    font-size: 12px;
+    font-size: 16px;
     color: @nord_light_font;
-    border-radius: 15px;
-    padding: 0px 7px;
-    margin: 3px;
+    border-radius: 2em;
+    padding: 0.4em 1em;
+    margin: 0.1em 0.2em;
 }
 
 #battery.discharging.warning {
