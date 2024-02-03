@@ -35,7 +35,7 @@ in
         allow_tearing = false;
       };
 
-      decoration.rounding = 15;
+      decoration.rounding = 5;
 
       animations = {
         enabled = true;

@@ -3,7 +3,6 @@
     enable = true;
     settings = {
       font.size = 8.0;
-      padding.x = 3;
     };
   };
 }
