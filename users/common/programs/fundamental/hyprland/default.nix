@@ -86,6 +86,8 @@ in
         ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
 
+        ", XF86Calculator, exec, qalculate-gtk"
+
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"

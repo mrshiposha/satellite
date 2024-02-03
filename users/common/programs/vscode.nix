@@ -10,7 +10,7 @@
       
       "files.insertFinalNewline" = true;
       "editor.fontFamily" = "mononoki, Cambria Math";
-      "window.zoomLevel" = 2;
+      "window.zoomLevel" = 1.5;
     };
   };
 }

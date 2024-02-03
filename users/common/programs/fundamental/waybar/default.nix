@@ -37,24 +37,24 @@ in
         persistent-workspaces."*" = 4;
         "window-rewrite-default" = "<sub></sub>";
         window-rewrite = {
-          "rofi" = "";
-          "alacritty" = "";
-          "codium" = "󰨞";
+          "class<rofi>" = "";
+          "class<alacritty>" = "";
+          "class<VSCodium>" = "󰨞";
           "class<firefox>" = "";
           "class<firefox> title<.*youtube.*>" = "";
           "class<firefox> title<.*Meet -.*>" = "<sub></sub>";
-          "telegram" = "";
-          "slack" = "";
-          "discord" = "";
+          "class<org.telegram.desktop>" = "";
+          "class<slack>" = "";
+          "class<discord>" = "";
 
-          "pavucontrol" = "<sub></sub>";
-          "nm-connection-editor" = "<sub></sub>";
-          "blueman" = "<sub></sub>";
+          "class<pavucontrol>" = "<sub></sub>";
+          "class<nm-connection-editor>" = "<sub></sub>";
+          "class<.blueman-manager-wrapped>" = "<sub></sub>";
 
           "class<firefox> title<.*Gmail.*>" = "<sub></sub>";
-          "thunderbird" = "";
+          "class<thunderbird>" = "";
 
-          "qalculate-gtk" = "";
+          "class<qalculate-gtk>" = "";
         };
       };
 
@@ -109,13 +109,16 @@ in
         };
       };
 
-      cpu.format = "{usage}% ";
+      cpu = {
+        format = "{usage}% ";
+        on-click = "alacritty -e btop";
+      };
       memory.format = "{percentage}% RAM";
       disk.format = "{percentage_used}% ";
 
       battery = {
         format = "{capacity}% {icon}";
-        format-charging = "{capacity}% {icon}";
+        format-charging = "{capacity}% {icon}<sub></sub>";
         format-icons = ["" "" "" "" ""];
         states = {
           warning = 30;

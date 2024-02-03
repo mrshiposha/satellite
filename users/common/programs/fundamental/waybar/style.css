@@ -1,7 +1,7 @@
 /* Nord */
 @define-color bg #2E3440;
 @define-color lightbg #4c566a;
-@define-color warning #ebcb8b;
+@define-color warning #d08770;
 @define-color critical #BF616A;
 @define-color workspaceactive #8fbcbb;
 @define-color workspacehover #a3be8c;

@@ -10,10 +10,19 @@
   home-manager.users.mrshiposha = {
     imports = [ ./common/programs ];
 
-    programs.git = {
-      enable = true;
-      userName = "Daniel Shiposha";
-      userEmail = "ds@unique.network";
+    home.packages = [ rustup ];
+
+    programs = {
+      git = {
+        enable = true;
+        userName = "Daniel Shiposha";
+        userEmail = "ds@unique.network";
+      };
+
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
     };
 
     home.stateVersion = config.system.stateVersion;
