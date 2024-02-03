@@ -126,6 +126,20 @@
   programs.wpaperd.enable = true;
   programs.swaylock.enable = true;
 
+  # TODO
+  # systemd.user.services.screenlock = {
+  #   Unit = {
+  #     Description = "Lock the screen on sleep and lock";
+  #     Before = ["sleep.target"];
+  #   };
+
+  #   Service = {
+  #     ExecStart = "${pkgs.swaylock}/bin/swaylock";
+  #   };
+
+  #   Install.WantedBy = ["sleep.target"];
+  # };
+
   home.packages = with pkgs; [
     grim
     slurp

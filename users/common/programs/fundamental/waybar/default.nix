@@ -60,7 +60,11 @@ in
 
       clock.format = "{:%H:%M} ";
 
-      backlight.format = "{percent}% ";
+      backlight = {
+        format = "{percent}% ";
+        reverse-scrolling = true;
+        scroll-step = 0.1;
+      };
 
       pulseaudio = {
         format = "{volume}% <sub></sub> / {format_source}";
@@ -69,6 +73,8 @@ in
         format-source-muted = "";
         tooltip-format = "Sound Volume {volume}%";
         on-click = "pavucontrol";
+        reverse-scrolling = true;
+        scroll-step = 0.1;
       };
 
       bluetooth = {
