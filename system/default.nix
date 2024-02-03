@@ -5,6 +5,10 @@
     ./greeter.nix
     ./net.nix
     ./audio.nix
+    ./docker.nix
+    ./powersave.nix
+    ./auth-agent.nix
+    ./qt.nix
   ];
 
   system.stateVersion = "23.11";
