@@ -68,6 +68,9 @@ window#waybar {
 #pulseaudio,
 #bluetooth,
 #network,
+#cpu,
+#memory,
+#disk,
 #battery
 {
     background-color: @nord_bg;

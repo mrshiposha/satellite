@@ -28,6 +28,7 @@ in
       modules-right = [
         "network"
         "bluetooth"
+        "group/stats"
         "battery"
       ];
 
@@ -94,6 +95,23 @@ in
         on-click = "rfkill toggle wlan";
         on-click-right = "nm-connection-editor";
       };
+
+      "group/stats" = {
+        orientation = "inherit";
+        modules = [
+          "cpu"
+          "disk"
+          "memory"
+        ];
+
+        drawer = {
+          transition-duration = 500;
+        };
+      };
+
+      cpu.format = "{usage}% ";
+      memory.format = "{percentage}% RAM";
+      disk.format = "{percentage_used}% ";
 
       battery = {
         format = "{capacity}% {icon}";
