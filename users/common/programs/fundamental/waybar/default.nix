@@ -60,15 +60,13 @@ in
 
       clock.format = "{:%H:%M} ";
 
-      backlight = {
-        format = "{percent}% {icon}";
-        format-icons = [""];
-      };
+      backlight.format = "{percent}% ";
 
       pulseaudio = {
-        format = "{volume}% {icon}";
-        format-icons.default = [""];
-        format-muted = "<sub></sub>";
+        format = "{volume}%  / {format_source}";
+        format-muted = "<sub></sub> / {format_source}";
+        format-source = "";
+        format-source-muted = "<sub></sub>";
         tooltip-format = "Sound Volume {volume}%";
         on-click = "pavucontrol";
       };

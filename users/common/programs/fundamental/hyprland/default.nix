@@ -81,6 +81,7 @@ in
         ", XF86AudioRaiseVolume, exec, pamixer --increase 5"
         ", XF86AudioLowerVolume, exec, pamixer --decrease 5"
         ", XF86AudioMute, exec, pamixer --toggle-mute"
+        ", XF86AudioMicMute, exec, pamixer --source 58 --toggle-mute"
 
         ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
