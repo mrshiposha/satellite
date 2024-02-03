@@ -12,5 +12,6 @@
     pavucontrol
     pamixer
     brightnessctl
+    qalculate-gtk
   ];
 }

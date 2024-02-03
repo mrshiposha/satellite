@@ -21,11 +21,11 @@ in
 
       modules-left = [
         "hyprland/workspaces"
-        "backlight"
-        "pulseaudio"
       ];
       modules-center = ["clock"];
       modules-right = [
+        "backlight"
+        "pulseaudio"
         "network"
         "bluetooth"
         "group/stats"
@@ -53,6 +53,8 @@ in
 
           "class<firefox> title<.*Gmail.*>" = "<sub></sub>";
           "thunderbird" = "";
+
+          "qalculate-gtk" = "";
         };
       };
 
