@@ -1,6 +1,10 @@
 { pkgs, ... }: with pkgs; {
   fonts = {
-    packages = [ meslo-lgs-nf mononoki ];
+    packages = [
+      font-awesome
+      meslo-lgs-nf
+      mononoki
+    ];
     fontconfig = {
       enable = true;
       defaultFonts.monospace = ["MesloLGS NF"];

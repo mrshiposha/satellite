@@ -1,0 +1,103 @@
+/* Nord */
+@define-color bg #2E3440;
+@define-color lightbg #4c566a;
+@define-color warning #ebcb8b;
+@define-color critical #BF616A;
+@define-color workspaceactive #8fbcbb;
+@define-color workspacehover #a3be8c;
+@define-color workspaceicon #434C5E;
+@define-color nord_bg #434C5E;
+@define-color nord_bg_blue #546484;
+@define-color nord_light #D8DEE9;
+@define-color nord_light_font #D8DEE9;
+@define-color nord_dark_font #434C5E;
+@define-color nord_light_marine #88c0d0;
+@define-color nord_light_green #a3be8c;
+
+* {
+    padding: 0;
+}
+
+window#waybar {
+    background-color: @bg;
+    border-radius: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+#workspaces {
+    background: @lightbg;
+    margin: 0;
+    border-radius: 15px;
+    border: 0px;
+    font-weight: bold;
+    font-style: normal;
+    opacity: 0.8;
+    font-size: 14px;
+    color: @workspaceicon;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 3px;
+    border-radius: 15px;
+    border: 0px;
+    color: @workspaceicon;
+    background-color: @workspaceactive;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+}
+
+#workspaces button.active {
+    color: @workspaceicon;
+    background: @workspaceactive;
+    border-radius: 15px;
+    min-width: 40px;
+    transition: all 0.3s ease-in-out;
+    opacity:1.0;
+}
+
+#workspaces button:hover {
+    color: @workspaceicon;
+    background: @workspacehover;
+    border-radius: 15px;
+}
+
+#clock,
+#backlight,
+#pulseaudio,
+#bluetooth,
+#network,
+#battery
+{
+    background-color: @nord_bg;
+    font-size: 12px;
+    color: @nord_light_font;
+    border-radius: 15px;
+    padding: 0px 7px;
+    margin: 3px;
+}
+
+#battery.discharging.warning {
+  background-color: @warning;   
+}
+
+#battery.discharging.critical {
+    background-color: @critical;   
+}
+
+#bluetooth.on {
+    background-color: @nord_light_marine;
+}
+
+#bluetooth.connected {
+    background-color: @nord_light_green;
+}
+
+#network.linked {
+    background-color: @nord_light_marine;
+}
+
+#network.wifi {
+    background-color: @nord_light_green;
+}

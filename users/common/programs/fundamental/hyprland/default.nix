@@ -1,3 +1,9 @@
+{ config, lib, ... }:
+
+let
+  optional = lib.optionalAttrs;
+in
+
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -19,8 +25,8 @@
       misc.force_default_wallpaper = false;
 
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
+        gaps_in = 2;
+        gaps_out = 5;
         border_size = 2;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
@@ -29,7 +35,7 @@
         allow_tearing = false;
       };
 
-      decoration.rounding = 7;
+      decoration.rounding = 15;
 
       animations = {
         enabled = true;
@@ -51,8 +57,16 @@
 
       env = "XCURSOR_SIZE,24";
 
+      workspace = [
+        "1,persistent:true"
+        "2,persistent:true"
+        "3,persistent:true"
+        "4,persistent:true"
+      ];
+
       "$mainMod" = "Super";
       "$terminal" = "alacritty";
+      "$reloadWaybar" = "pkill waybar ; waybar";
 
       bind = [
         "$mainMod+Shift, Return, exec, $terminal"
@@ -61,7 +75,15 @@
         "$mainMod, Return, exec, rofi -show drun -show-icons"
         "$mainMod, Q, killactive,"
         "$mainMod+Shift, E, exit,"
+        "$mainMod+Shift, C, exec, $reloadWaybar"
         "$mainMod+Shift, F, togglefloating,"
+
+        ", XF86AudioRaiseVolume, exec, pamixer --increase 5"
+        ", XF86AudioLowerVolume, exec, pamixer --decrease 5"
+        ", XF86AudioMute, exec, pamixer --toggle-mute"
+
+        ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
 
         "$mainMod+Shift, 1, workspace, 1"
         "$mainMod+Shift, 2, workspace, 2"
@@ -73,11 +95,11 @@
         "$mainMod+Ctrl, 3, movetoworkspacesilent, 3"
         "$mainMod+Ctrl, 4, movetoworkspacesilent, 4"
 
-        "$mainMod+Shift, right, workspace, +1"
-        "$mainMod+Shift, left, workspace, -1"
+        "$mainMod+Shift, Right, workspace, e+1"
+        "$mainMod+Shift, Left, workspace, e-1"
 
-        "$mainMod+Ctrl, right, movetoworkspace, +1"
-        "$mainMod+Ctrl, left, movetoworkspace, -1"
+        "$mainMod+Ctrl, Right, movetoworkspace, e+1"
+        "$mainMod+Ctrl, Left, movetoworkspace, e-1"
       ];
 
       gestures = {
@@ -88,6 +110,11 @@
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
+      ];
+    } // optional config.programs.waybar.enable {
+      exec-once = [
+        "waybar"
+        (builtins.toString ./init-workspaces.sh)
       ];
     };
   };

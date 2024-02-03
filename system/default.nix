@@ -2,6 +2,7 @@
   imports = [
     ./boot.nix
     ./fonts.nix
+    ./greeter.nix
     ./net.nix
     ./audio.nix
   ];

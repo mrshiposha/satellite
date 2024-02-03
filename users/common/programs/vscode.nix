@@ -8,8 +8,8 @@
         nixosConfig.fonts.fontconfig.defaultFonts.monospace
         0;
       
-      "files.inswerFinalNewline" = true;
-      "editor.fontFamily" = "mononoki, Cambria Math";
+      "files.insertFinalNewline" = true;
+      "editor.fontFamily" = "'Font Awesome 6 Free', 'Font Awesome 6 Brands'";
       "window.zoomLevel" = 2;
     };
   };

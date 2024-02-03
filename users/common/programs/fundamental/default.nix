@@ -1,12 +1,16 @@
 { pkgs, ... }: with pkgs; {
   imports = [
     ./zsh
-    ./hyprland.nix
-    ./rofi.nix
+    ./hyprland
+    ./waybar
+    ./rofi
+    ./mako.nix
   ];
 
   home.packages = [
     networkmanagerapplet
     pavucontrol
+    pamixer
+    brightnessctl
   ];
 }
