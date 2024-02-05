@@ -30,6 +30,7 @@ in
         "bluetooth"
         "battery"
         "group/stats"
+        "custom/power"
       ];
 
       "hyprland/workspaces" = {
@@ -113,6 +114,12 @@ in
         drawer = {
           transition-duration = 500;
         };
+      };
+
+      "custom/power" = {
+        format = "";
+        on-click = "rofi -show power-menu";
+        tooltip-format = "Power Menu";
       };
 
       cpu = {

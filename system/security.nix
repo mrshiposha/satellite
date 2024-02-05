@@ -18,11 +18,8 @@
   };
 
   services.logind = {
-    extraConfig = ''
-      StopIdleSessionSec=900
-      IdleAction=lock
-    '';
-
+    # FIXME looks like it doesn't work
     lidSwitch = "suspend-then-hibernate";
+    powerKey = "hibernate";
   };
 }

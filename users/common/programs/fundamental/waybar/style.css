@@ -70,7 +70,8 @@ window#waybar {
 #cpu,
 #memory,
 #disk,
-#battery
+#battery,
+#custom-power
 {
     background-color: @nord_bg;
     font-size: 16px;

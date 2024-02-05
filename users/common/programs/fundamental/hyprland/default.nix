@@ -70,7 +70,7 @@
         "$mainMod, Return, exec, rofi -show drun -show-icons"
         "$mainMod, Q, killactive,"
         "$mainMod+Shift, E, exit,"
-        "$mainMod, L, exec, swaylock"
+        "$mainMod, L, exec, swaylock -f"
         "$mainMod+Shift, C, exec, $reloadWaybar"
         "$mainMod, F, togglefloating,"
         "$mainMod+Shift, F, fullscreen,"
@@ -82,6 +82,8 @@
 
         ", XF86MonBrightnessUp, exec, brightnessctl -q set 5%+"
         ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
+
+        ", XF86Favorites, exec, rofi -show power-menu"
 
         ", XF86Calculator, exec, qalculate-gtk"
 
@@ -119,6 +121,8 @@
         (builtins.toString ./init-workspaces.sh)
 
         "wpaperd"
+
+        "swayidle -w lock 'swaylock -f' before-sleep 'swaylock -f; hyprctl dispatch dpms off' after-resume 'hyprctl dispatch dpms on'"
       ];
     };
   };
@@ -126,19 +130,37 @@
   programs.wpaperd.enable = true;
   programs.swaylock.enable = true;
 
-  # TODO
-  # systemd.user.services.screenlock = {
-  #   Unit = {
-  #     Description = "Lock the screen on sleep and lock";
-  #     Before = ["sleep.target"];
-  #   };
+  services.swayidle =
+  let
+    lock = "${pkgs.swaylock}/bin/swaylock -f";
+    hibernate = "${pkgs.systemd}/bin/systemctl hibernate";
+  in
+  {
+    enable = true;
+    events = [
+      {
+        event = "lock";
+        command = lock;
+      }
 
-  #   Service = {
-  #     ExecStart = "${pkgs.swaylock}/bin/swaylock";
-  #   };
+      {
+        event = "before-sleep";
+        command = lock;
+      }
+    ];
 
-  #   Install.WantedBy = ["sleep.target"];
-  # };
+    timeouts = [
+      {
+        timeout = 600;
+        command = lock;
+      }
+
+      {
+        timeout = 900;
+        command = hibernate;
+      }
+    ];
+  };
 
   home.packages = with pkgs; [
     grim
