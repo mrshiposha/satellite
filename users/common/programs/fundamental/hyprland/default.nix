@@ -136,13 +136,7 @@ in
 
         "wpaperd"
 
-        ''
-        swayidle -w lock '${screen.lock}' \
-          before-sleep '${screen.lock}; ${screen.off}' \
-          after-resume '${screen.on}' \
-          timeout 600 '${screen.lock}' \
-          timeout 900 '${hibernate}'
-        ''
+        "swayidle -w lock '${screen.lock}' before-sleep '${screen.lock}; ${screen.off}' after-resume '${screen.on}' timeout 600 '${screen.lock}' timeout 900 '${hibernate}'"
       ];
     };
   };
