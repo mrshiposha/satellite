@@ -14,5 +14,6 @@
     pamixer
     brightnessctl
     qalculate-gtk
+    xdg-utils
   ];
 }
