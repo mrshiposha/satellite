@@ -18,8 +18,11 @@
   };
 
   services.logind = {
-    # FIXME looks like it doesn't work
     lidSwitch = "suspend-then-hibernate";
+    extraConfig = ''
+      HibernateDelaySec = 600
+    '';
+
     powerKey = "hibernate";
   };
 }

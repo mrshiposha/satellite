@@ -81,15 +81,6 @@ window#waybar {
     margin: 0.1em 0.2em;
 }
 
-#network {
-    background-color: @nord_bg;
-    font-size: 24px;
-    color: @nord_light_font;
-    border-radius: 2em;
-    padding: 0.05em 0.5em;
-    margin: 0.05em 0.2em;
-}
-
 #battery.discharging.warning {
   background-color: @warning;   
 }
@@ -106,7 +97,19 @@ window#waybar {
     background-color: @nord_light_green;
 }
 
-#network.linked {
+#network,
+#network.disabled {
+    background-color: @nord_bg;
+    font-size: 24px;
+    color: @nord_light_font;
+    border-radius: 2em;
+    padding: 0.05em 0.5em;
+    margin: 0.05em 0.2em;
+}
+
+#network.linked,
+#network.disconnected
+{
     background-color: @nord_light_marine;
 }
 

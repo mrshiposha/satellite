@@ -1,4 +1,18 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  swaylock = rec {
+    pkg = pkgs.swaylock-effects;
+    bin = "${pkg}/bin/swaylock";
+  };
+  screenlock-config = "${config.home.homeDirectory}/${config.xdg.configFile."swaylock/config".target}";
+  screen = {
+    lock = "${swaylock.bin} -f -C ${screenlock-config}";
+    off = "hyprctl dispatch dpms off";
+    on = "hyprctl dispatch dpms on";
+  };
+  hibernate = "${pkgs.systemd}/bin/systemctl hibernate";
+in
+{
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -70,7 +84,7 @@
         "$mainMod, Return, exec, rofi -show drun -show-icons"
         "$mainMod, Q, killactive,"
         "$mainMod+Shift, E, exit,"
-        "$mainMod, L, exec, swaylock -f"
+        "$mainMod, L, exec, ${screen.lock}"
         "$mainMod+Shift, C, exec, $reloadWaybar"
         "$mainMod, F, togglefloating,"
         "$mainMod+Shift, F, fullscreen,"
@@ -122,49 +136,59 @@
 
         "wpaperd"
 
-        "swayidle -w lock 'swaylock -f' before-sleep 'swaylock -f; hyprctl dispatch dpms off' after-resume 'hyprctl dispatch dpms on'"
+        ''
+        swayidle -w lock '${screen.lock}' \
+          before-sleep '${screen.lock}; ${screen.off}' \
+          after-resume '${screen.on}' \
+          timeout 600 '${screen.lock}' \
+          timeout 900 '${hibernate}'
+        ''
       ];
     };
   };
 
   programs.wpaperd.enable = true;
-  programs.swaylock.enable = true;
-
-  services.swayidle =
-  let
-    lock = "${pkgs.swaylock}/bin/swaylock -f";
-    hibernate = "${pkgs.systemd}/bin/systemctl hibernate";
-  in
-  {
+  programs.swaylock = {
     enable = true;
-    events = [
-      {
-        event = "lock";
-        command = lock;
-      }
+    package = swaylock.pkg;
+    settings = {
+      indicator = true;
+      indicator-radius = 100;
+      show-keyboard-layout = true;
 
-      {
-        event = "before-sleep";
-        command = lock;
-      }
-    ];
+      clock = true;
+      timestr = "%R";
+      datestr = "%Y-%m-%d";
 
-    timeouts = [
-      {
-        timeout = 600;
-        command = lock;
-      }
+      line-uses-ring = true;
 
-      {
-        timeout = 900;
-        command = hibernate;
-      }
-    ];
+      bs-hl-color = "b48eadff";
+      caps-lock-bs-hl-color = "d08770ff";
+      caps-lock-key-hl-color = "ebcb8bff";
+      inside-color = "2e3440ff";
+      inside-clear-color = "81a1c1ff";
+      inside-ver-color = "5e81acff";
+      inside-wrong-color = "bf616aff";
+      key-hl-color = "a3be8cff";
+      layout-bg-color = "2e3440ff";
+
+      ring-color = "4c566aff";
+      ring-clear-color = "88c0d0ff";
+      ring-ver-color = "81a1c1ff";
+      ring-wrong-color = "d08770ff";
+      separator-color = "3b4252ff";
+      text-color = "eceff4ff";
+      text-clear-color = "3b4252ff";
+
+      text-ver-color = "3b4252ff";
+      text-wrong-color = "3b4252ff";
+    };
   };
 
   home.packages = with pkgs; [
     grim
     slurp
     wl-clipboard
+    swayidle
   ];
 }

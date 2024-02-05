@@ -24,6 +24,7 @@ in
     maxIconSize = 48;
     defaultTimeout = 2500;
     anchor = "bottom-right";
-    margin = builtins.toString gapsout;
+    margin = builtins.toString (gapsout + 20);
+    width = 426;
   };
 }

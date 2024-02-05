@@ -1,4 +1,4 @@
-{ config, ... }: {
+{
   networking.hostName = "satellite";
 
   networking.wireless.iwd.enable = true;
