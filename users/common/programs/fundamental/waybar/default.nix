@@ -1,4 +1,4 @@
-{ config, ... }: 
+{ config, pkgs, ... }: 
 
 let
   hyprland = config.wayland.windowManager.hyprland;
@@ -85,22 +85,20 @@ in
         tooltip-format-connected = "{device_alias}";
         tooltip-format-connected-battery = "{device_alias}<sub> {device_battery_percentage}%</sub>";
 
-        on-click = "rfkill toggle bluetooth";
-        on-click-right = "blueman-manager";
+        on-click = "${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
       };
 
       network = {
         interface = "wlan0";
         format-wifi = "";
         format-linked = "";
-        format-disconnected = "<sub></sub>";
+        format-disconnected = "";
 
         tooltip-format-wifi = "{essid}\nIP: {ipaddr}\nStrength: {signalStrength}%";
         tooltip-format-linked = "connecting to {essid}";
         tooltip-format-disconnected = "WiFi disconnected";
 
-        on-click = "rfkill toggle wlan";
-        on-click-right = "nm-connection-editor";
+        on-click = builtins.toString ./launch-wifi-menu.sh;
       };
 
       "group/stats" = {

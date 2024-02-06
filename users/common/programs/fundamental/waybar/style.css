@@ -98,7 +98,8 @@ window#waybar {
 }
 
 #network,
-#network.disabled {
+#network.disabled,
+#network.disconnected {
     background-color: @nord_bg;
     font-size: 24px;
     color: @nord_light_font;
@@ -107,9 +108,7 @@ window#waybar {
     margin: 0.05em 0.2em;
 }
 
-#network.linked,
-#network.disconnected
-{
+#network.linked {
     background-color: @nord_light_marine;
 }
 
