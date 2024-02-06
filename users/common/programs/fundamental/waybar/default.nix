@@ -117,6 +117,8 @@ in
 
       "custom/power" = {
         format = "";
+        exec = '' echo '{ "tooltip": "Power Menu" }' '';
+        return-type = "json";
 
         # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
         on-click = "sleep 0.1 && rofi -show power-menu";
