@@ -85,7 +85,8 @@ in
         tooltip-format-connected = "{device_alias}";
         tooltip-format-connected-battery = "{device_alias}<sub> {device_battery_percentage}%</sub>";
 
-        on-click = "${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
+        # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
+        on-click = "sleep 0.1 && ${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
       };
 
       network = {
@@ -116,7 +117,9 @@ in
 
       "custom/power" = {
         format = "";
-        on-click = "rofi -show power-menu";
+
+        # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
+        on-click = "sleep 0.1 && rofi -show power-menu";
         tooltip-format = "Power Menu";
       };
 
