@@ -17,12 +17,8 @@
     };
   };
 
-  services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    extraConfig = ''
-      HibernateDelaySec = 600
-    '';
-
-    powerKey = "hibernate";
-  };
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec = 600
+  '';
 }
