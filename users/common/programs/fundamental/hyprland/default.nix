@@ -99,7 +99,7 @@ in
 
         ", XF86Favorites, exec, rofi -show power-menu"
 
-        ", XF86Calculator, exec, qalculate-gtk"
+        ", XF86Calculator, exec, rofi -show calc"
 
         ''Super_L+Shift_L, S, exec, grim -g "$(slurp -d)" - | wl-copy --type image/png''
 
