@@ -48,6 +48,8 @@
       window.zoomLevel = 1.5;
       window.menuBarVisibility = "toggle";
 
+      pestIdeTools.serverPath = "${pkgs.pest-ide-tools}/bin/pest-language-server";
+
       nix = {
         enableLanguageServer = true;
         serverPath = "nil";
