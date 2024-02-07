@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: with pkgs; {
+{ config, pkgs, ... }: {
   users.users.mrshiposha = {
     isNormalUser = true;
     extraGroups = [
@@ -14,7 +14,10 @@
       ./common/images/wallpapers.nix
     ];
 
-    home.packages = [ rustup ];
+    home.packages = with pkgs; [
+      rustup
+      lapce
+    ];
 
     programs = {
       git = {
