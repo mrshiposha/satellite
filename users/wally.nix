@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: with pkgs; {
+{ config, ... }: {
   users.users.wally = {
     isNormalUser = true;
     extraGroups = [

@@ -1,6 +1,6 @@
-{ pkgs, ... }: with pkgs; {
+{ pkgs, ... }: {
   fonts = {
-    packages = [
+    packages = with pkgs; [
       font-awesome
       meslo-lgs-nf
       mononoki

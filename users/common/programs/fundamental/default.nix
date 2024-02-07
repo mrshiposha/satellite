@@ -1,4 +1,4 @@
-{ pkgs, ... }: with pkgs; {
+{ pkgs, ... }: {
   imports = [
     ./zsh
     ./hyprland
@@ -8,7 +8,7 @@
     ./themes.nix
   ];
 
-  home.packages = [
+  home.packages = with pkgs; [
     networkmanagerapplet
     pavucontrol
     pamixer

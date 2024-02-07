@@ -1,5 +1,5 @@
-{ pkgs, ... }: with pkgs; {
-  home.packages = [
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
     tdesktop
     slack
     discord

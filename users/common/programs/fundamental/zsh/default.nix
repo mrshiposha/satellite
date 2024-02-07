@@ -1,11 +1,11 @@
-{ pkgs, ... }: with pkgs; {
+{ pkgs, ... }: {
   programs.zsh = {
     enable = true;
     plugins = [
       {
         file = "powerlevel10k.zsh-theme";
         name = "powerlevel10k";
-        src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k";
+        src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
       }
     ];
 
