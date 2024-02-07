@@ -30,6 +30,13 @@
         version = "0.1.0";
         sha256 = "sha256-AwiVkUNyKTTCzzsS0XoQRFeW/e+iOsXxeLANi8/kEdQ=";
       }
+
+      {
+        name = "pest-ide-tools";
+        publisher = "pest";
+        version = "0.3.6";
+        sha256 = "sha256-oyT/O0LwOCVVKM0JGiWTcRVXBElDplcZ+m1Eq+bRTJA=";
+      }
     ];
     userSettings = {
       terminal.integrated.fontFamily = builtins.elemAt

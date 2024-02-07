@@ -12,6 +12,7 @@
     imports = [
       ./common/programs
       ./common/images/wallpapers.nix
+      ./programs/vscode.nix
     ];
 
     home.packages = with pkgs; [
