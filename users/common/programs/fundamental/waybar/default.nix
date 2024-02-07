@@ -41,6 +41,7 @@ in
           "class<rofi>" = "";
           "class<alacritty>" = "";
           "class<VSCodium>" = "󰨞";
+          "class<lapce>" = "";
           "class<firefox>" = "";
           "class<firefox> title<.*youtube.*>" = "";
           "class<firefox> title<.*Meet -.*>" = "<sub></sub>";
