@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   users.users.mrshiposha = {
     isNormalUser = true;
+    description = "Daniel Shiposha";
     extraGroups = [
       "wheel"
       "networkmanager"

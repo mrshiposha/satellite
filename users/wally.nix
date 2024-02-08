@@ -1,6 +1,7 @@
 { config, ... }: {
   users.users.wally = {
     isNormalUser = true;
+    description = "Valentina Shiposha";
     extraGroups = [
       "networkmanager"
     ];
