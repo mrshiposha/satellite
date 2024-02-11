@@ -44,7 +44,16 @@ in
         allow_tearing = false;
       };
 
-      decoration.rounding = 5;
+      decoration = {
+        rounding = 5;
+
+        blur = {
+          enabled = true;
+          size = 5;
+          passes = 1;
+          new_optimizations = true;
+        };
+      };
 
       animations = {
         enabled = true;
