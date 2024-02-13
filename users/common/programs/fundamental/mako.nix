@@ -15,7 +15,7 @@ in
     enable = true;
 
     maxVisible = -1;
-    layer = "top";
+    layer = "overlay";
     font = "monospace 12";
     backgroundColor = "#4c566a9d";
     borderColor = "#4c566a9d";
