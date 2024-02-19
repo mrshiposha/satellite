@@ -18,7 +18,7 @@
 
     home.packages = with pkgs; [
       rustup
-      lapce
+      qrencode
     ];
 
     programs = {
