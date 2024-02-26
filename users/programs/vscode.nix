@@ -44,7 +44,7 @@
         0;
       
       files.insertFinalNewline = true;
-      editor.fontFamily = "mononoki, Cambria Math";
+      editor.fontFamily = "iosevka";
       window.zoomLevel = 1.5;
       window.menuBarVisibility = "toggle";
 
