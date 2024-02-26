@@ -76,10 +76,15 @@ in
       env = "XCURSOR_SIZE,24";
 
       workspace = [
-        "1,persistent:true"
-        "2,persistent:true"
-        "3,persistent:true"
-        "4,persistent:true"
+        "1,persistent:true, monitor:eDP-1, default:true"
+        "2,persistent:true, monitor:eDP-1"
+        "3,persistent:true, monitor:eDP-1"
+        "4,persistent:true, monitor:eDP-1"
+
+        "5,persistent:true, monitor:HDMI-A-1, default:true"
+        "6,persistent:true, monitor:HDMI-A-1"
+        "7,persistent:true, monitor:HDMI-A-1"
+        "8,persistent:true, monitor:HDMI-A-1"
       ];
 
       "$mainMod" = "Super";
@@ -117,10 +122,20 @@ in
         "$mainMod, 3, workspace, 3"
         "$mainMod, 4, workspace, 4"
 
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+
         "$mainMod+Shift, 1, movetoworkspacesilent, 1"
         "$mainMod+Shift, 2, movetoworkspacesilent, 2"
         "$mainMod+Shift, 3, movetoworkspacesilent, 3"
         "$mainMod+Shift, 4, movetoworkspacesilent, 4"
+
+        "$mainMod+Shift, 5, movetoworkspacesilent, 5"
+        "$mainMod+Shift, 6, movetoworkspacesilent, 6"
+        "$mainMod+Shift, 7, movetoworkspacesilent, 7"
+        "$mainMod+Shift, 8, movetoworkspacesilent, 8"
 
         "$mainMod, Right, workspace, e+1"
         "$mainMod, Left, workspace, e-1"
