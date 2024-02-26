@@ -4,6 +4,7 @@
       font-awesome
       meslo-lgs-nf
       mononoki
+      iosevka
     ];
     fontconfig = {
       enable = true;
