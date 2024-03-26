@@ -88,7 +88,7 @@ in
       ];
 
       "$mainMod" = "Super";
-      "$terminal" = "alacritty";
+      "$terminal" = "wezterm";
       "$reloadWaybar" = "pkill waybar ; waybar";
 
       bind = [

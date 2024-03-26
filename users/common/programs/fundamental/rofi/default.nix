@@ -2,7 +2,7 @@
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    terminal = "alacritty";
+    terminal = "wezterm";
     theme = ./theme.rasi;
     plugins = [
       pkgs.rofi-calc

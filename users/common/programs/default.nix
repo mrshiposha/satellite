@@ -1,7 +1,7 @@
 {
   imports = [
     ./fundamental
-    ./alacritty.nix
+    ./wezterm.nix
     ./stats.nix
     ./firefox.nix
     ./connections.nix

@@ -25,6 +25,8 @@
 
   users.defaultUserShell = pkgs.zsh;
 
+  environment.systemPackages = [ pkgs.llvmPackages.clangUseLLVM ];
+
   # FIXME in 23.11 the binary from the home-manager crashes.
   # Remove this in the future version of NixOS.
   programs.hyprland.enable = true;

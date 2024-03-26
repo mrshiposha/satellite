@@ -15,5 +15,6 @@
     brightnessctl
     qalculate-gtk
     xdg-utils
+    trash-cli
   ];
 }

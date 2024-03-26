@@ -14,12 +14,14 @@
       ./common/programs
       ./common/images/wallpapers.nix
       ./programs/vscode.nix
+      ./programs/neovim
     ];
 
     home.packages = with pkgs; [
       rustup
       qrencode
       inkscape
+      neovide
     ];
 
     programs = {

@@ -40,7 +40,9 @@ in
         window-rewrite = {
           "class<rofi>" = "";
           "class<alacritty>" = "";
+          "class<org.wezfurlong.wezterm>" = "";
           "class<VSCodium>" = "󰨞";
+          "class<neovide>" = "";
           "class<lapce>" = "";
           "class<firefox>" = "";
           "class<firefox> title<.*youtube.*>" = "";
@@ -128,7 +130,7 @@ in
 
       cpu = {
         format = "{usage}% ";
-        on-click = "alacritty -e btop";
+        on-click = "wezterm -e btop";
       };
       memory = {
         format = "{percentage}% RAM";
