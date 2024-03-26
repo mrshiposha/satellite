@@ -23,7 +23,6 @@
       ${dofile "terminal"}
       ${dofile "nav"}
       ${dofile "telescope"}
-      ${dofile "dashboard"}
     '';
 
     viAlias = true;
