@@ -14,7 +14,10 @@
       barbar-nvim
       plenary-nvim
       telescope-nvim
+      telescope-media-files-nvim
       nvim-web-devicons
+      auto-session
+      gitsigns-nvim
     ];
     extraLuaConfig = ''
       ${dofile "options"}
@@ -23,10 +26,17 @@
       ${dofile "terminal"}
       ${dofile "nav"}
       ${dofile "telescope"}
+      ${dofile "sessions"}
+      ${dofile "git"}
     '';
 
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
   };
+
+  home.packages = with pkgs; [
+    ripgrep
+    fd 
+  ];
 }
