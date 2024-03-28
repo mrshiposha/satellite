@@ -1,10 +1,9 @@
-local chadtree_settings = {
-   keymap = {
-       primary = {
-	   "<enter>",
-	   "<2-leftmouse>",
-       },
-       secondary = {},
-   },
-}
-vim.api.nvim_set_var("chadtree_settings", chadtree_settings)
+require("neo-tree").setup({
+    auto_clean_after_session_restore = true,
+    filesystem = {
+	follow_current_file = {
+	    enabled = true,
+	    leave_dirs_open = true,
+	}
+    }
+})

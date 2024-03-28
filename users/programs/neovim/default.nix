@@ -8,7 +8,7 @@
     plugins = with pkgs.vimPlugins; [
       nordic-nvim
       vim-visual-multi
-      chadtree
+      neo-tree-nvim
       flatten-nvim
       toggleterm-nvim
       barbar-nvim

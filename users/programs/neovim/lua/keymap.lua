@@ -18,6 +18,8 @@ keymap({"n"}, "<ESC>", "<cmd>noh<cr>")
 keymap({"v"}, "<C-c>", "\"+y")
 keymap({"i"}, "<C-v>", "<ESC>\"+pa")
 keymap({"c"}, "<C-v>", "<C-r>*", { noremap = true })
+keymap({"n"}, "<C-a>", "ggVG")
+keymap({"v"}, "<C-a>", "<ESC>ggVG")
 keymap({"i"}, "<A-r>", require("telescope.builtin").registers, { noremap = true })
 
 keymap({"n", "i", "v"}, "<C-z>", "<cmd>u<cr>")
@@ -37,7 +39,7 @@ keymap({"n", "v"}, "<Tab><Right>", "<C-w><Right>")
 keymap({"n", "v"}, "<Tab><Up>", "<C-w><Up>")
 keymap({"n", "v"}, "<Tab><Down>", "<C-w><Down>")
 
-keymap({"n", "i", "v"}, "<C-b>", "<cmd>CHADopen<cr>")
+keymap({"n", "i", "v"}, "<C-b>", "<cmd>Neotree toggle<cr>")
 
 keymap({"n", "v"}, "<C-Left>", "b")
 keymap({"i"}, "<C-Left>", "<C-O>b")
