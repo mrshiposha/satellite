@@ -22,6 +22,7 @@
       qrencode
       inkscape
       neovide
+      ghidra-bin
     ];
 
     programs = {

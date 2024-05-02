@@ -1,4 +1,4 @@
-{ nixosConfig, pkgs, ... }: {
+{ nixosConfig, pkgs, rustPlatform, ... }: {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -32,10 +32,17 @@
       }
 
       {
-        name = "pest-ide-tools";
-        publisher = "pest";
-        version = "0.3.6";
-        sha256 = "sha256-oyT/O0LwOCVVKM0JGiWTcRVXBElDplcZ+m1Eq+bRTJA=";
+        name = "rainbow-bracket";
+        publisher = "tal7aouy";
+        version = "1.0.2";
+        sha256 = "sha256-H0J9ZhzHpJ96fW7DrVqpA9tqAgL2cFmM9Wu9STu1MUY=";
+      }
+
+      {
+        name = "scheme";
+        publisher = "jeandeaual";
+        version = "0.2.0";
+        sha256 = "sha256-ddehU7YeHv62QjZiTk0HV9wHgz8mVDuyMpH/w89bh6s=";
       }
     ];
     userSettings = {
@@ -48,7 +55,7 @@
       window.zoomLevel = 1.5;
       window.menuBarVisibility = "toggle";
 
-      pestIdeTools.serverPath = "${pkgs.pest-ide-tools}/bin/pest-language-server";
+      RainbowBrackets.depreciation-notice = false;
 
       nix = {
         enableLanguageServer = true;

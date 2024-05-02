@@ -50,6 +50,7 @@ in
           "class<org.telegram.desktop>" = "";
           "class<slack>" = "";
           "class<discord>" = "";
+          "class<ghidra-Ghidra>" = "";
 
           "class<pavucontrol>" = "<sub></sub>";
           "class<nm-connection-editor>" = "<sub></sub>";
