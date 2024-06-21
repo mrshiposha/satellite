@@ -9,7 +9,6 @@
   ];
 
   home.packages = with pkgs; [
-    networkmanagerapplet
     pavucontrol
     pamixer
     brightnessctl
