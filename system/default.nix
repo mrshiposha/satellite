@@ -9,6 +9,7 @@
     ./powersave.nix
     ./security.nix
     ./qt.nix
+    ./erp.nix
   ];
 
   system.stateVersion = "23.11";
