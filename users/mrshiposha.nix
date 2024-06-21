@@ -10,10 +10,10 @@
 
   home-manager.users.mrshiposha = {
     imports = [
-      ./common/programs
+      ./common/programs/program-main-set.nix
+      ./common/programs/vscode.nix
+      ./common/programs/neovim
       ./common/images/wallpapers.nix
-      ./programs/vscode.nix
-      ./programs/neovim
     ];
 
     home.packages = with pkgs; [
