@@ -44,6 +44,13 @@
         version = "0.2.0";
         sha256 = "sha256-ddehU7YeHv62QjZiTk0HV9wHgz8mVDuyMpH/w89bh6s=";
       }
+
+      {
+        name = "language-x86-64-assembly";
+        publisher = "13xforever";
+        version = "3.1.4";
+        sha256 = "sha256-FJRDm1H3GLBfSKBSFgVspCjByy9m+j9OStlU+/pMfs8=";
+      }
     ];
     userSettings = {
       terminal.integrated.fontFamily = builtins.elemAt
