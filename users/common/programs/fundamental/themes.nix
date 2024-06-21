@@ -34,7 +34,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    platformTheme.name = "qtct";
     style = {
       package = pkgs.nordic;
       name = "Nordic";
