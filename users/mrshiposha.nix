@@ -4,7 +4,6 @@
     description = "Daniel Shiposha";
     extraGroups = [
       "wheel"
-      "networkmanager"
       "docker"
     ];
   };

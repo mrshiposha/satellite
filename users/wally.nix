@@ -2,9 +2,6 @@
   users.users.wally = {
     isNormalUser = true;
     description = "Valentina Shiposha";
-    extraGroups = [
-      "networkmanager"
-    ];
   };
 
   home-manager.users.wally = {
