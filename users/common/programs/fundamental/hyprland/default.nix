@@ -156,7 +156,6 @@ in
       ];
 
       exec-once = [
-        "waybar"
         (builtins.toString ./init-workspaces.sh)
 
         "wpaperd"
