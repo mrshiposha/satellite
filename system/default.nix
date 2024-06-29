@@ -18,8 +18,6 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  environment.systemPackages = [ pkgs.llvmPackages.clangUseLLVM ];
-
   programs = {
     zsh = {
       enable = true;
