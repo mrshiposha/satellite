@@ -11,7 +11,8 @@
 
       GTK = {
         theme_name = "Nordic";
-        cursor_theme_name = "Quintom_Ink";
+        #cursor_theme_name = "Quintom_Ink";
+        #icon_theme_name = "Zafiro-icons-Dark";
       };
     };
   };
