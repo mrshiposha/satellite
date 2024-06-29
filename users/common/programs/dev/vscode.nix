@@ -53,12 +53,8 @@
       }
     ];
     userSettings = {
-      terminal.integrated.fontFamily = builtins.elemAt
-        nixosConfig.fonts.fontconfig.defaultFonts.monospace
-        0;
-      
       files.insertFinalNewline = true;
-      editor.fontFamily = "iosevka";
+      editor.fontLigatures = true;
       window.zoomLevel = 1.5;
       window.menuBarVisibility = "toggle";
 
