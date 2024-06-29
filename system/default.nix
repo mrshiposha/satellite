@@ -2,7 +2,6 @@
   imports = [
     ./boot.nix
     ./fonts.nix
-    ./greeter.nix
     ./net.nix
     ./audio.nix
     ./docker.nix
@@ -11,6 +10,7 @@
     ./gui.nix
     ./games.nix
     ./erp.nix
+    ./unfree.nix
   ];
 
   system.stateVersion = "23.11";
