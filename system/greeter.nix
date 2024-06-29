@@ -1,5 +1,9 @@
 { pkgs, ... }: {
-  environment.systemPackages = [ pkgs.nordic ];
+  environment.systemPackages = with pkgs; [
+    nordic
+    quintom-cursor-theme
+    zafiro-icons
+  ];
 
   programs.regreet = {
     enable = true;
@@ -11,8 +15,8 @@
 
       GTK = {
         theme_name = "Nordic";
-        #cursor_theme_name = "Quintom_Ink";
-        #icon_theme_name = "Zafiro-icons-Dark";
+        cursor_theme_name = "Quintom_Ink";
+        icon_theme_name = "Zafiro-icons-Dark";
       };
     };
   };
