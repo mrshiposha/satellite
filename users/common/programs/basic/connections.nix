@@ -5,6 +5,11 @@
     discord
   ];
 
+  unfree.list = with pkgs; [
+    slack
+    discord
+  ];
+
   programs = {
     thunderbird = {
       enable = true;

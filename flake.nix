@@ -28,7 +28,7 @@
           home-manager.useUserPackages = true;
         }
         ./users
-        ./unfree-list.nix
+        ./unfree.nix
       ];
     };
   };

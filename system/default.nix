@@ -8,7 +8,8 @@
     ./docker.nix
     ./powersave.nix
     ./security.nix
-    ./qt.nix
+    ./gui.nix
+    ./games.nix
     ./erp.nix
   ];
 
@@ -18,15 +19,10 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs = {
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestions.enable = true;
-    };
-    hyprland.enable = true;
-    wshowkeys.enable = true;
-    steam.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
   };
   users.defaultUserShell = pkgs.zsh;
 }

@@ -10,6 +10,7 @@
 
   home-manager.users.mrshiposha = {
     imports = [
+      ./common/modules/basic
       ./common/programs/fundamental
       ./common/programs/basic
       ./common/programs/dev/vscode.nix

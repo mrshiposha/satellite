@@ -1,9 +1,0 @@
-{ lib, ... }: {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "slack"
-    "discord"
-    "steam"
-    "steam-original"
-    "steam-run"
-  ];
-}
