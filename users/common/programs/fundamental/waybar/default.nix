@@ -74,11 +74,12 @@ in
       };
 
       pulseaudio = {
-        format = "{volume}%  / {format_source}";
+        format = "{volume}% {icon} / {format_source}";
+        format-icons = ["" "" ""];
         format-muted = " / {format_source}";
         format-source = "";
         format-source-muted = "";
-        tooltip-format = "Sound Volume {volume}%";
+        tooltip-format = "Sound Volume / Mic Status";
         on-click = "pavucontrol";
         reverse-scrolling = true;
         scroll-step = 0.1;
