@@ -15,6 +15,7 @@ in
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.enable = true;
     settings = {
       monitor = ",highres,auto,1";
 
@@ -100,8 +101,8 @@ in
         "$mainMod+Shift, E, exit,"
         "$mainMod, L, exec, ${screen.lock}"
         "$mainMod+Shift, C, exec, $reloadWaybar"
-        "$mainMod, F, togglefloating,"
-        "$mainMod+Shift, F, fullscreen,"
+        "$mainMod+Shift, F, togglefloating,"
+        "$mainMod, F, fullscreen,"
 
         ", XF86AudioRaiseVolume, exec, pamixer --increase 5"
         ", XF86AudioLowerVolume, exec, pamixer --decrease 5"
