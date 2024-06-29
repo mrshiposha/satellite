@@ -11,6 +11,7 @@ in
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings.main = rec {
       layer = "top";
       position = "bottom";
@@ -73,8 +74,8 @@ in
       };
 
       pulseaudio = {
-        format = "{volume}% <sub></sub> / {format_source}";
-        format-muted = "<sub></sub> / {format_source}";
+        format = "{volume}%  / {format_source}";
+        format-muted = " / {format_source}";
         format-source = "";
         format-source-muted = "";
         tooltip-format = "Sound Volume {volume}%";
@@ -142,7 +143,7 @@ in
 
       battery = {
         format = "{capacity}% {icon}";
-        format-charging = "{capacity}% {icon}<sub></sub>";
+        format-charging = "{capacity}% {icon} ";
         format-icons = ["" "" "" "" ""];
         states = {
           warning = 30;
