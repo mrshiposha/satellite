@@ -6,7 +6,8 @@
 
   home-manager.users.wally = {
     imports = [
-      ./common/programs/program-main-set.nix
+      ./common/programs/fundamental
+      ./common/programs/basic
       ./common/images/wallpapers.nix
     ];
 

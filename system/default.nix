@@ -18,19 +18,17 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true; 
-  };
-
-  users.defaultUserShell = pkgs.zsh;
-
   environment.systemPackages = [ pkgs.llvmPackages.clangUseLLVM ];
 
-  # FIXME in 23.11 the binary from the home-manager crashes.
-  # Remove this in the future version of NixOS.
-  programs.hyprland.enable = true;
-
-  programs.wshowkeys.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+    };
+    hyprland.enable = true;
+    wshowkeys.enable = true;
+    steam.enable = true;
+  };
+  users.defaultUserShell = pkgs.zsh;
 }

@@ -51,6 +51,7 @@ in
           "class<slack>" = "";
           "class<discord>" = "";
           "class<ghidra-Ghidra>" = "";
+          "class<steam>" = "";
 
           "class<pavucontrol>" = "<sub></sub>";
           "class<nm-connection-editor>" = "<sub></sub>";
