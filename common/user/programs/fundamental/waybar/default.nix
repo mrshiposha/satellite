@@ -11,7 +11,9 @@ in
 {
   theming.fonts.packages = with pkgs; [
     font-awesome
-    meslo-lgs-nf
+    (nerdfonts.override {
+      fonts = ["NerdFontsSymbolsOnly"];
+    })
   ];
   programs.waybar = {
     enable = true;
@@ -47,8 +49,7 @@ in
           "class<alacritty>" = "";
           "class<org.wezfurlong.wezterm>" = "";
           "class<VSCodium>" = "󰨞";
-          "class<neovide>" = "";
-          "class<lapce>" = "";
+          "class<neovide>" = "";
           "class<firefox>" = "";
           "class<firefox> title<.*youtube.*>" = "";
           "class<firefox> title<.*Meet -.*>" = "<sub></sub>";

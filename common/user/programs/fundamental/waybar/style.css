@@ -16,7 +16,7 @@
 
 * {
     padding: 0;
-    font-family: "serif", "Font Awesome 6 Brands", "Font Awesome 6 Free", "MesloLGS NF";
+    font-family: "serif", "Font Awesome 6 Brands", "Font Awesome 6 Free", "Symbols Nerd Font Mono";
     /*
         These fonts are required to properly render the icons.
         The choice of fonts and their order matters.
@@ -25,7 +25,7 @@
         - serif: good regular text (digits, letters, etc)
         - Font Awesome 6 Brands: for brands (like Firefox, Telegram, etc)
         - Font Awesome 6 Free: for general icons (like clock, sound, wifi, battery, etc)
-        - MesloLGS NF: for dev icons (like vscode and terminal)
+        - Symbols Nerd Font Mono: for dev icons (like vscode and terminal)
     */
 }
 
