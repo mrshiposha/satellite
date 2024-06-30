@@ -7,7 +7,7 @@
     };
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, ... }:
+  outputs = inputs @ { nixpkgs, ... }:
   let
     mkLib = nixpkgs:
         nixpkgs.lib.extend
@@ -15,27 +15,7 @@
 
     lib = mkLib nixpkgs;
 
-    system = configurationPath:
-      let
-        configuration = (import configurationPath lib inputs);
-      in
-      lib.nixosSystem (configuration // {
-        modules = [
-          {
-            nix.settings.experimental-features = [
-              "nix-command"
-              "flakes"
-              "repl-flake"
-            ];
-          }
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ] ++ configuration.modules;
-      });
+    system = import ./lib/system.nix lib inputs;
   in
   {
     nixosConfigurations.satellite = system ./hosts/satellite;
