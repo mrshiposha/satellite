@@ -12,6 +12,7 @@
         proc_tree = true;
         mem_graphs = false;
         show_disks = false;
+        update_ms = 1000;
       };
     };
   };
