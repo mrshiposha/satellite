@@ -74,8 +74,6 @@ in
         force_zero_scaling = true;
       };
 
-      env = "XCURSOR_SIZE,24";
-
       workspace = [
         "1,persistent:true, monitor:eDP-1, default:true"
         "2,persistent:true, monitor:eDP-1"

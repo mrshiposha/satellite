@@ -31,6 +31,10 @@ in
         name = mkOption {
           type = str;
         };
+
+        size = mkOption {
+          type = number;
+        };
       };
 
       icons = {

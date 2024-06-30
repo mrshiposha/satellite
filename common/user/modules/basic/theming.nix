@@ -74,6 +74,11 @@ in
           type = str;
           default = "Quintom_Ink";
         };
+
+        size = mkOption {
+          type = number;
+          default = 24;
+        };
       };
 
       icons = {
@@ -113,6 +118,7 @@ in
     home.pointerCursor = mkIf cfg.gui.enable {
       package = cfg.gui.cursors.package;
       name = cfg.gui.cursors.name;
+      size = cfg.gui.cursors.size;
       x11.enable = true;
       gtk.enable = true;
     };
