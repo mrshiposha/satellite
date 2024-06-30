@@ -9,6 +9,10 @@ let
 in
 
 {
+  theming.fonts.packages = with pkgs; [
+    font-awesome
+    meslo-lgs-nf
+  ];
   programs.waybar = {
     enable = true;
     systemd.enable = true;

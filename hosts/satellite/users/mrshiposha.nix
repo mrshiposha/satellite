@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   users.users.mrshiposha = {
     isNormalUser = true;
     description = "Daniel Shiposha";
@@ -9,14 +9,18 @@
   };
 
   home-manager.users.mrshiposha = {
-    imports = [
-      ./common/modules/basic
-      ./common/programs/fundamental
-      ./common/programs/basic
-      ./common/programs/dev/vscode.nix
-      ./common/programs/dev/neovim
-      ./common/images/wallpapers.nix
+    imports = builtins.map lib.household.common.user [
+      /modules/basic
+      /programs/fundamental
+      /programs/basic
+      /programs/dev/vscode.nix
+      /programs/dev/neovim
     ];
+
+    theming.gui.wallpapers = {
+      active = lib.household.image /1920x1080/nord_mountains.png;
+      screensaver = lib.household.image /1920x1080/nord_waves.png;
+    };
 
     home.packages = with pkgs; [
       rustup

@@ -11,7 +11,7 @@ DEVICE=${1:-wlan0}
 POSITION=${2:-0}
 Y_OFF=${3:-0}
 X_OFF=${4:-0}
-FONT="DejaVu Sans Mono 12"
+FONT="Iosevka"
 
 ## Scan for available and broadcasting SSIDs.
 iwctl station $DEVICE scan

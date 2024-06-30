@@ -5,7 +5,6 @@
     ./waybar
     ./rofi
     ./mako.nix
-    ./themes.nix
   ];
 
   home.packages = with pkgs; [

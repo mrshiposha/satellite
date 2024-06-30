@@ -3,13 +3,13 @@
     ./boot.nix
     ./fonts.nix
     ./net.nix
-    ./audio.nix
-    ./docker.nix
-    ./powersave.nix
+    # ./audio.nix
+    # ./docker.nix
+    # ./powersave.nix
     ./security.nix
-    ./gui.nix
-    ./games.nix
-    ./erp.nix
+    # ./gui.nix
+    # ./games.nix
+    # ./erp.nix
     ./unfree.nix
   ];
 

@@ -9,12 +9,9 @@ in {
   };
 
   config = let
-    users = builtins.attrValues config.home-manager.users;
-    usersFullUnfreeList = (
-        builtins.concatMap
-          (user: user.unfree.list)
-          (builtins.filter (user: user ? unfree) users)
-      );
+    usersFullUnfreeList = builtins.concatMap
+      (unfree: unfree.list)
+      (lib.household.userModulesByName config "unfree");
     fullUnfreeList = cfg.list ++ usersFullUnfreeList;
   in {
     nixpkgs.config.allowUnfreePredicate = pkg:

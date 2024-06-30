@@ -7,28 +7,37 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-    nixosConfigurations.satellite = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        {
-          nix.settings.experimental-features = [
-            "nix-command"
-            "flakes"
-            "repl-flake"
-          ];
-        }
+  outputs = inputs @ { nixpkgs, home-manager, ... }:
+  let
+    mkLib = nixpkgs:
+        nixpkgs.lib.extend
+        (final: prev: import ./lib);
 
-        ./hardware-configuration.nix
-        ./system
+    lib = mkLib nixpkgs;
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-        ./users
-      ];
-    };
+    system = configurationPath:
+      let
+        configuration = (import configurationPath lib inputs);
+      in
+      lib.nixosSystem (configuration // {
+        modules = [
+          {
+            nix.settings.experimental-features = [
+              "nix-command"
+              "flakes"
+              "repl-flake"
+            ];
+          }
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ] ++ configuration.modules;
+      });
+  in
+  {
+    nixosConfigurations.satellite = system ./hosts/satellite;
   };
 }
