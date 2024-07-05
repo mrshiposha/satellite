@@ -7,10 +7,10 @@
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       nordic-nvim
+      transparent-nvim
       vim-visual-multi
       neo-tree-nvim
       flatten-nvim
-      toggleterm-nvim
       barbar-nvim
       plenary-nvim
       telescope-nvim
@@ -20,9 +20,9 @@
       gitsigns-nvim
     ];
     extraLuaConfig = ''
+      ${dofile "appearance"}
       ${dofile "options"}
       ${dofile "keymap"}
-      ${dofile "theme"}
       ${dofile "terminal"}
       ${dofile "nav"}
       ${dofile "telescope"}
@@ -33,6 +33,13 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+  };
+
+  xdg.configFile.neovide = {
+    target = "neovide/config.toml";
+    text = ''
+      maximized = false
+    '';
   };
 
   home.packages = with pkgs; [

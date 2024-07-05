@@ -7,4 +7,3 @@ require("flatten").setup({
     },
 })
 
-require("toggleterm").setup({})
