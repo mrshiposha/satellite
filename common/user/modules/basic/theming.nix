@@ -37,7 +37,7 @@ in
         };
         monospace = mkOption {
           type = listOf str;
-          default = ["Iosevka Term" "MesloLGS NF"];
+          default = ["Iosevka" "MesloLGS NF"];
         };
         emoji = mkOption {
           type = listOf str;
