@@ -246,8 +246,16 @@ mappings:new {
     }
 }
 
+local terminal_enter_normal = "<C-\\><C-n>"
 mappings:new {
-    description = "editor copy & paste",
+    description = "enter normal mode in terminal",
+    modes = {
+	terminal = { ["<ESC>"] = terminal_enter_normal }
+    }
+}
+
+mappings:new {
+    description = "copy & paste",
     modes = {
 	visual = { ["<C-c>"] = "\"+y" },
 	normal = {
@@ -257,6 +265,9 @@ mappings:new {
 	insert = {
 	    ["<C-c>"] = leave_insert.."#normal#",
 	    ["<C-v>"] = insert_reenter("#normal#", enter_append),
+	},
+	terminal = {
+	    ["<C-S-v>"] = terminal_enter_normal.."\"+gPi"
 	},
     }
 }
@@ -381,13 +392,6 @@ mappings:new {
 	visual = "#normal#",
 	insert = "#normal#",
 	-- terminal = "#normal#"
-    }
-}
-
-mappings:new {
-    description = "enter normal mode in terminal",
-    modes = {
-	terminal = { ["<ESC>"] = "<C-\\><C-n>" }
     }
 }
 
