@@ -3,7 +3,7 @@ local plugins = {
     nordic = require("nordic"), 
 }
 
-vim.o.guifont = "serif:#-subpixelantialias";
+vim.o.guifont = "monospace:#-subpixelantialias";
 vim.g.neovide_text_gamma = 0.8
 vim.g.neovide_text_contrast = 0.1 -- Will work with 0.13.1, see https://github.com/neovide/neovide/pull/2510 
 
