@@ -4,6 +4,8 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     extraConfig = ''
+      local wezterm = require "wezterm"
+
       return {
         enable_wayland = false, -- https://github.com/wez/wezterm/issues/4483
 
@@ -11,6 +13,8 @@
         window_background_opacity = 0.7,
         use_fancy_tab_bar = false,
         window_close_confirmation = "NeverPrompt",
+
+	font = wezterm.font "monospace",
 
         colors = {
           tab_bar = {
