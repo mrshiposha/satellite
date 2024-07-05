@@ -139,7 +139,7 @@ in
 
       cpu = {
         format = "{usage}% ";
-        on-click = "wezterm -e btop";
+        on-click = "wezterm -e btop -p 2";
       };
       memory = {
         format = "{percentage}% RAM";
