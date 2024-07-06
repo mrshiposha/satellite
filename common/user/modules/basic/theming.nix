@@ -21,7 +21,32 @@ in
         packages = mkOption {
           type = listOf package;
           default = with pkgs; [
-            iosevka
+	    (iosevka.override {
+		set = "Ship";
+		privateBuildPlan = {
+		    family = "Iosevka Ship";
+		    spacing = "normal";
+		    serifs = "sans";
+		    noCvSs = false;
+		    buildTextureFeature = true;
+		    exportGlyphNames = true;
+
+		    variants.inherits = "ss05";
+		};	
+	    })
+            (iosevka.override {
+		set = "Ship";
+		privateBuildPlan = {
+		    family = "Iosevka Ship Term";
+		    spacing = "term";
+		    serifs = "sans";
+		    noCvSs = false;
+		    buildTextureFeature = true;
+		    exportGlyphNames = true;
+
+		    variants.inherits = "ss05";
+		};
+	    })
             meslo-lgs-nf
             noto-fonts
           ];
@@ -29,15 +54,15 @@ in
 
         serif = mkOption {
           type = listOf str;
-          default = ["Iosevka"];
+          default = ["Iosevka Ship"];
         };
         sansSerif = mkOption {
           type = listOf str;
-          default = ["Iosevka"];
+          default = ["Iosevka Ship"];
         };
         monospace = mkOption {
           type = listOf str;
-          default = ["Iosevka" "MesloLGS NF"];
+          default = ["Iosevka Ship Term" "MesloLGS NF"];
         };
         emoji = mkOption {
           type = listOf str;
