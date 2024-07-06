@@ -48,6 +48,7 @@ in
           "class<rofi>" = "";
           "class<alacritty>" = "";
           "class<org.wezfurlong.wezterm>" = "";
+          "class<org.wezfurlong.wezterm> title<btop>" = "";
           "class<VSCodium>" = "󰨞";
           "class<neovide>" = "";
           "class<firefox>" = "";
