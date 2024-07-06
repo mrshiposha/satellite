@@ -202,6 +202,8 @@ mappings:new {
 	visual = {
 	    ["<C-S-Left>"] = "b",
 	    ["<C-S-Right>"] = "e",
+	    ["<C-S-e>"] = "E",
+	    ["<C-S-b>"] = "B",
 	},
 	normal = "v#visual#",
 	insert = {
