@@ -38,7 +38,11 @@
   xdg.configFile.neovide = {
     target = "neovide/config.toml";
     text = ''
-      maximized = false
+	[font]
+	    normal = ["monospace"]
+	    size = 21.0
+
+	maximized = false
     '';
   };
 
