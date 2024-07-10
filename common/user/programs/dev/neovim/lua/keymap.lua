@@ -96,16 +96,20 @@ function mappings:new(info)
 	local src_mapping, src_transform = dep_mapping(mode, mapping)	
 
 	for old, new in pairs(src_mapping) do
-	    local expanded_mapping = string.gsub(new, mode_capture, function (dep)
-		check_and_mark_dep(mode, dep)	
+	    if type(new) == "string" then
+		local expanded_mapping = string.gsub(new, mode_capture, function (dep)
+		    check_and_mark_dep(mode, dep)	
 
-		--print(info.description, mode, old, new, info.modes[dep][old])
-		return expand_mode(dep, info.modes[dep])[old];
-	    end)
+		    --print(info.description, mode, old, new, info.modes[dep][old])
+		    return expand_mode(dep, info.modes[dep])[old];
+		end)
 
-	    --print(info.description, mode, old, expanded_mapping)
+		--print(info.description, mode, old, expanded_mapping)
 
-	    info.modes[mode][old] = src_transform(expanded_mapping)
+		info.modes[mode][old] = src_transform(expanded_mapping)
+	    elseif type(new) == "function" then
+		info.modes[mode][old] = new
+	    end
 	end
 
 	expanded_modes[mode] = true
@@ -266,7 +270,7 @@ mappings:new {
 	},
 	insert = {
 	    ["<C-c>"] = leave_insert.."#normal#",
-	    ["<C-v>"] = insert_reenter("#normal#", enter_append),
+	    ["<C-v>"] = "<C-R>+",
 	},
 	terminal = {
 	    ["<C-S-v>"] = terminal_enter_normal.."\"+gPi"
@@ -377,6 +381,43 @@ mappings:new {
 }
 
 mappings:new {
+    description = "splitting windows",
+    modes = {
+	normal = {
+	    ["<A-s>"] = "<cmd>split<cr>",
+	    ["<A-v>"] = "<cmd>vsplit<cr>",
+	},
+	visual = "#normal#",
+	insert = "#normal#",
+	terminal = "#normal#",
+    },
+}
+
+local resize_h_speed = 1
+local resize_v_speed = 5
+mappings:new {
+    description = "resizing windows",
+    modes = {
+	normal = {
+	    ["<C-A-->"] = "<cmd>vertical resize -"..resize_v_speed.."<cr>",
+	    ["<C-A-=>"] = "<cmd>vertical resize +"..resize_v_speed.."<cr>",
+	    ["<C-A-_>"] = "<cmd>resize -"..resize_h_speed.."<cr>",
+	    ["<C-A-+>"] = "<cmd>resize +"..resize_h_speed.."<cr>",
+	},
+    },
+}
+
+mappings:new {
+    description = "swapping windows",
+    modes = {
+	normal = { ["<A-x>"] = "<C-w>x" },
+	visual = "#normal#",
+	insert = "#normal#",
+	terminal = "#normal#",
+    },
+}
+
+mappings:new {
     description = "delete words in command",
     modes = {
 	command = { ["<C-BS>"] = "<C-W>" }
@@ -397,6 +438,33 @@ mappings:new {
     }
 }
 
+mappings:new {
+    description = "tab navigation",
+    modes = {
+	normal = {
+	    ["<C-Tab>"] = "<cmd>tabn<cr>",
+	    ["<C-S-Tab>"] = "<cmd>tabp<cr>",
+	    ["<C-S-Up>"] = "",
+	    ["<C-S-Down>"] = "",
+--	    ["<C-w>"] = function ()
+    --	    	TODO closing panels & tabs
+--		print("works!")
+--	    end,
+	},
+	visual = "#normal#",
+	insert = "#normal#",
+    }
+}
+
+mappings:new {
+    description = "Toggle file tree",
+    modes = {
+	normal = {
+	    ["<C-b>"] = "<cmd>NvimTreeToggle<cr>", 
+	},
+    },
+}
+
 mappings:apply()
 
 function keymap (modes, key, action, options)
@@ -414,13 +482,4 @@ keymap({"i"}, "<A-r>", require("telescope.builtin").registers, { noremap = true 
 keymap({"n", "v"}, "<TAB>w", require("auto-session.session-lens").search_session, { noremap = true })
 keymap({"n", "i", "v"}, "<A-f>", require("telescope.builtin").find_files)
 keymap({"n", "i", "v"}, "<C-f>", require("telescope.builtin").live_grep)
-
-keymap({"n", "i", "v"}, "<C-Tab>", "<cmd>BufferNext<cr>")
-keymap({"n", "i", "v"}, "<C-S-Tab>", "<cmd>BufferPrevious<cr>")
-keymap({"n", "i", "v"}, "<C-w>", "<cmd>BufferClose<cr>")
-keymap({"n", "i", "v"}, "<C-t>", "<cmd>BufferRestore<cr>")
-
-keymap({"n", "i", "v"}, "<C-b>", "<cmd>Neotree toggle<cr>")
-
---keymap({"n", "i", "v"}, "<A-s>", "<cmd>vsplit<cr><C-w><C-w>")
 

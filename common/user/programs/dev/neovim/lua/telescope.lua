@@ -1,4 +1,3 @@
-require("plenary")
 require("telescope").setup({
     defaults = {
 	mappings = {

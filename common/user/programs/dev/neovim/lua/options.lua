@@ -1,5 +1,6 @@
-local opt = vim.opt
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.number = true
 
-opt.number = true
-opt.shiftwidth = 4
-opt.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize"
+vim.opt.shiftwidth = 4
+vim.opt.autoread = true

@@ -1,6 +1,8 @@
 local plugins = {
     transparent = require("transparent"),
-    nordic = require("nordic"), 
+    nordic = require("nordic"),
+    notify = require("notify"),
+    noice = require("noice"),
 }
 
 vim.g.neovide_text_gamma = 0.8
@@ -26,3 +28,9 @@ plugins.nordic.colorscheme({
     minimal_mode = false,
     alternate_backgrounds = false
 })
+plugins.notify.setup {
+    top_down = false,
+}
+vim.notify = plugins.notify
+
+plugins.noice.setup {}

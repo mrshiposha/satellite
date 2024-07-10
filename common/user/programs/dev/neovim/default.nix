@@ -6,29 +6,35 @@
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
+      nvim-treesitter.withAllGrammars
+      nvim-notify 
+      noice-nvim
       nordic-nvim
       transparent-nvim
       vim-visual-multi
-      neo-tree-nvim
       flatten-nvim
-      barbar-nvim
-      plenary-nvim
+      tabby-nvim
+      nvim-tree-lua
       telescope-nvim
-      telescope-media-files-nvim
       nvim-web-devicons
       auto-session
       gitsigns-nvim
     ];
     extraLuaConfig = ''
-      ${dofile "appearance"}
       ${dofile "options"}
+      ${dofile "treesitter"}
+      ${dofile "telescope"}
+      ${dofile "appearance"}
       ${dofile "keymap"}
       ${dofile "terminal"}
       ${dofile "nav"}
-      ${dofile "telescope"}
       ${dofile "sessions"}
       ${dofile "git"}
     '';
+    extraPackages = with pkgs; [ 
+	ripgrep
+	fd 
+    ];
 
     viAlias = true;
     vimAlias = true;
@@ -40,14 +46,11 @@
     text = ''
 	[font]
 	    normal = ["monospace"]
-	    size = 21.0
+	    size = 15.5
+	    hinting = "slight"
+	    edging = "subpixelantialias"
 
 	maximized = false
     '';
   };
-
-  home.packages = with pkgs; [
-    ripgrep
-    fd 
-  ];
 }
