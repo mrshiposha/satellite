@@ -15,6 +15,7 @@
       flatten-nvim
       tabby-nvim
       nvim-tree-lua
+      galaxyline-nvim
       telescope-nvim
       nvim-web-devicons
       auto-session
