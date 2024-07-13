@@ -18,6 +18,7 @@
       galaxyline-nvim
       dressing-nvim
       telescope-nvim
+      telescope-undo-nvim
       nvim-web-devicons
       auto-session
       gitsigns-nvim

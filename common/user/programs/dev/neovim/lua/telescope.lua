@@ -1,4 +1,6 @@
-require("telescope").setup({
+local telescope = require("telescope")
+
+telescope.setup({
     defaults = {
 	mappings = {
 	    i = {
@@ -10,5 +12,6 @@ require("telescope").setup({
 		end,
 	    }
 	}
-    }
+    },
 })
+telescope.load_extension("undo")
