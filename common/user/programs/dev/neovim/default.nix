@@ -16,10 +16,19 @@
       tabby-nvim
       nvim-tree-lua
       galaxyline-nvim
+      dressing-nvim
       telescope-nvim
       nvim-web-devicons
       auto-session
       gitsigns-nvim
+      nvim-cmp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      nvim-lspconfig
+      cmp-nvim-lsp
+      luasnip
+      nvim-autopairs
     ];
     extraLuaConfig = ''
       ${dofile "options"}
@@ -31,10 +40,13 @@
       ${dofile "nav"}
       ${dofile "sessions"}
       ${dofile "git"}
+      ${dofile "completion"}
     '';
     extraPackages = with pkgs; [ 
 	ripgrep
-	fd 
+	fd
+	lua-language-server
+	nil
     ];
 
     viAlias = true;

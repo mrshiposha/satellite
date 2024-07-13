@@ -3,6 +3,12 @@ local plugins = {
     nordic = require("nordic"),
     notify = require("notify"),
     noice = require("noice"),
+    galaxyline = {
+	core = require("galaxyline"),
+	section = require("galaxyline").section,
+	condition = require("galaxyline.condition"),
+    },
+    dressing = require("dressing"),
 }
 
 vim.g.neovide_text_gamma = 0.8
@@ -34,3 +40,57 @@ plugins.notify.setup {
 vim.notify = plugins.notify
 
 plugins.noice.setup {}
+
+plugins.galaxyline.core.short_line_list = { "NvimTree" }
+plugins.galaxyline.section.left[1] = {
+    ViMode = {
+	provider = function ()
+	    local mode_names = {
+	      ["n"] = "normal",
+	      ["v"] = "visual",
+	      ["V"] = "visual line",
+	      [""] = "visual block", -- This is a special character for visual block mode
+	      ["i"] = "insert",
+	      ["R"] = "replace",
+	      ["c"] = "command",
+	      ["t"] = "terminal",
+	      ["s"] = "select",
+	      ["S"] = "select line",
+	      [""] = "select block", -- This is a special character for select block mode
+	    }
+
+	    return "(- " .. (mode_names[vim.fn.mode()] or "unknown") .. " -)";
+	end,
+    },
+}
+plugins.galaxyline.section.mid[1] = {
+    BranchIcon = {
+	provider = function() return "  " end,
+	condition = plugins.galaxyline.condition.check_git_workspace,
+	separator = " ",
+	separator_highlight = { nil, "NONE" },
+    }
+}
+plugins.galaxyline.section.mid[2] = {
+    GitBranch = {
+	provider = 'GitBranch',
+	condition = plugins.galaxyline.condition.check_git_workspace,
+    }
+}
+plugins.galaxyline.section.right[1] = {
+    PerCent = {
+	provider = "LinePercent",
+	separator = " ",
+    }
+}
+plugins.galaxyline.section.right[2] = {
+    FileEncode = {
+	provider = "FileEncode",
+	separator = " ",
+    }
+}
+vim.api.nvim_set_hl(0, "StatusLine", {
+    bg = "NONE",
+})
+
+plugins.dressing.setup {}
