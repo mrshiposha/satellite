@@ -10,22 +10,42 @@ require("tabby.tabline").set(function (line)
 	line.tabs().foreach(function (tab)
 	    local hl = tab.is_current() and theme.current_tab or theme.tab
 	    local winfiles = {}
+	    local terminals = 0
 	    local extra = 0
+
+	    local max_filenames = 3
+
 	    line.wins_in_tab(
 		tab.id,
 		function (win)
 		    return not string.match(win.buf_name(), "NvimTree")
 		end
 	    ).foreach(function (win)
-		local max_filenames = 3
 
 		if #winfiles < max_filenames then
-		    table.insert(winfiles, win.file_icon() .. " " .. win.buf_name())
+		    if win.buf().type() == "terminal" then
+			terminals = terminals + 1
+		    else
+			table.insert(winfiles, win.file_icon() .. " " .. win.buf_name())
+		    end
 		else
-		    extra = extra + 1
-		    return
+		    if win.buf().type() == "terminal" then
+			terminals = terminals + 1
+		    else
+			extra = extra + 1
+		    end
 		end
 	    end)
+
+	    if terminals > 0 then
+		if #winfiles == max_filenames then
+		    table.remove(winfiles, max_filenames)
+		    extra = extra + 1
+		end
+
+		local term_num = terminals > 1 and "s: "..terminals or "";
+		table.insert(winfiles, " terminal"..term_num)
+	    end
 
 	    if extra > 0 then
 		table.insert(winfiles, "+"..extra)
