@@ -165,3 +165,5 @@ vim.api.nvim_set_hl(0, "NvimTreeNormal", {
     bg = "NONE",
 })
 
+vim.opt.splitbelow = true
+vim.opt.splitright = true
