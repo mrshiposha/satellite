@@ -1,19 +1,50 @@
---local theme = {
---  fill = 'TabLineFill',
---  head = 'TabLine',
---  current_tab = 'TabLineSel',
---  tab = 'TabLine',
---  win = 'TabLine',
---  tail = 'TabLine',
---}
+require("tabby.tabline").set(function (line)
+    local theme = {
+	  fill = 'TabLineFill',
+	  current_tab = 'TabLineSel',
+	  tab = 'TabLine',
+    }
 
-require("tabby.tabline").use_preset("active_wins_at_tail", {
-    --buf_name = {
---	mode = "'unique'|'relative'|'tail'|'shorten'",
- --   },
-    --preset = "active_tab_with_wins",
-})
+    return {
+	line.tabs().foreach(function (tab)
+	    local hl = tab.is_current() and theme.current_tab or theme.tab
+	    local winfiles = {}
+	    local extra = 0
+	    line.wins_in_tab(
+		tab.id,
+		function (win)
+		    return not string.match(win.buf_name(), "NvimTree")
+		end
+	    ).foreach(function (win)
+		local max_filenames = 3
 
+		if #winfiles < max_filenames then
+		    table.insert(winfiles, win.file_icon() .. " " .. win.buf_name())
+		else
+		    extra = extra + 1
+		    return
+		end
+	    end)
+
+	    if extra > 0 then
+		table.insert(winfiles, "+"..extra)
+	    end
+	    local filenames = table.concat(winfiles, " | ")
+
+	    return {
+		line.sep("▓", hl, theme.fill),
+		tab.is_current() and "" or "",
+		tab.number(),
+		filenames,
+		tab.close_btn(""),
+		line.sep("▓", hl, theme.fill),
+		hl = hl,
+		margin = " ",
+	    }
+	end),
+	hl = theme.fill,
+    }
+end)
 require("nvim-tree").setup {
     tab = {
 	sync = {
@@ -73,7 +104,8 @@ require("nvim-tree").setup {
 		vim.api.nvim_set_current_dir(node.absolute_path)
 	    end
 	end)
-	keymap("<cr>", api.node.open.tab_drop)
+	keymap("<Space>", api.node.open.edit)
+	keymap("<CR>", api.node.open.tab_drop)
 	keymap("<2-LeftMouse>", api.node.open.tab_drop)
 	keymap("<A-s>", api.node.open.horizontal)
 	keymap("<A-v>", api.node.open.vertical)
