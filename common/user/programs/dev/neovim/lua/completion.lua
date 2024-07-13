@@ -10,6 +10,12 @@ local plugins = {
 local cmp_mapping = plugins.cmp.mapping
 local cmp_modes = {"i", "c"}
 
+local function default_cmp_sources()
+    return {
+	{ name = "nvim_lsp" },
+	{ name = "buffer" },
+    }
+end
 plugins.cmp.setup {
     completion = {
 	completeopt = "menu,menuone,preview",
@@ -23,10 +29,7 @@ plugins.cmp.setup {
 	["<C-A-Down>"] = cmp_mapping(cmp_mapping.scroll_docs(4), cmp_modes),
 	["<C-A-UP>"] = cmp_mapping(cmp_mapping.scroll_docs(-4), cmp_modes),
     },
-    sources = plugins.cmp.config.sources {
-	{ name = "nvim_lsp" },
-	{ name = "buffer" },
-    },
+    sources = plugins.cmp.config.sources(default_cmp_sources()),
     snippet = {
 	expand = function(args)
 	    plugins.luasnip.lsp_expand(args.body)
@@ -49,9 +52,30 @@ plugins.cmp.setup.cmdline(":", {
     },
     matching = { disallow_symbol_nonprefix_matching = false },
 })
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function ()
+	local sources = default_cmp_sources()
+	local type = vim.bo.filetype
+
+	if type == "nix" then
+	    table.insert(sources, { name = "path" })
+
+	    plugins.cmp.setup.buffer {
+	       sources = sources
+	    }
+	end
+    end
+})
 
 plugins.lspcfg["lua_ls"].setup {
     capabilities = plugins.nvimlsp.default_capabilities(),
+    settings = {
+	Lua = {
+	    diagnostics = {
+		globals = { "vim" }
+	    }
+	}
+    }
 }
 plugins.lspcfg["nil_ls"].setup {
     capabilities = plugins.nvimlsp.default_capabilities(),
