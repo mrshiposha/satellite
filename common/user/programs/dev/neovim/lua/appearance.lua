@@ -61,19 +61,25 @@ plugins.galaxyline.section.left[1] = {
 
 	    return "(- " .. (mode_names[vim.fn.mode()] or "unknown") .. " -)";
 	end,
+	separator = " ",
     },
 }
-plugins.galaxyline.section.mid[1] = {
-    BranchIcon = {
-	provider = function() return "  " end,
-	condition = plugins.galaxyline.condition.check_git_workspace,
-	separator = " ",
-	separator_highlight = { nil, "NONE" },
+plugins.galaxyline.section.left[2] = {
+    FileIcon = {
+	provider = "FileIcon",
+	condition = plugins.galaxyline.condition.buffer_not_empty,
     }
 }
-plugins.galaxyline.section.mid[2] = {
+plugins.galaxyline.section.left[3] = {
+    FileName = {
+	provider = "FileName",
+	condition = plugins.galaxyline.condition.buffer_not_empty,
+    }
+}
+plugins.galaxyline.section.mid[1] = {
     GitBranch = {
 	provider = 'GitBranch',
+	icon = "  ",
 	condition = plugins.galaxyline.condition.check_git_workspace,
     }
 }
