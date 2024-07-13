@@ -1,3 +1,4 @@
+vim.o.showtabline = 2
 require("tabby.tabline").set(function (line)
     local theme = {
 	  fill = 'TabLineFill',
