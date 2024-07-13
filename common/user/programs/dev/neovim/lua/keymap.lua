@@ -1,4 +1,4 @@
-mappings = {}
+local mappings = {}
 function mappings:new(info)
     if not info.description then
 	error("mapping must have `description`")
@@ -44,7 +44,7 @@ function mappings:new(info)
     local function init_mode(mode, mapping)
 	if not valid_modes[mode] then
 	    map_error(string.format("invalid mode `%s`", mode))
-	end	
+	end
 
 	if type(mapping) == "string" then
 	    info.modes[mode] = {}
@@ -52,19 +52,22 @@ function mappings:new(info)
     end
 
     local function dep_mapping(mode, mapping)
+	local src_mapping
+	local src_transform
 	if type(mapping) == "string" then
 	    local _, _, before, dep, after = string.find(
 		mapping,
 		"^(.-)"..mode_capture.."(.-)$"
 	    )
-	    
+
 	    if dep then
 		check_and_mark_dep(mode, dep)
 	    else
 		map_error("no dependency found")
 	    end
 
-	    local src_mapping, dep_transform = dep_mapping(dep, info.modes[dep])
+	    local dep_transform
+	    src_mapping, dep_transform = dep_mapping(dep, info.modes[dep])
 	    src_transform = function (m)
 		--print("src_transform: ", mode, mapping, m, dep_transform)
 		local transformed_dep = dep_transform(m)
@@ -76,9 +79,9 @@ function mappings:new(info)
 
 	elseif type(mapping) == "table" then
 	    src_mapping = mapping
-	    src_transform = function (mapping)
-		--print("mapping: "..mapping)
-		return mapping
+	    src_transform = function (m)
+		--print("mapping: "..m)
+		return m
 	    end
 
 	    --print(mode, mapping, src_mapping, src_transform)
@@ -93,12 +96,12 @@ function mappings:new(info)
 
 	init_mode(mode, mapping)
 
-	local src_mapping, src_transform = dep_mapping(mode, mapping)	
+	local src_mapping, src_transform = dep_mapping(mode, mapping)
 
 	for old, new in pairs(src_mapping) do
 	    if type(new) == "string" then
 		local expanded_mapping = string.gsub(new, mode_capture, function (dep)
-		    check_and_mark_dep(mode, dep)	
+		    check_and_mark_dep(mode, dep)
 
 		    --print(info.description, mode, old, new, info.modes[dep][old])
 		    return expand_mode(dep, info.modes[dep])[old];
@@ -128,10 +131,9 @@ function mappings:apply()
     for _, info in ipairs(self) do
 	local options = info.options or { silent = true }
 	options.desc = info.description
-	
-	local modes = {}
-	for mode, mappings in pairs(info.modes) do
-	    for old, new in pairs(mappings) do
+
+	for mode, mode_mappings in pairs(info.modes) do
+	    for old, new in pairs(mode_mappings) do
 		local short_name = mode:sub(1, 1)
 		vim.keymap.set({short_name}, old, new, options)
 	    end
@@ -143,7 +145,7 @@ local leave_insert = "<ESC>`^"
 local enter_insert = "i"
 local enter_append = "a"
 
-function insert_reenter(mapping, enter)
+local function insert_reenter(mapping, enter)
     enter = enter or enter_insert
     return leave_insert..mapping..enter
 end
@@ -208,6 +210,8 @@ mappings:new {
 	    ["<C-S-Right>"] = "e",
 	    ["<C-S-e>"] = "E",
 	    ["<C-S-b>"] = "B",
+	    ["<S-i>"] = "iw",
+	    ["<C-S-i>"] = "iW",
 	},
 	normal = "v#visual#",
 	insert = {
@@ -461,14 +465,14 @@ mappings:new {
     description = "Toggle file tree",
     modes = {
 	normal = {
-	    ["<C-b>"] = "<cmd>NvimTreeToggle<cr>", 
+	    ["<C-b>"] = "<cmd>NvimTreeToggle<cr>",
 	},
     },
 }
 
 mappings:apply()
 
-function keymap (modes, key, action, options)
+local function keymap (modes, key, action, options)
     if options == nil then
         options = { noremap = true, silent = true }
     end
