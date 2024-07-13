@@ -10,15 +10,53 @@
     ];
 
     initExtra = ''
-      bindkey "^[[1;5C" forward-word
-      bindkey "^[[1;5D" backward-word
-      bindkey '^H' backward-kill-word
+	function noop() { return true }
+	zle -N noop
 
-      if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-        source ${./p10k/full.zsh}
-      else
-        source ${./p10k/minimal.zsh}
-      fi
+	# Ctrl + Left
+	bindkey "^[[1;5D" backward-word
+
+	# Ctrl + Right
+	bindkey "^[[1;5C" forward-word
+
+	# Ctrl + BS
+	bindkey "^[[127;5u" backward-kill-word
+
+	# Ignore Shift + Left Arrow
+	bindkey "^[[1;2D" noop
+
+	# Ignore Shift + Right Arrow
+	bindkey "^[[1;2C" noop
+
+	# Ignore Shift + Up Arrow
+	bindkey "^[[1;2A" noop
+
+	# Ignore Shift + Down Arrow
+	bindkey "^[[1;2B" noop
+
+	# Ignore Alt + Left Arrow
+	bindkey "^[\[1;3D" noop
+
+	# Ignore Alt + Right Arrow
+	bindkey "^[\[1;3C" noop
+
+	# Ignore Alt + Up Arrow
+	bindkey "^[\[1;3A" noop
+
+	# Ignore Alt + Down Arrow
+	bindkey "^[\[1;3B" noop
+
+	# Ignore Ctrl + Up Arrow
+	bindkey "^[\[1;5A" noop
+
+	# Ignore Ctrl + Down Arrow
+	bindkey "^[\[1;5B" noop
+
+	if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
+	    source ${./p10k/full.zsh}
+	else
+	    source ${./p10k/minimal.zsh}
+	fi
     '';
   };
 }
