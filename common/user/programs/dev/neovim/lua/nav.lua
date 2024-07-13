@@ -69,6 +69,13 @@ require("nvim-tree").setup {
 	indent_width = 1,
 	indent_markers = {
 	    enable = true,
+	    icons = {
+		corner = "╰",
+		edge = "┊",
+		item = "│",
+		bottom = "…",
+		none = " ",
+	    },
 	},
 	highlight_git = "name",
 	highlight_modified = "icon",
