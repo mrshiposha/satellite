@@ -418,9 +418,10 @@ mappings:new {
 }
 
 mappings:new {
-    description = "delete words in command",
+    description = "delete words",
     modes = {
-	command = { ["<C-BS>"] = "<C-W>" }
+	command = { ["<C-BS>"] = "<C-W>" },
+	insert = "#command#",
     },
     options = {
 	silent = false,
