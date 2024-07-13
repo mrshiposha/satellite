@@ -32,6 +32,7 @@ in
 		    exportGlyphNames = true;
 
 		    variants.inherits = "ss05";
+		    ligations.inherits = "dlig";
 		};	
 	    })
             (iosevka.override {
