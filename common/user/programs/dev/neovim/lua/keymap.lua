@@ -1,7 +1,9 @@
+local util = require("util")
+
 vim.g.VM_default_mappings = false
 vim.opt.whichwrap:append("<,>,[,]")
 
-local mappings = require("util").mappings
+local mappings = util.mappings
 
 local leave_insert = "<ESC>`^"
 local enter_insert = "i"
@@ -305,7 +307,7 @@ mappings:new {
 }
 
 local function find_terminal()
-    local wins = require("util").list_tab_wins()
+    local wins = util.list_tab_wins()
     local terminal_win = nil
 
     for _, win in ipairs(wins) do
@@ -345,12 +347,32 @@ mappings:new {
 	    ["<C-S-Tab>"] = "<cmd>tabp<cr>",
 	    ["<C-S-Up>"] = "",
 	    ["<C-S-Down>"] = "",
---	    ["<C-w>"] = function ()
---		print("works!")
---	    end,
+	    ["<C-w>"] = function ()
+		local current_buf = vim.api.nvim_get_current_buf()
+
+		if vim.bo[current_buf].filetype == "NvimTree" then
+		    vim.api.nvim_command("quit")
+		    return
+		end
+
+		local wins = util.list_tab_wins()
+		local nvimtree
+		for _, win in ipairs(wins) do
+		    if vim.bo[win.buf].filetype == "NvimTree" then
+			nvimtree = win.id
+		    end
+		end
+
+		if nvimtree and #wins <= 2 then
+		    vim.api.nvim_command("tabclose")
+		else
+		    vim.api.nvim_command("quit")
+		end
+	    end,
 	},
 	visual = "#normal#",
 	insert = "#normal#",
+	terminal = "#normal#",
     }
 }
 
