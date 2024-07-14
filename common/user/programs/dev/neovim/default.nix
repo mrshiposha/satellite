@@ -30,6 +30,7 @@
       cmp-nvim-lsp
       luasnip
       nvim-autopairs
+      nvim-comment
     ];
     extraLuaConfig = ''
       package.path = "${./lua}/?.lua;"..package.path

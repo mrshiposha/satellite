@@ -346,7 +346,6 @@ mappings:new {
 	    ["<C-S-Up>"] = "",
 	    ["<C-S-Down>"] = "",
 --	    ["<C-w>"] = function ()
-    --	    	TODO closing panels & tabs
 --		print("works!")
 --	    end,
 	},
@@ -397,6 +396,20 @@ mappings:new {
 	},
 	visual = "#normal#",
 	insert = "#normal#",
+    },
+}
+
+local commenter = require("nvim_comment")
+commenter.setup { create_mappings = false }
+mappings:new {
+    description = "Comments",
+    modes = {
+	normal = {
+	    ["<C-/>"] = "<cmd>set operatorfunc=CommentOperator<cr>g@l",
+	},
+	visual = {
+	    ["<C-/>"] = ":<C-u>call commentoperator(visualmode())<cr>",
+	},
     },
 }
 
