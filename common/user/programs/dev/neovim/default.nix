@@ -32,6 +32,8 @@
       nvim-autopairs
     ];
     extraLuaConfig = ''
+      package.path = "${./lua}/?.lua;"..package.path
+
       ${dofile "options"}
       ${dofile "treesitter"}
       ${dofile "telescope"}

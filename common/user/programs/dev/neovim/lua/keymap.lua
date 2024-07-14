@@ -24,7 +24,7 @@ function mappings:new(info)
     local function check_and_mark_dep(mode, dep)
 	if not valid_modes[dep] then
 	    map_error(string.format("invalid mode dependency `%s`", dep))
-	end 
+	end
 
 	if mode == dep then
 	    map_error(string.format("recursive dependency for `%s`", mode))
@@ -384,12 +384,22 @@ mappings:new {
     }
 }
 
+local function split_window(direction)
+    direction = direction == "h" and "" or direction
+    local split_cmd = direction.."split"
+
+    if vim.bo.buftype == "terminal" then
+	vim.api.nvim_command("startinsert | "..split_cmd.." | terminal")
+    else
+	vim.api.nvim_command(split_cmd)
+    end
+end
 mappings:new {
     description = "splitting windows",
     modes = {
 	normal = {
-	    ["<A-s>"] = "<cmd>split<cr>",
-	    ["<A-v>"] = "<cmd>vsplit<cr>",
+	    ["<A-s>"] = function () split_window("h") end,
+	    ["<A-v>"] = function () split_window("v") end,
 	},
 	visual = "#normal#",
 	insert = "#normal#",
@@ -432,14 +442,36 @@ mappings:new {
     }
 }
 
--- TODO
+local function find_terminal()
+    local wins = require("util").list_tab_wins()
+    local terminal_win = nil
+
+    for _, win in ipairs(wins) do
+	if vim.api.nvim_buf_get_option(win.buf, "buftype") == "terminal" then
+	    terminal_win = win.id
+	    break
+	end
+    end
+
+    return terminal_win
+end
 mappings:new {
     description = "toggle terminal",
     modes = {
-	normal = { ["<C-`>"] = "<cmd>terminal<cr>" },
+	normal = {
+	    ["<C-`>"] = function ()
+		local terminal = find_terminal()
+		if terminal then
+		    if vim.bo.buftype ~= "terminal" then
+			vim.api.nvim_set_current_win(terminal)
+		    end
+		else
+		    vim.api.nvim_command("vsplit | terminal")
+		end
+	    end
+	},
 	visual = "#normal#",
 	insert = "#normal#",
-	-- terminal = "#normal#"
     }
 }
 
