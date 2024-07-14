@@ -22,6 +22,12 @@
 	# Ctrl + BS
 	bindkey "^[[127;5u" backward-kill-word
 
+	# Ignore Shift + BS
+	bindkey "^[[127;2u" noop
+
+	# Ignore Alt + BS
+	bindkey "^[\x7f" noop
+
 	# Ignore Shift + Left Arrow
 	bindkey "^[[1;2D" noop
 
