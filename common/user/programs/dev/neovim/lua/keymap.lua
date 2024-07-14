@@ -1,3 +1,6 @@
+vim.g.VM_default_mappings = false
+vim.opt.whichwrap:append("<,>,[,]")
+
 local mappings = require("util").mappings
 
 local leave_insert = "<ESC>`^"
@@ -361,21 +364,41 @@ mappings:new {
     },
 }
 
+mappings:new {
+    description = "List sessions",
+    modes = {
+	normal = {
+	    ["<Tab>s"] = require("auto-session.session-lens").search_session
+	},
+	visual = "#normal#",
+    },
+    options = {
+	silent = false,
+    },
+}
+
+mappings:new {
+    description = "Find Utilities",
+    modes = {
+	normal = {
+	    ["<A-f>"] = require("telescope.builtin").find_files,
+	    ["<C-S-f>"] = require("telescope.builtin").live_grep,
+	},
+	visual = "#normal#",
+	insert = "#normal#",
+    },
+}
+
+mappings:new {
+    description = "Show registers",
+    modes = {
+	normal = {
+	    ["<A-r>"] = require("telescope.builtin").registers,
+	},
+	visual = "#normal#",
+	insert = "#normal#",
+    },
+}
+
 mappings:apply()
-
-local function keymap (modes, key, action, options)
-    if options == nil then
-        options = { noremap = true, silent = true }
-    end
-    vim.keymap.set(modes, key, action, options)
-end
-
-vim.g.VM_default_mappings = false
-vim.opt.whichwrap:append("<,>,[,]")
-
-keymap({"i"}, "<A-r>", require("telescope.builtin").registers, { noremap = true })
-
-keymap({"n", "v"}, "<TAB>w", require("auto-session.session-lens").search_session, { noremap = true })
-keymap({"n", "i", "v"}, "<A-f>", require("telescope.builtin").find_files)
-keymap({"n", "i", "v"}, "<C-f>", require("telescope.builtin").live_grep)
 
