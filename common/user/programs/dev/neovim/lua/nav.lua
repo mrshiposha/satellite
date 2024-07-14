@@ -23,10 +23,13 @@ require("tabby.tabline").set(function (line)
 	    ).foreach(function (win)
 
 		if #winfiles < max_filenames then
-		    if win.buf().type() == "terminal" then
+		    local buf_type = win.buf().type()
+
+		    if buf_type == "terminal" then
 			terminals = terminals + 1
 		    else
-			table.insert(winfiles, win.file_icon() .. " " .. win.buf_name())
+			local name = buf_type == "" and win.buf_name() or buf_type
+			table.insert(winfiles, win.file_icon() .. " " .. name)
 		    end
 		else
 		    if win.buf().type() == "terminal" then
