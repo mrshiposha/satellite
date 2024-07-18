@@ -45,6 +45,25 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end
 })
 
+-- Create an autocommand group
+local autoreload_group = vim.api.nvim_create_augroup('AutoReload', { clear = true })
+
+-- Add autocommands to the group
+vim.api.nvim_create_autocmd({'FocusGained', 'BufEnter'}, {
+    group = autoreload_group,
+    pattern = '*',
+    command = 'checktime',
+})
+
+-- Set the autoread option to true
+vim.opt.autoread = true
+
+-- Check for file changes periodically
+vim.api.nvim_create_autocmd('CursorHold', {
+    group = autoreload_group,
+    pattern = '*',
+    command = 'checktime',
+})
 
 vim.g.neovide_text_gamma = 0.8
 vim.g.neovide_text_contrast = 0.1 -- Will work with 0.13.1, see https://github.com/neovide/neovide/pull/2510
