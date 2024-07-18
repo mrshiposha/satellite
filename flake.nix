@@ -7,17 +7,16 @@
     };
   };
 
-  outputs = inputs @ { nixpkgs, ... }:
-  let
-    mkLib = nixpkgs:
-        nixpkgs.lib.extend
-        (final: prev: import ./lib);
+  outputs =
+    inputs@{ nixpkgs, ... }:
+    let
+      mkLib = nixpkgs: nixpkgs.lib.extend (final: prev: import ./lib);
 
-    lib = mkLib nixpkgs;
+      lib = mkLib nixpkgs;
 
-    system = import ./lib/system.nix lib inputs;
-  in
-  {
-    nixosConfigurations.satellite = system ./hosts/satellite;
-  };
+      system = import ./lib/system.nix lib inputs;
+    in
+    {
+      nixosConfigurations.satellite = system ./hosts/satellite;
+    };
 }

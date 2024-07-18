@@ -3,11 +3,8 @@
 let
   hyprland = config.wayland.windowManager.hyprland;
 
-  gapsout = if hyprland.enable
-    then hyprland.settings.general.gaps_out
-    else 4;
+  gapsout = if hyprland.enable then hyprland.settings.general.gaps_out else 4;
 in
-
 {
   home.packages = [ pkgs.libnotify ];
 

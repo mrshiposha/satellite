@@ -1,19 +1,14 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, ... }:
 
 let
   hyprland = config.wayland.windowManager.hyprland;
 
-  gapsout = if hyprland.enable
-    then hyprland.settings.general.gaps_out
-    else 4;
+  gapsout = if hyprland.enable then hyprland.settings.general.gaps_out else 4;
 in
-
 {
   theming.fonts.packages = with pkgs; [
     font-awesome
-    (nerdfonts.override {
-      fonts = ["NerdFontsSymbolsOnly"];
-    })
+    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
   programs.waybar = {
     enable = true;
@@ -26,10 +21,8 @@ in
       margin-left = gapsout;
       margin-right = gapsout;
 
-      modules-left = [
-        "hyprland/workspaces"
-      ];
-      modules-center = ["clock"];
+      modules-left = [ "hyprland/workspaces" ];
+      modules-center = [ "clock" ];
       modules-right = [
         "backlight"
         "pulseaudio"
@@ -81,7 +74,11 @@ in
 
       pulseaudio = {
         format = "{volume}% {icon} / {format_source}";
-        format-icons = ["" "" ""];
+        format-icons = [
+          ""
+          ""
+          ""
+        ];
         format-muted = " / {format_source}";
         format-source = "";
         format-source-muted = "";
@@ -108,7 +105,10 @@ in
         format-linked = "";
         format-disconnected = "";
 
-        tooltip-format-wifi = "{essid}\nIP: {ipaddr}\nStrength: {signalStrength}%";
+        tooltip-format-wifi = ''
+          {essid}
+          IP: {ipaddr}
+          Strength: {signalStrength}%'';
         tooltip-format-linked = "connecting to {essid}";
         tooltip-format-disconnected = "WiFi disconnected";
 
@@ -130,7 +130,7 @@ in
 
       "custom/power" = {
         format = "";
-        exec = '' echo '{ "tooltip": "Power Menu" }' '';
+        exec = ''echo '{ "tooltip": "Power Menu" }' '';
         return-type = "json";
 
         # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
@@ -151,7 +151,13 @@ in
       battery = {
         format = "{capacity}% {icon}";
         format-charging = "{capacity}% {icon} ";
-        format-icons = ["" "" "" "" ""];
+        format-icons = [
+          ""
+          ""
+          ""
+          ""
+          ""
+        ];
         states = {
           warning = 30;
           critical = 15;

@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   users.users.wally = {
     isNormalUser = true;
     description = "Valentina Shiposha";

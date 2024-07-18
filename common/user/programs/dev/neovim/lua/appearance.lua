@@ -27,7 +27,7 @@ vim.opt.listchars = {
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.lua", "*.nix" },
+	pattern = { "*.lua" },
 	callback = function ()
 		vim.bo.tabstop = 2
 		vim.bo.shiftwidth = 2
@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.js", "*.ts", "*.json" },
+	pattern = { "*.nix", "*.js", "*.ts", "*.json" },
 	callback = function ()
 		vim.bo.tabstop = 2
 		vim.bo.shiftwidth = 2

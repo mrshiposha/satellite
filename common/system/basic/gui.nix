@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 with types;
 let
@@ -9,77 +14,63 @@ in
     enable = mkEnableOption "GUI";
 
     greeter.seat0.theme = {
-      wallpaper = mkOption {
-        type = path;
-      };
+      wallpaper = mkOption { type = path; };
 
       style = {
-        package = mkOption {
-          type = package;
-        };
+        package = mkOption { type = package; };
 
-        name = mkOption {
-          type = str;
-        };
+        name = mkOption { type = str; };
       };
 
       cursors = {
-        package = mkOption {
-          type = package;
-        };
+        package = mkOption { type = package; };
 
-        name = mkOption {
-          type = str;
-        };
+        name = mkOption { type = str; };
 
-        size = mkOption {
-          type = number;
-        };
+        size = mkOption { type = number; };
       };
 
       icons = {
-        package = mkOption {
-          type = package;
-        };
+        package = mkOption { type = package; };
 
-        name = mkOption {
-          type = str;
-        };
+        name = mkOption { type = str; };
       };
     };
   };
 
-  config = let
-    greeterTheme = cfg.greeter.seat0.theme;
-  in mkIf cfg.enable {
-    programs = {
-      hyprland.enable = true;
-      wshowkeys.enable = true;
-    };
+  config =
+    let
+      greeterTheme = cfg.greeter.seat0.theme;
+    in
+    mkIf cfg.enable {
+      programs = {
+        hyprland.enable = true;
+        wshowkeys.enable = true;
+      };
 
-    environment.systemPackages = with pkgs; [
-      greeterTheme.style.package
-      greeterTheme.cursors.package
-      greeterTheme.icons.package
+      environment.systemPackages = with pkgs; [
+        greeterTheme.style.package
+        greeterTheme.cursors.package
+        greeterTheme.icons.package
 
-      libsForQt5.qt5.qtwayland
-      qt6.qtwayland
-    ];
+        libsForQt5.qt5.qtwayland
+        qt6.qtwayland
+      ];
 
-    programs.regreet = {
-      enable = true;
-      settings = {
-        background = {
-          path = greeterTheme.wallpaper;
-          fit = "Contain";
-        };
+      programs.regreet = {
+        enable = true;
+        settings = {
+          background = {
+            path = greeterTheme.wallpaper;
+            fit = "Contain";
+          };
 
-        GTK = {
-          theme_name = greeterTheme.style.name;
-          cursor_theme_name = greeterTheme.cursors.name;
-          icon_theme_name = greeterTheme.icons.name;
+          GTK = {
+            theme_name = greeterTheme.style.name;
+            cursor_theme_name = greeterTheme.cursors.name;
+            icon_theme_name = greeterTheme.icons.name;
+          };
         };
       };
     };
-  };
 }

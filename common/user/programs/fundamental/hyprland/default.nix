@@ -4,7 +4,9 @@ let
     pkg = pkgs.swaylock-effects;
     bin = "${pkg}/bin/swaylock";
   };
-  screenlock-config = "${config.home.homeDirectory}/${config.xdg.configFile."swaylock/config".target}";
+  screenlock-config = "${config.home.homeDirectory}/${
+    config.xdg.configFile."swaylock/config".target
+  }";
   screen = {
     lock = "${swaylock.bin} -f -C ${screenlock-config}";
     off = "hyprctl dispatch dpms off";
@@ -153,11 +155,15 @@ in
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      windowrulev2 = let class = "(org\.wezfurlong\.wezterm)"; in [
-        "float,class:${class}"
-        "size 1400 800,class:${class}"
-        "center,class:${class}"
-      ];
+      windowrulev2 =
+        let
+          class = "(org.wezfurlong.wezterm)";
+        in
+        [
+          "float,class:${class}"
+          "size 1400 800,class:${class}"
+          "center,class:${class}"
+        ];
 
       exec-once = [
         (builtins.toString ./init-workspaces.sh)

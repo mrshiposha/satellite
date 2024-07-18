@@ -1,5 +1,6 @@
 let
-  extensionUrl = name: version: "https://addons.mozilla.org/firefox/downloads/latest/${name}/${version}.xpi";
+  extensionUrl =
+    name: version: "https://addons.mozilla.org/firefox/downloads/latest/${name}/${version}.xpi";
 in
 {
   programs.firefox = {

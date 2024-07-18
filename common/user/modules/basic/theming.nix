@@ -1,4 +1,10 @@
-{ nixosConfig, config, lib, pkgs, ... }:
+{
+  nixosConfig,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 with types;
 let
@@ -9,7 +15,7 @@ in
     theming.fonts = {
       packages = mkOption {
         type = listOf package;
-        default = [];
+        default = [ ];
       };
 
       defaults = {
@@ -21,33 +27,33 @@ in
         packages = mkOption {
           type = listOf package;
           default = with pkgs; [
-	    (iosevka.override {
-		set = "Ship";
-		privateBuildPlan = {
-		    family = "Iosevka Ship";
-		    spacing = "normal";
-		    serifs = "sans";
-		    noCvSs = false;
-		    buildTextureFeature = true;
-		    exportGlyphNames = true;
-
-		    variants.inherits = "ss05";
-		    ligations.inherits = "dlig";
-		};	
-	    })
             (iosevka.override {
-		set = "Ship";
-		privateBuildPlan = {
-		    family = "Iosevka Ship Term";
-		    spacing = "term";
-		    serifs = "sans";
-		    noCvSs = false;
-		    buildTextureFeature = true;
-		    exportGlyphNames = true;
+              set = "Ship";
+              privateBuildPlan = {
+                family = "Iosevka Ship";
+                spacing = "normal";
+                serifs = "sans";
+                noCvSs = false;
+                buildTextureFeature = true;
+                exportGlyphNames = true;
 
-		    variants.inherits = "ss05";
-		};
-	    })
+                variants.inherits = "ss05";
+                ligations.inherits = "dlig";
+              };
+            })
+            (iosevka.override {
+              set = "Ship";
+              privateBuildPlan = {
+                family = "Iosevka Ship Term";
+                spacing = "term";
+                serifs = "sans";
+                noCvSs = false;
+                buildTextureFeature = true;
+                exportGlyphNames = true;
+
+                variants.inherits = "ss05";
+              };
+            })
             meslo-lgs-nf
             noto-fonts
           ];
@@ -55,19 +61,22 @@ in
 
         serif = mkOption {
           type = listOf str;
-          default = ["Iosevka Ship"];
+          default = [ "Iosevka Ship" ];
         };
         sansSerif = mkOption {
           type = listOf str;
-          default = ["Iosevka Ship"];
+          default = [ "Iosevka Ship" ];
         };
         monospace = mkOption {
           type = listOf str;
-          default = ["Iosevka Ship Term" "MesloLGS NF"];
+          default = [
+            "Iosevka Ship Term"
+            "MesloLGS NF"
+          ];
         };
         emoji = mkOption {
           type = listOf str;
-          default = ["Noto Color Emoji"];
+          default = [ "Noto Color Emoji" ];
         };
       };
     };
@@ -120,12 +129,8 @@ in
       };
 
       wallpapers = {
-        active = mkOption {
-          type = path;
-        };
-        screensaver = mkOption {
-          type = path;
-        };
+        active = mkOption { type = path; };
+        screensaver = mkOption { type = path; };
       };
     };
   };
