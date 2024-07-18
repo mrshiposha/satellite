@@ -15,6 +15,7 @@ vim.opt.list = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.expandtab = false
 vim.opt.listchars = {
 	tab = "→ ",
 	trail = "·",
@@ -24,6 +25,26 @@ vim.opt.listchars = {
 	extends = "⟩",
 	precedes = "⟨"
 }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.lua", "*.nix" },
+	callback = function ()
+		vim.bo.tabstop = 2
+		vim.bo.shiftwidth = 2
+		vim.bo.softtabstop = 2
+	end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.js", "*.ts", "*.json" },
+	callback = function ()
+		vim.bo.tabstop = 2
+		vim.bo.shiftwidth = 2
+		vim.bo.softtabstop = 2
+		vim.bo.expandtab = true
+	end
+})
+
 
 vim.g.neovide_text_gamma = 0.8
 vim.g.neovide_text_contrast = 0.1 -- Will work with 0.13.1, see https://github.com/neovide/neovide/pull/2510
