@@ -3,6 +3,7 @@ local plugins = {
 	lspcfg = require("lspconfig"),
 	nvimlsp = require("cmp_nvim_lsp"),
 	luasnip = require("luasnip"),
+	trouble = require("trouble"),
 	autopairs = require("nvim-autopairs"),
 	cmp_autopairs = require("nvim-autopairs.completion.cmp")
 };
@@ -48,6 +49,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
+-- TODO use DirenvLoaded & Filetype entering
 plugins.lspcfg["lua_ls"].setup {
 	capabilities = plugins.nvimlsp.default_capabilities(),
 	settings = {Lua = {diagnostics = {globals = {"vim"}}}}
@@ -55,6 +57,11 @@ plugins.lspcfg["lua_ls"].setup {
 plugins.lspcfg["nil_ls"].setup {
 	capabilities = plugins.nvimlsp.default_capabilities()
 }
+plugins.lspcfg["tsserver"].setup {
+	capabilities = plugins.nvimlsp.default_capabilities()
+}
+
+plugins.trouble.setup {}
 
 plugins.autopairs.setup {}
 plugins.cmp.event:on("confirm_done", plugins.cmp_autopairs.on_confirm_done())

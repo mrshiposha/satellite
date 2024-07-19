@@ -35,6 +35,8 @@
         nvim-comment
         nvim-surround
         lazygit-nvim
+        direnv-vim
+        trouble-nvim
       ];
       extraLuaConfig = ''
         package.path = "${./lua}/?.lua;"..package.path
@@ -48,7 +50,7 @@
         ${dofile "nav"}
         ${dofile "sessions"}
         ${dofile "git"}
-        ${dofile "completion"}
+        ${dofile "lsp"}
       '';
       extraPackages = with pkgs; [
         ripgrep
