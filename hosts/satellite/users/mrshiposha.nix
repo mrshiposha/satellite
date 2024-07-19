@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 {
   users.users.mrshiposha = {
@@ -21,6 +20,7 @@
       /programs/basic
       /programs/dev/vscode.nix
       /programs/dev/neovim
+      /programs/dev/lazygit.nix
     ];
 
     theming.gui.wallpapers = {
