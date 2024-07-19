@@ -401,5 +401,6 @@ mappings:new{
 	}
 }
 
-require("mini.surround").setup {silent = true}
+require("nvim-surround").setup {}
+
 mappings:apply()

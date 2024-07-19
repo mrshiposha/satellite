@@ -1,15 +1,4 @@
 { pkgs, ... }:
-let
-  minisurround = pkgs.vimUtils.buildVimPlugin {
-    name = "mini.surround";
-    src = pkgs.fetchFromGitHub {
-      owner = "echasnovski";
-      repo = "mini.surround";
-      rev = "3cb5b509ad34f2402df4b977be607a614c8c7524";
-      hash = "sha256-0csTosYTbSoGVP7yHJw6rzjoIcCYU5WQoeXMzqdP7Q8=";
-    };
-  };
-in
 {
   programs.neovim =
     let
@@ -44,7 +33,7 @@ in
         luasnip
         nvim-autopairs
         nvim-comment
-        minisurround
+        nvim-surround
         lazygit-nvim
       ];
       extraLuaConfig = ''
