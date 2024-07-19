@@ -27,21 +27,21 @@ vim.opt.listchars = {
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.lua" },
+	pattern = { "*.nix", "*.lua" },
 	callback = function ()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-		vim.bo.softtabstop = 2
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.softtabstop = 2
 	end
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "*.nix", "*.js", "*.ts", "*.json" },
+	pattern = { "*.js", "*.ts", "*.json" },
 	callback = function ()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-		vim.bo.softtabstop = 2
-		vim.bo.expandtab = true
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.softtabstop = 2
+		vim.opt_local.expandtab = true
 	end
 })
 
