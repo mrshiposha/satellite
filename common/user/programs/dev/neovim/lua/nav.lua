@@ -88,6 +88,9 @@ require("nvim-tree").setup {
 	git = {enable = true, show_on_open_dirs = false},
 	trash = {cmd = "trash"},
 	live_filter = {always_show_folders = false},
+	filters = {
+		dotfiles = true,
+	},
 	on_attach = function(buf)
 		local api = require("nvim-tree.api")
 		local function keymap(key, action, opts)
