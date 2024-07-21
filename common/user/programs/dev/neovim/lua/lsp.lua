@@ -67,6 +67,9 @@ local function setup_lsp()
 	plugins.lspcfg["nil_ls"].setup {
 		capabilities = plugins.nvimlsp.default_capabilities(),
 	}
+	plugins.lspcfg["rust_analyzer"].setup {
+		capabilities = plugins.nvimlsp.default_capabilities(),
+	}
 	plugins.lspcfg["tsserver"].setup {
 		capabilities = plugins.nvimlsp.default_capabilities(),
 	}
