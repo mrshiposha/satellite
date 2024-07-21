@@ -141,6 +141,16 @@ return {
 		return wins
 	end,
 
-	mappings = mappings
+	mappings = mappings,
+
+	shutdown_lsp = function ()
+		local active_clients = vim.lsp.get_active_clients()
+
+		for _, client in ipairs(active_clients) do
+			vim.lsp.stop_client(client.id)
+		end
+
+		pcall(vim.api.nvim_del_augroup_by_name, "lspconfig")
+	end,
 }
 

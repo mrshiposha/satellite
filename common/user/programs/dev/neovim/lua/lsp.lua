@@ -7,12 +7,21 @@ local plugins = {
 	autopairs = require("nvim-autopairs"),
 	cmp_autopairs = require("nvim-autopairs.completion.cmp")
 };
+local util = require("util")
 
 local cmp_mapping = plugins.cmp.mapping
 local cmp_modes = {"i", "c"}
 
 local function default_cmp_sources()
-	return {{name = "nvim_lsp"}, {name = "buffer"}}
+	return {
+		{
+			name = "nvim_lsp",
+			entity_filter = function ()
+				return #vim.lsp.get_active_clients() > 0
+			end
+		},
+		{name = "buffer"},
+	}
 end
 plugins.cmp.setup {
 	completion = {completeopt = "menu,menuone,preview"},
@@ -32,7 +41,7 @@ plugins.cmp.setup.cmdline({"/", "?"}, {sources = {{name = "buffer"}}})
 plugins.cmp.setup.cmdline(":", {
 	sources = {
 		{name = "cmdline"}, {name = "path"},
-  {name = "cmdline", option = {ignore_cmds = {"!"}}}
+		{name = "cmdline", option = {ignore_cmds = {"!"}}}
 	},
 	matching = {disallow_symbol_nonprefix_matching = false}
 })
@@ -49,17 +58,27 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
--- TODO use DirenvLoaded & Filetype entering
-plugins.lspcfg["lua_ls"].setup {
-	capabilities = plugins.nvimlsp.default_capabilities(),
-	settings = {Lua = {diagnostics = {globals = {"vim"}}}}
-}
-plugins.lspcfg["nil_ls"].setup {
-	capabilities = plugins.nvimlsp.default_capabilities()
-}
-plugins.lspcfg["tsserver"].setup {
-	capabilities = plugins.nvimlsp.default_capabilities()
-}
+local function setup_lsp()
+	plugins.lspcfg["lua_ls"].setup {
+		capabilities = plugins.nvimlsp.default_capabilities(),
+		settings = {Lua = {diagnostics = {globals = {"vim"}}}},
+	}
+	plugins.lspcfg["nil_ls"].setup {
+		capabilities = plugins.nvimlsp.default_capabilities(),
+	}
+	plugins.lspcfg["tsserver"].setup {
+		capabilities = plugins.nvimlsp.default_capabilities(),
+	}
+end
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "DirenvLoaded",
+	callback = setup_lsp,
+})
+
+vim.api.nvim_create_autocmd("DirChanged", {
+	callback = util.shutdown_lsp,
+})
 
 plugins.trouble.setup {}
 
