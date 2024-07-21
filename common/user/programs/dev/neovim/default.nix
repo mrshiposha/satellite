@@ -37,6 +37,7 @@
         lazygit-nvim
         direnv-vim
         trouble-nvim
+        actions-preview-nvim
       ];
       extraLuaConfig = ''
         package.path = "${./lua}/?.lua;"..package.path

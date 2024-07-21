@@ -5,7 +5,8 @@ local plugins = {
 	luasnip = require("luasnip"),
 	trouble = require("trouble"),
 	autopairs = require("nvim-autopairs"),
-	cmp_autopairs = require("nvim-autopairs.completion.cmp")
+	cmp_autopairs = require("nvim-autopairs.completion.cmp"),
+	preview = require("actions-preview"),
 };
 local util = require("util")
 
@@ -85,3 +86,4 @@ plugins.trouble.setup {}
 plugins.autopairs.setup {}
 plugins.cmp.event:on("confirm_done", plugins.cmp_autopairs.on_confirm_done())
 
+plugins.preview.setup {}

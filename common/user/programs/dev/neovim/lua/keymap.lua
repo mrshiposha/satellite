@@ -401,6 +401,13 @@ mappings:new{
 	}
 }
 
+mappings:new{
+	description = "Code sctions preview",
+	modes = {
+		normal = {["<A-a>"] = require("actions-preview").code_actions}
+	},
+}
+
 require("nvim-surround").setup {}
 
 mappings:apply()
