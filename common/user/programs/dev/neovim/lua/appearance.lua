@@ -130,6 +130,19 @@ plugins.galaxyline.section.left[3] = {
 		condition = plugins.galaxyline.condition.buffer_not_empty
 	}
 }
+plugins.galaxyline.section.left[4] = {
+	MacroRecording = {
+		provider = function ()
+			local reg_recording = vim.fn.reg_recording()
+
+			if reg_recording == "" then
+				return ""
+			else
+				return " // recording @".. reg_recording
+			end
+		end,
+	}
+}
 plugins.galaxyline.section.mid[1] = {
 	GitBranch = {
 		provider = 'GitBranch',
