@@ -1,8 +1,8 @@
 {
-  imports = [
-    ./wezterm.nix
-    ./stats.nix
-    ./firefox.nix
-    ./connections.nix
-  ];
+	imports = [
+		./wezterm.nix
+		./stats.nix
+		./firefox.nix
+		./connections.nix
+	];
 }
