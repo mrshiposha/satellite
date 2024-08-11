@@ -7,6 +7,7 @@ local plugins = {
 	autopairs = require("nvim-autopairs"),
 	cmp_autopairs = require("nvim-autopairs.completion.cmp"),
 	preview = require("actions-preview"),
+	preview_hl = require("actions-preview.highlight").delta
 };
 local util = require("util")
 
@@ -59,34 +60,44 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
-local function setup_lsp()
-	plugins.lspcfg["lua_ls"].setup {
-		capabilities = plugins.nvimlsp.default_capabilities(),
-		settings = {Lua = {diagnostics = {globals = {"vim"}}}},
-	}
-	plugins.lspcfg["nil_ls"].setup {
-		capabilities = plugins.nvimlsp.default_capabilities(),
-	}
-	plugins.lspcfg["rust_analyzer"].setup {
-		capabilities = plugins.nvimlsp.default_capabilities(),
-	}
-	plugins.lspcfg["tsserver"].setup {
-		capabilities = plugins.nvimlsp.default_capabilities(),
-	}
-end
+vim.g.rustaceanvim = {
+	server = {
+		auto_attach = true,
+		cmd = function ()
+			return { "direnv", "exec", vim.fn.getcwd(), "rust-analyzer", "--log-file", vim.fn.tempname() .. '-rust-analyzer.log' }
+		end,
+	},
+}
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "DirenvLoaded",
-	callback = setup_lsp,
-})
-
-vim.api.nvim_create_autocmd("DirChanged", {
-	callback = util.shutdown_lsp,
-})
+plugins.lspcfg["lua_ls"].setup {
+	capabilities = plugins.nvimlsp.default_capabilities(),
+	settings = {Lua = {diagnostics = {globals = {"vim"}}}},
+}
+plugins.lspcfg["nil_ls"].setup {
+	capabilities = plugins.nvimlsp.default_capabilities(),
+}
+plugins.lspcfg["tsserver"].setup {
+	capabilities = plugins.nvimlsp.default_capabilities(),
+}
 
 plugins.trouble.setup {}
 
 plugins.autopairs.setup {}
 plugins.cmp.event:on("confirm_done", plugins.cmp_autopairs.on_confirm_done())
 
-plugins.preview.setup {}
+plugins.preview.setup {
+	highlight_command = { plugins.preview_hl("delta -s -n") },
+	telescope = {
+		sorting_strategy = "ascending",
+		layout_strategy = "vertical",
+		layout_config = {
+			width = 0.8,
+			height = 0.9,
+			prompt_position = "top",
+			preview_cutoff = 20,
+			preview_height = function(_, _, max_lines)
+				return max_lines - 15
+			end,
+		},
+	},
+}
