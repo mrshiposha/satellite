@@ -11,11 +11,11 @@ local plugins = {
 	dressing = require("dressing")
 }
 
-vim.opt.list = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
+vim.opt.list = true
 vim.opt.listchars = {
 	tab = "→ ",
 	trail = "·",
@@ -25,6 +25,8 @@ vim.opt.listchars = {
 	extends = "⟩",
 	precedes = "⟨"
 }
+
+vim.g.rust_recommended_style = false
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = { "*.nix", "*.lua" },
