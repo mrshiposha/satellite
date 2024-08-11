@@ -29,7 +29,6 @@
     };
 
     home.packages = with pkgs; [
-      rustup
       qrencode
       inkscape
       neovide
