@@ -1,4 +1,13 @@
 local util = require("util")
+local telescope = {
+	actions = require("telescope.actions"),
+	action_state = require("telescope.actions.state"),
+	builtin = require("telescope.builtin"),
+	pickers = require("telescope.pickers"),
+	finders = require("telescope.finders"),
+	sorters = require("telescope.sorters"),
+	previewers = require("telescope.previewers"),
+}
 
 vim.g.VM_default_mappings = false
 vim.opt.whichwrap:append("<,>,[,]")
@@ -397,11 +406,52 @@ mappings:new{
 	}
 }
 
+local function lsp_actions()
+	telescope.pickers.new({}, {
+		prompt_title = "LSP Actions",
+		finder = telescope.finders.new_table {
+			results = {
+				{ "Actions", require("actions-preview").code_actions },
+				{ "Definitions", vim.lsp.buf.definition },
+				{ "References", vim.lsp.buf.references },
+			},
+			entry_maker = function(entry)
+				return {
+					value = entry,
+					display = entry[1],
+					ordinal = entry[1],
+				}
+			end,
+		},
+		sorter = telescope.sorters.get_generic_fuzzy_sorter(),
+		previewer = telescope.previewers.new_buffer_previewer({
+			define_preview = function (_, entry)
+				vim.schedule(function ()
+					if entry.preview_command then
+						vim.lsp.buf.definition()
+					end
+				end)
+			end
+		}),
+		attach_mappings = function(prompt_bufnr)
+			telescope.actions.select_default:replace(function()
+				telescope.actions.close(prompt_bufnr)
+
+				local selection = telescope.action_state.get_selected_entry()
+				selection.value[2]()
+			end)
+			return true
+		end,
+	}):find()
+end
+
 mappings:new{
-	description = "Code sctions preview",
+	description = "LSP actions",
 	modes = {
-		normal = {["<A-a>"] = require("actions-preview").code_actions}
-	},
+		normal = {["<A-a>"] = lsp_actions},
+		visual = "#normal#",
+		insert = "#normal#",
+	}
 }
 
 require("nvim-surround").setup {}
