@@ -320,20 +320,16 @@ mappings:new{
 			["<C-S-Up>"] = "",
 			["<C-S-Down>"] = "",
 			["<C-w>"] = function()
-				local current_buf = vim.api.nvim_get_current_buf()
-
-				if vim.bo[current_buf].filetype == "NvimTree" then
-					vim.api.nvim_command("quit")
-					return
-				end
-
 				local wins = util.list_tab_wins()
-				local nvimtree
+				local filewins = 0
 				for _, win in ipairs(wins) do
-					if vim.bo[win.buf].filetype == "NvimTree" then nvimtree = win.id end
+					if vim.bo[win.buf].buftype == "" then filewins = filewins + 1 end
 				end
 
-				if nvimtree and #wins <= 2 then
+				local current_buf = vim.api.nvim_get_current_buf()
+				local current_is_file = vim.bo[current_buf].buftype == ""
+
+				if current_is_file and filewins == 1 then
 					vim.api.nvim_command("tabclose")
 				else
 					vim.api.nvim_command("quit")
