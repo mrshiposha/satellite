@@ -1,22 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    tdesktop
-    slack
-    discord
-  ];
+		tdesktop
+		discord
+	];
 
-  unfree.list = with pkgs; [
-    slack
-    discord
-  ];
-
-  programs = {
-    thunderbird = {
-      enable = true;
-      profiles = {
-        basic.isDefault = true;
-      };
-    };
-  };
+	unfree.list = with pkgs; [
+		discord
+	];
 }
