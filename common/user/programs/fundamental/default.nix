@@ -16,4 +16,6 @@
     xdg-utils
     trash-cli
   ];
+
+	xdg.mimeApps.enable = true;
 }
