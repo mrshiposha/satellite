@@ -4,5 +4,6 @@
 		./stats.nix
 		./firefox.nix
 		./connections.nix
+		./yazi.nix
 	];
 }
