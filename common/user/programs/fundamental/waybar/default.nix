@@ -33,36 +33,40 @@ in
         "custom/power"
       ];
 
-      "hyprland/workspaces" = {
-        format = "{windows}";
-        persistent-workspaces."*" = 4;
-        "window-rewrite-default" = "<sub></sub>";
-        window-rewrite = {
-          "class<rofi>" = "";
-          "class<alacritty>" = "";
-          "class<org.wezfurlong.wezterm>" = "";
-          "class<org.wezfurlong.wezterm> title<btop>" = "";
-          "class<VSCodium>" = "󰨞";
-          "class<neovide>" = "";
-          "class<firefox>" = "";
-          "class<firefox> title<.*youtube.*>" = "";
-          "class<firefox> title<.*Meet -.*>" = "<sub></sub>";
-          "class<org.telegram.desktop>" = "";
-          "class<slack>" = "";
-          "class<discord>" = "";
-          "class<ghidra-Ghidra>" = "";
-          "class<steam>" = "";
+			"hyprland/workspaces" = {
+				format = "{windows}";
+				persistent-workspaces."*" = 4;
+				"window-rewrite-default" = "<sub></sub>";
+				window-rewrite = {
+					"class<rofi>" = "";
+					"class<alacritty>" = "";
+					"class<org.wezfurlong.wezterm>" = "";
+					"class<org.wezfurlong.wezterm> title<btop>" = "";
+					"class<org.pwmt.zathura>" = "";
+					"class<org.wezfurlong.wezterm> title<Yazi.*>" = "";
+					"class<org.wezfurlong.wezterm> title<nvim>" = "";
+					"class<VSCodium>" = "󰨞";
+					"class<neovide>" = "";
+					"class<firefox>" = "";
+					"class<firefox> title<.*youtube.*>" = "";
+					"class<firefox> title<.*Meet -.*>" = "<sub></sub>";
+					"class<org.telegram.desktop>" = "";
+					"class<slack>" = "";
+					"class<discord>" = "";
+					"class<Mattermost>" = "";
+					"class<ghidra-Ghidra>" = "";
+					"class<steam>" = "";
 
-          "class<pavucontrol>" = "<sub></sub>";
-          "class<nm-connection-editor>" = "<sub></sub>";
-          "class<.blueman-manager-wrapped>" = "<sub></sub>";
+					"class<pavucontrol>" = "<sub></sub>";
+					"class<nm-connection-editor>" = "<sub></sub>";
+					"class<.blueman-manager-wrapped>" = "<sub></sub>";
 
-          "class<firefox> title<.*Gmail.*>" = "<sub></sub>";
-          "class<thunderbird>" = "";
+					"class<firefox> title<.*Gmail.*>" = "<sub></sub>";
+					"class<thunderbird>" = "";
 
-          "class<qalculate-gtk>" = "";
-        };
-      };
+					"class<qalculate-gtk>" = "";
+				};
+			};
 
       clock.format = "{:%H:%M} ";
 
