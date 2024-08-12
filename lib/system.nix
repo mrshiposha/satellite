@@ -6,7 +6,7 @@ let
 in
 lib.nixosSystem (
   configuration
-  // {
+    // {
     modules = [
       {
         nix.settings.experimental-features = [

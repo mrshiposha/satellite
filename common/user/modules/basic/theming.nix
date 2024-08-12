@@ -1,9 +1,8 @@
-{
-  nixosConfig,
-  config,
-  lib,
-  pkgs,
-  ...
+{ nixosConfig
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with types;
