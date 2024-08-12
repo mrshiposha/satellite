@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
 	imports = [
 		./wezterm.nix
 		./stats.nix
@@ -6,5 +6,9 @@
 		./connections.nix
 		./yazi.nix
 		./zathura.nix
+	];
+
+	home.packages = with pkgs; [
+		logseq
 	];
 }

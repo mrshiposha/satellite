@@ -56,6 +56,7 @@ in
 					"class<Mattermost>" = "";
 					"class<ghidra-Ghidra>" = "";
 					"class<steam>" = "";
+					"class<Logseq>" = "";
 
 					"class<pavucontrol>" = "<sub></sub>";
 					"class<nm-connection-editor>" = "<sub></sub>";
