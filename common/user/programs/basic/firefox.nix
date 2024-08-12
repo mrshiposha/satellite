@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   extensionUrl =
     name: version: "https://addons.mozilla.org/firefox/downloads/latest/${name}/${version}.xpi";
@@ -21,4 +22,6 @@ in
       };
     };
   };
+
+	xdg.mimeApps.defaultApplications."application/pdf" = lib.mkDefault [ "firefox.desktop" ];
 }

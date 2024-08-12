@@ -5,5 +5,6 @@
 		./firefox.nix
 		./connections.nix
 		./yazi.nix
+		./zathura.nix
 	];
 }
