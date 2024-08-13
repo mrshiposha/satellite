@@ -1,37 +1,37 @@
 { config, pkgs, ... }:
 
 let
-  hyprland = config.wayland.windowManager.hyprland;
+	hyprland = config.wayland.windowManager.hyprland;
 
-  gapsout = if hyprland.enable then hyprland.settings.general.gaps_out else 4;
+	gapsout = if hyprland.enable then hyprland.settings.general.gaps_out else 4;
 in
 {
-  theming.fonts.packages = with pkgs; [
-    font-awesome
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-  ];
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-    settings.main = rec {
-      layer = "top";
-      position = "bottom";
+	theming.fonts.packages = with pkgs; [
+		font-awesome
+		(nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+	];
+	programs.waybar = {
+		enable = true;
+		systemd.enable = true;
+		settings.main = rec {
+			layer = "top";
+			position = "bottom";
 
-      margin-bottom = gapsout;
-      margin-left = gapsout;
-      margin-right = gapsout;
+			margin-bottom = gapsout;
+			margin-left = gapsout;
+			margin-right = gapsout;
 
-      modules-left = [ "hyprland/workspaces" ];
-      modules-center = [ "clock" ];
-      modules-right = [
-        "backlight"
-        "pulseaudio"
-        "network"
-        "bluetooth"
-        "battery"
-        "group/stats"
-        "custom/power"
-      ];
+			modules-left = [ "hyprland/workspaces" ];
+			modules-center = [ "clock" ];
+			modules-right = [
+				"backlight"
+				"pulseaudio"
+				"network"
+				"bluetooth"
+				"battery"
+				"group/stats"
+				"custom/power"
+			];
 
 			"hyprland/workspaces" = {
 				format = "{windows}";
@@ -69,107 +69,107 @@ in
 				};
 			};
 
-      clock.format = "{:%H:%M} ";
+			clock.format = "{:%H:%M} ";
 
-      backlight = {
-        format = "{percent}% ";
-        reverse-scrolling = true;
-        scroll-step = 0.1;
-      };
+			backlight = {
+				format = "{percent}% ";
+				reverse-scrolling = true;
+				scroll-step = 0.1;
+			};
 
-      pulseaudio = {
-        format = "{volume}% {icon} / {format_source}";
-        format-icons = [
-          ""
-          ""
-          ""
-        ];
-        format-muted = " / {format_source}";
-        format-source = "";
-        format-source-muted = "";
-        tooltip-format = "Sound Volume / Mic Status";
-        on-click = "pavucontrol";
-        reverse-scrolling = true;
-        scroll-step = 0.1;
-      };
+			pulseaudio = {
+				format = "{volume}% {icon} / {format_source}";
+				format-icons = [
+					""
+					""
+					""
+				];
+				format-muted = " / {format_source}";
+				format-source = "";
+				format-source-muted = "";
+				tooltip-format = "Sound Volume / Mic Status";
+				on-click = "pavucontrol";
+				reverse-scrolling = true;
+				scroll-step = 0.1;
+			};
 
-      bluetooth = {
-        format = "";
+			bluetooth = {
+				format = "";
 
-        tooltip-format = "Bluetooth {status}";
-        tooltip-format-connected = "{device_alias}";
-        tooltip-format-connected-battery = "{device_alias}<sub> {device_battery_percentage}%</sub>";
+				tooltip-format = "Bluetooth {status}";
+				tooltip-format-connected = "{device_alias}";
+				tooltip-format-connected-battery = "{device_alias}<sub> {device_battery_percentage}%</sub>";
 
-        # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
-        on-click = "sleep 0.1 && ${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
-      };
+				# See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
+				on-click = "sleep 0.1 && ${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
+			};
 
-      network = {
-        interface = "wlan0";
-        format-wifi = "";
-        format-linked = "";
-        format-disconnected = "";
+			network = {
+				interface = "wlan0";
+				format-wifi = "";
+				format-linked = "";
+				format-disconnected = "";
 
-        tooltip-format-wifi = ''
-          {essid}
-          IP: {ipaddr}
-          Strength: {signalStrength}%'';
-        tooltip-format-linked = "connecting to {essid}";
-        tooltip-format-disconnected = "WiFi disconnected";
+				tooltip-format-wifi = ''
+					{essid}
+					IP: {ipaddr}
+					Strength: {signalStrength}%'';
+				tooltip-format-linked = "connecting to {essid}";
+				tooltip-format-disconnected = "WiFi disconnected";
 
-        on-click = builtins.toString ./launch-wifi-menu.sh;
-      };
+				on-click = builtins.toString ./launch-wifi-menu.sh;
+			};
 
-      "group/stats" = {
-        orientation = "inherit";
-        modules = [
-          "cpu"
-          "disk"
-          "memory"
-        ];
+			"group/stats" = {
+				orientation = "inherit";
+				modules = [
+					"cpu"
+					"disk"
+					"memory"
+				];
 
-        drawer = {
-          transition-duration = 500;
-        };
-      };
+				drawer = {
+					transition-duration = 500;
+				};
+			};
 
-      "custom/power" = {
-        format = "";
-        exec = ''echo '{ "tooltip": "Power Menu" }' '';
-        return-type = "json";
+			"custom/power" = {
+				format = "";
+				exec = ''echo '{ "tooltip": "Power Menu" }' '';
+				return-type = "json";
 
-        # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
-        on-click = "sleep 0.1 && rofi -show power-menu";
-        tooltip-format = "Power Menu";
-      };
+				# See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
+				on-click = "sleep 0.1 && rofi -show power-menu";
+				tooltip-format = "Power Menu";
+			};
 
-      cpu = {
-        format = "{usage}% ";
-        on-click = "wezterm -e btop -p 2";
-      };
-      memory = {
-        format = "{percentage}% RAM";
-        on-click = cpu.on-click;
-      };
-      disk.format = "{percentage_used}% ";
+			cpu = {
+				format = "{usage}% ";
+				on-click = "wezterm -e btop -p 2";
+			};
+			memory = {
+				format = "{percentage}% RAM";
+				on-click = cpu.on-click;
+			};
+			disk.format = "{percentage_used}% ";
 
-      battery = {
-        format = "{capacity}% {icon}";
-        format-charging = "{capacity}% {icon} ";
-        format-icons = [
-          ""
-          ""
-          ""
-          ""
-          ""
-        ];
-        states = {
-          warning = 30;
-          critical = 15;
-        };
-      };
-    };
+			battery = {
+				format = "{capacity}% {icon}";
+				format-charging = "{capacity}% {icon} ";
+				format-icons = [
+					""
+					""
+					""
+					""
+					""
+				];
+				states = {
+					warning = 30;
+					critical = 15;
+				};
+			};
+		};
 
-    style = builtins.readFile ./style.css;
-  };
+		style = builtins.readFile ./style.css;
+	};
 }

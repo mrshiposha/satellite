@@ -1,6 +1,6 @@
 {
-  imports = [
-    ./theming.nix
-    ./unfree.nix
-  ];
+	imports = [
+		./theming.nix
+		./unfree.nix
+	];
 }

@@ -1,14 +1,14 @@
 { pkgs, ... }:
 {
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
+	boot = {
+		loader = {
+			systemd-boot.enable = true;
+			efi.canTouchEfiVariables = true;
+		};
 
-    initrd.systemd.enable = true;
-    resumeDevice = "/dev/disk/by-label/swap";
+		initrd.systemd.enable = true;
+		resumeDevice = "/dev/disk/by-label/swap";
 
-    kernelPackages = pkgs.linuxPackages_6_9;
-  };
+		kernelPackages = pkgs.linuxPackages_6_9;
+	};
 }

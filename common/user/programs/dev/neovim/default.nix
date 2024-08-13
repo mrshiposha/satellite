@@ -66,7 +66,7 @@
 			vimdiffAlias = true;
 		};
 
-  home.packages = with pkgs; [
+	home.packages = with pkgs; [
 		luaformatter
 		rust-analyzer
 		lua-language-server
