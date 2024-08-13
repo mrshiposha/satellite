@@ -1,5 +1,9 @@
+{ config, lib, ... }:
+with lib;
 {
-	programs.alacritty = {
+	options.alacritty.enable = mkEnableOption "alacritty";
+
+	config.programs.alacritty = mkIf config.alacritty.enable {
 		enable = true;
 		settings = {
 			font.size = 12.0;

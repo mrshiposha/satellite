@@ -9,7 +9,7 @@
 			let
 				users = builtins.attrValues config.home-manager.users;
 			in
-			builtins.map (user: user.${moduleName}) (builtins.filter (user: user ? ${moduleName}) users);
+			builtins.map (user: user.${moduleName}) (builtins.filter (user: builtins.hasAttr "${moduleName}" user) users);
 
 		greeterThemeFromUserTheme =
 			user:
