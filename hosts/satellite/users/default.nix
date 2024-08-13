@@ -1,6 +1,6 @@
 {
-  imports = [
-    ./mrshiposha.nix
-    ./wally.nix
-  ];
+	imports = [
+		./mrshiposha.nix
+		./wally.nix
+	];
 }
