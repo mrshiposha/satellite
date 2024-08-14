@@ -43,6 +43,7 @@ in
 					"class<org.wezfurlong.wezterm>" = "";
 					"class<org.wezfurlong.wezterm> title<btop>" = "";
 					"class<org.pwmt.zathura>" = "";
+					"class<Zathura>" = "";
 					"class<org.wezfurlong.wezterm> title<Yazi.*>" = "";
 					"class<org.wezfurlong.wezterm> title<nvim>" = "";
 					"class<VSCodium>" = "󰨞";
