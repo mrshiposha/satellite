@@ -9,11 +9,17 @@ lib.nixosSystem (
 		// {
 		modules = [
 			{
-				nix.settings.experimental-features = [
-					"nix-command"
-					"flakes"
-					"repl-flake"
-				];
+				nix.settings = {
+					# see https://github.com/NixOS/nix/pull/7126#issuecomment-1820045768
+					# replace with https://github.com/NixOS/nix/pull/7126 when ready
+					sync-before-registering = true;
+
+					experimental-features = [
+						"nix-command"
+						"flakes"
+						"repl-flake"
+					];
+				};
 			}
 
 			home-manager.nixosModules.home-manager
