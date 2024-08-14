@@ -37,7 +37,11 @@ lib:
 						}
 					];
 					nix.distributedBuilds = true;
-					nix.extraOptions = "   builders-use-substitutes = true\n   cores = 12\n";
+
+					nix.extraOptions = ''
+						builders-use-substitutes = true
+						cores = 12
+					'';
 
 					gui = {
 						enable = true;
