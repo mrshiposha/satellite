@@ -9,7 +9,6 @@ local plugins = {
 	preview = require("actions-preview"),
 	preview_hl = require("actions-preview.highlight").delta
 };
-local util = require("util")
 
 local cmp_mapping = plugins.cmp.mapping
 local cmp_modes = {"i", "c"}
@@ -23,6 +22,7 @@ local function default_cmp_sources()
 			end
 		},
 		{name = "buffer"},
+		{name = "luasnip"},
 	}
 end
 plugins.cmp.setup {
@@ -30,7 +30,7 @@ plugins.cmp.setup {
 	mapping = {
 		["<C-Space>"] = cmp_mapping.complete(),
 		["<Tab>"] = cmp_mapping(cmp_mapping.confirm {select = true}, cmp_modes),
-		["<CR>"] = cmp_mapping(cmp_mapping.confirm {select = true}, cmp_modes),
+		["<CR>"] = cmp_mapping(cmp_mapping.confirm {select = true}, {"i"}),
 		["<Down>"] = cmp_mapping(cmp_mapping.select_next_item(), cmp_modes),
 		["<Up>"] = cmp_mapping(cmp_mapping.select_prev_item(), cmp_modes),
 		["<C-A-Down>"] = cmp_mapping(cmp_mapping.scroll_docs(4), cmp_modes),
@@ -38,6 +38,9 @@ plugins.cmp.setup {
 	},
 	sources = plugins.cmp.config.sources(default_cmp_sources()),
 	snippet = {expand = function(args) plugins.luasnip.lsp_expand(args.body) end}
+}
+plugins.luasnip.setup {
+	update_events = {"TextChanged", "TextChangedI"},
 }
 plugins.cmp.setup.cmdline({"/", "?"}, {sources = {{name = "buffer"}}})
 plugins.cmp.setup.cmdline(":", {
@@ -77,6 +80,9 @@ plugins.lspcfg["nil_ls"].setup {
 	capabilities = plugins.nvimlsp.default_capabilities(),
 }
 plugins.lspcfg["tsserver"].setup {
+	capabilities = plugins.nvimlsp.default_capabilities(),
+}
+plugins.lspcfg["texlab"].setup {
 	capabilities = plugins.nvimlsp.default_capabilities(),
 }
 
