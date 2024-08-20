@@ -45,6 +45,7 @@ in
 
 				layout = "dwindle";
 				allow_tearing = false;
+				cursor_inactive_timeout = 3;
 			};
 
 			decoration = {
