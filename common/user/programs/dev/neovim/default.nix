@@ -39,6 +39,7 @@
 				trouble-nvim
 				rustaceanvim
 				actions-preview-nvim
+				vimtex
 			];
 			extraLuaConfig = ''
 				package.path = "${./lua}/?.lua;"..package.path
@@ -53,6 +54,7 @@
 				${dofile "sessions"}
 				${dofile "git"}
 				${dofile "lsp"}
+				${dofile "vimtex"}
 			'';
 			extraPackages = with pkgs; [
 				ripgrep
@@ -71,6 +73,8 @@
 		rust-analyzer
 		lua-language-server
 		nil
+		texlab
+		texliveFull
 	];
 
 	xdg.configFile.neovide = {
