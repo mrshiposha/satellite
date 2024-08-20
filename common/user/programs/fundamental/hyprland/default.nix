@@ -143,6 +143,9 @@ in
 
 				"$mainMod+Shift, Right, movetoworkspace, e+1"
 				"$mainMod+Shift, Left, movetoworkspace, e-1"
+
+				"$mainMod+Alt, Right, movefocus, r"
+				"$mainMod+Alt, Left, movefocus, l"
 			];
 
 			gestures = {
