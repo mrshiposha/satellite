@@ -48,6 +48,10 @@ in
 				cursor_inactive_timeout = 3;
 			};
 
+			dwindle = {
+				force_split = 2;
+			};
+
 			decoration = {
 				rounding = 5;
 
