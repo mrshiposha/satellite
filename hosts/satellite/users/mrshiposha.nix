@@ -20,7 +20,10 @@
 			screensaver = lib.household.image /1920x1080/nord_waves.png;
 		};
 
-		preset.mrshiposha.enable = true;
+		preset.mrshiposha = {
+			enable = true;
+			imageUtils.enable = true;
+		};
 		stats.batsignal = true;
 	};
 }
