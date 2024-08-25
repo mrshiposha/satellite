@@ -1,5 +1,7 @@
 {
 	imports = [
+		./zsh
+		./desktop
 		./wezterm.nix
 		./stats.nix
 		./firefox.nix
