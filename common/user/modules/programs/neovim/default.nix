@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ nixosConfig, config, pkgs, lib, ... }:
 with lib;
 {
 	options.neovim.enable = mkEnableOption "neovim";
@@ -74,17 +74,19 @@ with lib;
 			vimdiffAlias = true;
 		};
 
-		home.packages = with pkgs; [
-			neovide
-			luaformatter
-			rust-analyzer
-			lua-language-server
-			nil
-			texlab
-			texliveFull
+		home.packages = with pkgs; mkMerge [
+			( mkIf nixosConfig.gui.enable [ neovide ] )
+			[
+				luaformatter
+				rust-analyzer
+				lua-language-server
+				nil
+				texlab
+				texliveFull
+			]
 		];
 
-		xdg.configFile.neovide = {
+		xdg.configFile.neovide = mkIf nixosConfig.gui.enable {
 			target = "neovide/config.toml";
 			text = ''
 				[font]

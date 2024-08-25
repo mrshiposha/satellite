@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ nixosConfig, config, lib, pkgs, ... }:
 with lib;
 let
 	cfg = config.preset.mrshiposha;
@@ -10,23 +10,23 @@ in
 	};
 
 	config = mkIf cfg.enable {
-		preset.regularUser.enable = true;
-		yazi.enable = true;
+		preset.regularUser.enable = mkDefault true;
+		yazi.enable = mkDefault true;
 
-		neovim.enable = true;
-		logseq.enable = true;
-		connections.mattermost.enable = true;
+		neovim.enable = mkDefault true;
+		logseq.enable = mkDefault nixosConfig.gui.enable;
+		connections.mattermost.enable = mkDefault nixosConfig.gui.enable;
 
 		programs = {
 			git = {
-				enable = true;
+				enable = mkDefault true;
 				userName = "Daniel Shiposha";
 				userEmail = "ds@unique.network";
 			};
 
 			direnv = {
-				enable = true;
-				nix-direnv.enable = true;
+				enable = mkDefault true;
+				nix-direnv.enable = mkDefault true;
 			};
 		};
 
