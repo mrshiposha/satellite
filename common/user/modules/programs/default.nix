@@ -7,5 +7,8 @@
 		./yazi.nix
 		./zathura.nix
 		./logseq.nix
+		./neovim
+		./lazygit.nix
+		./vscode.nix
 	];
 }

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, ... }:
 {
 	users.users.wally = {
 		isNormalUser = true;
@@ -16,11 +16,7 @@
 			screensaver = lib.household.image /1920x1080/nord_waves.png;
 		};
 
-		connections = {
-			telegram.enable = true;
-			discord.enable = true;
-		};
-
-		home.stateVersion = config.system.stateVersion;
+		preset.regularUser.enable = true;
+		stats.batsignal = true;
 	};
 }
