@@ -11,8 +11,8 @@ in
 
 	config = mkIf cfg.enable {
 		preset.regularUser.enable = mkDefault true;
-		yazi.enable = mkDefault true;
 
+		yazi.enable = mkDefault true;
 		neovim.enable = mkDefault true;
 		logseq.enable = mkDefault nixosConfig.gui.enable;
 		connections.mattermost.enable = mkDefault nixosConfig.gui.enable;

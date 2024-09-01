@@ -12,5 +12,7 @@
 		./neovim
 		./lazygit.nix
 		./vscode.nix
+		./audio.nix
+		./laptop.nix
 	];
 }

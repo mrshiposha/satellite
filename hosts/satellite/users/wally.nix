@@ -6,10 +6,7 @@
 	};
 
 	home-manager.users.wally = {
-		imports = builtins.map lib.household.common.user [
-			/modules
-			/programs/fundamental
-		];
+		imports = [ lib.household.modules.user ];
 
 		theming.gui.wallpapers = {
 			active = lib.household.image /1920x1080/nord_mountains.png;

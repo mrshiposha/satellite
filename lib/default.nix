@@ -1,7 +1,7 @@
 {
 	household = {
-		common.system = path: ../common/system + path;
-		common.user = path: ../common/user + path;
+		modules.system = ../modules/system;
+		modules.user = ../modules/user;
 		image = path: ../images + path;
 
 		userModulesByName =

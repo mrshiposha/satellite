@@ -3,51 +3,45 @@ lib:
 {
 	system = "x86_64-linux";
 
-	modules =
-		builtins.map lib.household.common.system [
-			/fundamental
+	modules = [
+		./hardware-configuration.nix
+		./users
 
-			/basic/audio.nix
-			/basic/powersave.nix
-			/basic/gui.nix
-			/basic/games.nix
+		(
+			{ config, ... }:
+			{
+				nix.buildMachines = [
+					{
+						hostName = "hearthstone";
+						system = "x86_64-linux";
+						protocol = "ssh-ng";
+						sshUser = "nix-remote";
+						sshKey = "/root/.ssh/buildhost/hearthstone/id_ecdsa";
+						maxJobs = 16;
+						speedFactor = 10;
+						supportedFeatures = [
+							"kvm"
+							"big-parallel"
+						];
+					}
+				];
+				nix.distributedBuilds = true;
 
-			/dev/containers.nix
-		]
-		++ [
-			./hardware-configuration.nix
-			./users
+				nix.extraOptions = ''
+					builders-use-substitutes = true
+					cores = 12
+				'';
 
-			(
-				{ config, ... }:
-				{
-					nix.buildMachines = [
-						{
-							hostName = "hearthstone";
-							system = "x86_64-linux";
-							protocol = "ssh-ng";
-							sshUser = "nix-remote";
-							sshKey = "/root/.ssh/buildhost/hearthstone/id_ecdsa";
-							maxJobs = 16;
-							speedFactor = 10;
-							supportedFeatures = [
-								"kvm"
-								"big-parallel"
-							];
-						}
-					];
-					nix.distributedBuilds = true;
+				laptop.enable = true;
+				intel.enable = true;
 
-					nix.extraOptions = ''
-						builders-use-substitutes = true
-						cores = 12
-					'';
+				gui = {
+					enable = true;
+					greeter.seat0.theme = lib.household.greeterThemeFromUserTheme config.home-manager.users.mrshiposha;
+				};
 
-					gui = {
-						enable = true;
-						greeter.seat0.theme = lib.household.greeterThemeFromUserTheme config.home-manager.users.mrshiposha;
-					};
-				}
-			)
-		];
+				container-mgmt.enable = true;
+			}
+		)
+	];
 }

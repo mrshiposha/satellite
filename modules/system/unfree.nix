@@ -1,11 +1,15 @@
 { config, lib, ... }:
 with lib;
+with lib.types;
 let
 	cfg = config.unfree;
 in
 {
 	options = {
-		unfree.list = with types; mkOption { type = listOf package; };
+		unfree.list = mkOption {
+			type = listOf package;
+			default = [];
+		};
 	};
 
 	config =

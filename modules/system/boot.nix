@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+with lib;
 {
 	boot = {
 		loader = {
@@ -9,6 +10,6 @@
 		initrd.systemd.enable = true;
 		resumeDevice = "/dev/disk/by-label/swap";
 
-		kernelPackages = pkgs.linuxPackages_6_9;
+		kernelPackages = mkDefault pkgs.linuxPackages_6_9;
 	};
 }

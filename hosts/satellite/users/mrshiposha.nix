@@ -5,15 +5,12 @@
 		description = "Daniel Shiposha";
 		extraGroups = [
 			"wheel"
-			"docker"
+			"podman"
 		];
 	};
 
 	home-manager.users.mrshiposha = {
-		imports = builtins.map lib.household.common.user [
-			/modules
-			/programs/fundamental
-		];
+		imports = [ lib.household.modules.user ];
 
 		theming.gui.wallpapers = {
 			active = lib.household.image /1920x1080/nord_mountains.png;
