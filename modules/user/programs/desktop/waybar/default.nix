@@ -84,8 +84,8 @@ in
 				pulseaudio = {
 					format = "{volume}% {icon} / {format_source}";
 					format-icons = [
-						""
 						""
+						""
 						""
 					];
 					format-muted = " / {format_source}";
