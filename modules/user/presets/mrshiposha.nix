@@ -15,7 +15,10 @@ in
 		yazi.enable = mkDefault true;
 		neovim.enable = mkDefault true;
 		logseq.enable = mkDefault nixosConfig.gui.enable;
-		connections.mattermost.enable = mkDefault nixosConfig.gui.enable;
+		connections = {
+			mattermost.enable = mkDefault nixosConfig.gui.enable;
+			skype.enable = mkDefault nixosConfig.gui.enable;
+		};
 
 		programs = {
 			git = {

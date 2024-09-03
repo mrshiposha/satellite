@@ -9,6 +9,7 @@ in
 		telegram.enable = mkEnableOption "telegram";
 		discord.enable = mkEnableOption "discord";
 		mattermost.enable = mkEnableOption "mattermost";
+		skype.enable = mkEnableOption "skype";
 	};
 
 	config = with pkgs; {
@@ -16,10 +17,12 @@ in
 			( mkIf cfg.telegram.enable [ tdesktop ] )
 			( mkIf cfg.discord.enable [ discord ] )
 			( mkIf cfg.mattermost.enable [ mattermost-desktop ] )
+			( mkIf cfg.skype.enable [ skypeforlinux ] )
 		];
 
 		unfree.list = with pkgs; mkIf cfg.discord.enable [
 			discord
+			skypeforlinux
 		];
 	};
 

@@ -58,6 +58,7 @@ in
 						"class<slack>" = "";
 						"class<discord>" = "";
 						"class<Mattermost>" = "";
+						"class<Skype>" = "";
 						"class<ghidra-Ghidra>" = "";
 						"class<steam>" = "";
 						"class<Logseq>" = "";
