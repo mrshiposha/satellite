@@ -9,6 +9,7 @@ in
 		telegram.enable = mkEnableOption "telegram";
 		discord.enable = mkEnableOption "discord";
 		mattermost.enable = mkEnableOption "mattermost";
+		matrix.enable = mkEnableOption "matrix";
 		skype.enable = mkEnableOption "skype";
 	};
 
@@ -17,6 +18,7 @@ in
 			( mkIf cfg.telegram.enable [ tdesktop ] )
 			( mkIf cfg.discord.enable [ discord ] )
 			( mkIf cfg.mattermost.enable [ mattermost-desktop ] )
+			( mkIf cfg.matrix.enable [ element-desktop ] )
 			( mkIf cfg.skype.enable [ skypeforlinux ] )
 		];
 

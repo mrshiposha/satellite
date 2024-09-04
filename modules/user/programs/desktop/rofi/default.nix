@@ -9,6 +9,7 @@ with lib;
 			package = pkgs.rofi-wayland;
 			terminal = "wezterm";
 			theme = ./theme.rasi;
+			pass.enable = config.crypto.enable;
 			plugins = [
 				# pkgs.rofi-calc -- broken, see https://github.com/NixOS/nixpkgs/issues/298539
 				pkgs.rofi-power-menu

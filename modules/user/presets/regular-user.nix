@@ -9,6 +9,8 @@ in
 	config = mkIf cfg.enable {
 		zsh.enable = mkDefault true;
 
+		crypto.enable = mkDefault true;
+
 		desktop.enable = mkDefault nixosConfig.gui.enable;
 		wezterm.enable = mkDefault nixosConfig.gui.enable;
 		firefox.enable = mkDefault nixosConfig.gui.enable;

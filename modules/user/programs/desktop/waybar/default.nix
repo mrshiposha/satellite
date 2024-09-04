@@ -57,7 +57,8 @@ in
 						"class<org.telegram.desktop>" = "";
 						"class<slack>" = "";
 						"class<discord>" = "";
-						"class<Mattermost>" = "";
+						"class<Mattermost>" = "";
+						"class<Element>" = "";
 						"class<Skype>" = "";
 						"class<ghidra-Ghidra>" = "";
 						"class<steam>" = "";

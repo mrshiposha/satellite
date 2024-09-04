@@ -14,5 +14,6 @@
 		./vscode.nix
 		./audio.nix
 		./laptop.nix
+		./crypto.nix
 	];
 }

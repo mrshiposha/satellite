@@ -17,8 +17,15 @@ in
 		logseq.enable = mkDefault nixosConfig.gui.enable;
 		connections = {
 			mattermost.enable = mkDefault nixosConfig.gui.enable;
+			matrix.enable = mkDefault nixosConfig.gui.enable;
 			skype.enable = mkDefault nixosConfig.gui.enable;
 		};
+
+		firefox.addons = [
+			"grammarly-1"
+			"polkadot-js-extension"
+			"ether-metamask"
+		];
 
 		programs = {
 			git = {

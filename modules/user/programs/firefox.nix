@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 with lib.types;
 let
@@ -8,6 +8,11 @@ in
 {
 	options.firefox = {
 		enable = mkEnableOption "firefox";
+		addons = mkOption {
+			type = listOf str;
+			default = [];
+		};
+		passff.enable = mkEnableOption "pasff";
 		defaultPdfApp = mkOption {
 			type = bool;
 			default = false;
@@ -17,6 +22,9 @@ in
 	config = mkIf config.firefox.enable {
 		programs.firefox = {
 			enable = true;
+			package = with pkgs; mkIf config.firefox.passff.enable (firefox.override {
+				nativeMessagingHosts = [passff-host];
+			});
 			policies = {
 				DisableTelemetry = true;
 
@@ -25,11 +33,8 @@ in
 				};
 
 				Extensions = {
-					Install = [
-						(extensionUrl "grammarly-1" "latest")
-						(extensionUrl "polkadot-js-extension" "latest")
-						(extensionUrl "ether-metamask" "latest")
-					];
+					Install = builtins.map (addon: extensionUrl addon "latest") config.firefox.addons
+						++ ( if config.firefox.passff.enable then ["passff"] else [] );
 				};
 			};
 		};
