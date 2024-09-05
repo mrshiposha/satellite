@@ -4,6 +4,13 @@
 		modules.user = ../modules/user;
 		image = path: ../images + path;
 
+		eachSystemConfig = { nixpkgs, fleet, ... }: system:
+			let pkgs = import nixpkgs { inherit system; }; in {
+				devShells.default = pkgs.mkShell {
+				packages = [ fleet.packages.${system}.default ];
+			};
+		};
+
 		userModulesByName =
 			config: moduleName:
 			let

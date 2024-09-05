@@ -15,16 +15,10 @@
 	outputs =
 		inputs@{ nixpkgs, flake-utils, fleet, ... }:
 		let
-			mkLib = nixpkgs: nixpkgs.lib.extend (final: prev: import ./lib);
-			lib = mkLib nixpkgs;
+			lib = nixpkgs.lib.extend (final: prev: import ./lib);
 			host = import ./lib/host.nix lib inputs;
 		in
-			flake-utils.lib.eachDefaultSystem (system:
-			let pkgs = import nixpkgs { inherit system; }; in {
-				devShells.default = pkgs.mkShell {
-					packages = [ fleet.packages.${system}.default ];
-				};
-			}) // {
+			flake-utils.lib.eachDefaultSystem (lib.household.eachSystemConfig inputs) // {
 				nixosConfigurations.satellite = host ./hosts/satellite;
 			};
 }
