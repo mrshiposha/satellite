@@ -23,7 +23,7 @@ in
 			enable = true;
 			systemd.enable = true;
 			settings = {
-				monitor = ",highres,auto,1";
+				monitor=",preferred,auto,1";
 
 				input = {
 					kb_layout = "us,ru";
