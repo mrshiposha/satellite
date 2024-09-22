@@ -80,6 +80,7 @@ with lib;
 				luaformatter
 				rust-analyzer
 				lua-language-server
+				nodePackages.typescript-language-server
 				nil
 				texlab
 				texliveFull
