@@ -155,9 +155,15 @@ in
 
 					"$mainMod+Alt, Right, movefocus, r"
 					"$mainMod+Alt, Left, movefocus, l"
+					"$mainMod+Alt, Up, movefocus, u"
+					"$mainMod+Alt, Down, movefocus, d"
+
 
 					"$mainMod+Ctrl, Right, movewindow, r"
 					"$mainMod+Ctrl, Left, movewindow, l"
+					"$mainMod+Ctrl, Up, movewindow, u"
+					"$mainMod+Ctrl, Down, movewindow, d"
+
 				];
 
 				gestures = {
