@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, household, ... }:
 let
 	usersFonts = builtins.concatMap
 		(
@@ -6,7 +6,7 @@ let
 			theming.fonts.packages
 			++ (if theming.fonts.defaults.enable then theming.fonts.defaults.packages else [ ])
 		)
-		(lib.household.userModulesByName config "theming");
+		(household.userModulesByName config "theming");
 in
 {
 	fonts = {

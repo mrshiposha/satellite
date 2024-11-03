@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, household, ... }:
 with lib;
 with lib.types;
 let
@@ -15,7 +15,7 @@ in
 	config =
 		let
 			usersFullUnfreeList = builtins.concatMap (unfree: unfree.list) (
-				lib.household.userModulesByName config "unfree"
+				household.userModulesByName config "unfree"
 			);
 			fullUnfreeList = cfg.list ++ usersFullUnfreeList;
 		in

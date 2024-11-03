@@ -1,15 +1,15 @@
-lib:
-{ ... }:
 {
 	system = "x86_64-linux";
 
-	modules = [
+	nixos.imports = [
 		./hardware-configuration.nix
 		./users
 
 		(
-			{ config, ... }:
+			{ config, household, ... }:
 			{
+				networking.hostName = "satellite";
+
 				nix.buildMachines = [
 					{
 						hostName = "hearthstone";
@@ -37,7 +37,7 @@ lib:
 
 				gui = {
 					enable = true;
-					greeter.seat0.theme = lib.household.greeterThemeFromUserTheme config.home-manager.users.mrshiposha;
+					greeter.seat0.theme = household.greeterThemeFromUserTheme config.home-manager.users.mrshiposha;
 				};
 
 				container-mgmt.enable = true;

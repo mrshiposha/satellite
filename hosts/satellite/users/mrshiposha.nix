@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ household, ... }:
 {
 	users.users.mrshiposha = {
 		isNormalUser = true;
@@ -10,11 +10,11 @@
 	};
 
 	home-manager.users.mrshiposha = {
-		imports = [ lib.household.modules.user ];
+		imports = [ household.modules.user ];
 
 		theming.gui.wallpapers = {
-			active = lib.household.image /1920x1080/nord_mountains.png;
-			screensaver = lib.household.image /1920x1080/nord_waves.png;
+			active = household.image /1920x1080/nord_mountains.png;
+			screensaver = household.image /1920x1080/nord_waves.png;
 		};
 
 		preset.mrshiposha = {
