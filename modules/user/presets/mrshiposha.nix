@@ -14,6 +14,7 @@ in
 
 		yazi.enable = mkDefault true;
 		neovim.enable = mkDefault true;
+		vscode.enable = mkDefault nixosConfig.gui.enable;
 		logseq.enable = mkDefault nixosConfig.gui.enable;
 		connections = {
 			mattermost.enable = mkDefault nixosConfig.gui.enable;
