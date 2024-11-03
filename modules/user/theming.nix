@@ -53,6 +53,7 @@ in
 								variants.inherits = "ss05";
 							};
 						})
+						iosevka
 						meslo-lgs-nf
 						noto-fonts
 					];
