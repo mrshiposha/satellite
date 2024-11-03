@@ -50,6 +50,7 @@ in
 						"class<org.wezfurlong.wezterm> title<Yazi.*>" = "";
 						"class<org.wezfurlong.wezterm> title<nvim>" = "";
 						"class<VSCodium>" = "󰨞";
+						"class<Codium>" = "󰨞";
 						"class<neovide>" = "";
 						"class<firefox>" = "";
 						"class<firefox> title<.*youtube.*>" = "";

@@ -177,13 +177,16 @@ in
 				];
 
 				windowrulev2 =
-					let
-					class = "(org.wezfurlong.wezterm)";
+				let
+					terminal_class = "(org\\.wezfurlong\\.wezterm)";
+					vscode_class = "VSCodium|Codium";
 				in
 					[
-					"float,class:${class}"
-					"size 1400 800,class:${class}"
-					"center,class:${class}"
+					  "float,class:${terminal_class}"
+						"size 1400 800,class:${terminal_class}"
+						"center,class:${terminal_class}"
+
+						"opacity 0.7, class:${vscode_class}"
 					];
 
 				exec-once = [
