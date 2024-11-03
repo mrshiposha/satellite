@@ -11,7 +11,7 @@
 		./logseq.nix
 		./neovim
 		./lazygit.nix
-		./vscode.nix
+		./vscode
 		./audio.nix
 		./laptop.nix
 		./crypto.nix
