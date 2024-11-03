@@ -23,6 +23,15 @@ in
 		systemd.network.enable = true;
 		services.automatic-timezoned.enable = true;
 
-		services.openssh.enable = cfg.ssh.enable;
+		services.openssh = {
+			enable = cfg.ssh.enable;
+			settings = {
+				PasswordAuthentication = false;
+				PermitRootLogin = "no";
+				LogLevel = "VERBOSE";
+			};
+		};
+
+		services.fail2ban.enable = cfg.ssh.enable;
 	};
 }
