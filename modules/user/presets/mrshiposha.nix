@@ -29,10 +29,19 @@ in
 		];
 
 		programs = {
+			zsh.initExtra = ''
+				function navigate() {
+					echo "Navigating the fleet...\n" && sudo su navigator -c "PATH=$PATH $*"
+				}
+			'';
+
 			git = {
 				enable = mkDefault true;
 				userName = "Daniel Shiposha";
 				userEmail = "ds@unique.network";
+				extraConfig = {
+					safe.directory = ["/household"];
+				};
 			};
 
 			direnv = {
