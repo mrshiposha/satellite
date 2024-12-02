@@ -11,76 +11,6 @@ let
 in
 {
 	options = {
-		theming.fonts = {
-			packages = mkOption {
-				type = listOf package;
-				default = [ ];
-			};
-
-			defaults = {
-				enable = mkOption {
-					type = bool;
-					default = true;
-				};
-
-				packages = mkOption {
-					type = listOf package;
-					default = with pkgs; [
-						(iosevka.override {
-							set = "Ship";
-							privateBuildPlan = {
-								family = "Iosevka Ship";
-								spacing = "normal";
-								serifs = "sans";
-								noCvSs = false;
-								buildTextureFeature = true;
-								exportGlyphNames = true;
-
-								variants.inherits = "ss05";
-								ligations.inherits = "dlig";
-							};
-						})
-						(iosevka.override {
-							set = "Ship";
-							privateBuildPlan = {
-								family = "Iosevka Ship Term";
-								spacing = "term";
-								serifs = "sans";
-								noCvSs = false;
-								buildTextureFeature = true;
-								exportGlyphNames = true;
-
-								variants.inherits = "ss05";
-							};
-						})
-						iosevka
-						meslo-lgs-nf
-						noto-fonts
-					];
-				};
-
-				serif = mkOption {
-					type = listOf str;
-					default = [ "Iosevka Ship" ];
-				};
-				sansSerif = mkOption {
-					type = listOf str;
-					default = [ "Iosevka Ship" ];
-				};
-				monospace = mkOption {
-					type = listOf str;
-					default = [
-						"Iosevka Ship Term"
-						"MesloLGS NF"
-					];
-				};
-				emoji = mkOption {
-					type = listOf str;
-					default = [ "Noto Color Emoji" ];
-				};
-			};
-		};
-
 		theming.gui = {
 			enable = mkOption {
 				type = bool;
@@ -132,17 +62,87 @@ in
 				active = mkOption { type = path; };
 				screensaver = mkOption { type = path; };
 			};
+
+			fonts = {
+				packages = mkOption {
+					type = listOf package;
+					default = [ ];
+				};
+
+				defaults = {
+					enable = mkOption {
+						type = bool;
+						default = nixosConfig.gui.enable;
+					};
+
+					packages = mkOption {
+						type = listOf package;
+						default = with pkgs; [
+							(iosevka.override {
+								set = "Ship";
+								privateBuildPlan = {
+									family = "Iosevka Ship";
+									spacing = "normal";
+									serifs = "sans";
+									noCvSs = false;
+									buildTextureFeature = true;
+									exportGlyphNames = true;
+
+									variants.inherits = "ss04";
+									ligations.inherits = "dlig";
+								};
+							})
+							(iosevka.override {
+								set = "Ship";
+								privateBuildPlan = {
+									family = "Iosevka Ship Term";
+									spacing = "term";
+									serifs = "sans";
+									noCvSs = false;
+									buildTextureFeature = true;
+									exportGlyphNames = true;
+
+									variants.inherits = "ss04";
+								};
+							})
+							iosevka
+							meslo-lgs-nf
+							noto-fonts
+						];
+					};
+
+					serif = mkOption {
+						type = listOf str;
+						default = [ "Iosevka Ship" ];
+					};
+					sansSerif = mkOption {
+						type = listOf str;
+						default = [ "Iosevka Ship" ];
+					};
+					monospace = mkOption {
+						type = listOf str;
+						default = [
+							"Iosevka Ship Term"
+							"MesloLGS NF"
+						];
+					};
+					emoji = mkOption {
+						type = listOf str;
+						default = [ "Noto Color Emoji" ];
+					};
+				};
+			};
 		};
 	};
 
 	config = {
-		fonts.fontconfig = mkIf cfg.fonts.defaults.enable {
+		fonts.fontconfig = mkIf cfg.gui.fonts.defaults.enable {
 			enable = true;
 			defaultFonts = {
-				serif = cfg.fonts.defaults.serif;
-				sansSerif = cfg.fonts.defaults.sansSerif;
-				monospace = cfg.fonts.defaults.monospace;
-				emoji = cfg.fonts.defaults.emoji;
+				serif = cfg.gui.fonts.defaults.serif;
+				sansSerif = cfg.gui.fonts.defaults.sansSerif;
+				monospace = cfg.gui.fonts.defaults.monospace;
+				emoji = cfg.gui.fonts.defaults.emoji;
 			};
 		};
 

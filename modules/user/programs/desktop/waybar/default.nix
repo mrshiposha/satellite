@@ -9,7 +9,7 @@ in
 	options.waybar.enable = mkEnableOption "waybar";
 
 	config = mkIf config.waybar.enable {
-		theming.fonts.packages = with pkgs; [
+		theming.gui.fonts.packages = with pkgs; [
 			font-awesome
 				(nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
 		];
