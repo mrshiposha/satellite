@@ -15,6 +15,7 @@
 	outputs = inputs@{ nixpkgs, flake-parts, fleet, home-manager, ... }:
 	let
 		household = (import ./lib).household;
+		navigatorUser = import ./navigator.nix;
 	in
 		flake-parts.lib.mkFlake { inherit inputs; } {
 			imports = [ fleet.flakeModules.default ];
@@ -35,6 +36,7 @@
 				nixos.imports = [
 					household.modules.system
 					home-manager.nixosModules.home-manager
+					navigatorUser
 					{
 						# Make `nix shell nixpkgs#thing` use the same nixpkgs, as used to build the system.
 						nix = {
@@ -61,10 +63,27 @@
 							useGlobalPkgs = true;
 							useUserPackages = true;
 						};
+
+						security.sudo.extraConfig = ''
+							Defaults:root,%wheel timestamp_timeout=0
+						'';
 					}
 				];
 
-				hosts.satellite = import ./hosts/satellite;
+				hosts = {
+					satellite = import ./hosts/satellite;
+					sentinel = import ./hosts/sentinel {
+						ip.addr = {
+							v6 = [];
+							v4 = [
+								{
+									address = "192.168.0.30";
+									prefixLength = 24;
+								}
+							];
+						};
+					};
+				};
 			};
 		};
 }
