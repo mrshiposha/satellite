@@ -8,6 +8,7 @@
 		(
 			{ config, household, ... }:
 			{
+				system.stateVersion = "23.11";
 				networking.hostName = "satellite";
 
 				nix.buildMachines = [

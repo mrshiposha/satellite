@@ -50,7 +50,13 @@
 								# replace with https://github.com/NixOS/nix/pull/7126 when ready
 								sync-before-registering = true;
 
-								trusted-users = [ "@wheel" ];
+								trusted-users = [
+									"root"
+									"@wheel"
+								];
+								trusted-public-keys = [
+									"satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY="
+								];
 
 								experimental-features = [
 									"nix-command"

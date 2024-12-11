@@ -11,9 +11,8 @@ with lib;
 		./audio.nix
 		./container-mgmt.nix
 		./unfree.nix
+		./services
 	];
-
-	system.stateVersion = "23.11";
 
 	hardware.enableRedistributableFirmware = mkDefault true;
 

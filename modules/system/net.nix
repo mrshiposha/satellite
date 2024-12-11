@@ -18,6 +18,7 @@ in
 				"1.1.1.1"
 				"8.8.8.8"
 			];
+			nftables.enable = true;
 		};
 
 		systemd.network.enable = true;

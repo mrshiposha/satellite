@@ -27,6 +27,6 @@ in
 		];
 
 		xdg.mimeApps.enable = mkDefault nixosConfig.gui.enable;
-		home.stateVersion = "23.11";
+		home.stateVersion = nixosConfig.system.stateVersion;
 	};
 }

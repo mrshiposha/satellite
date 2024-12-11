@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./shiposha.com.nix
+  ];
+}
