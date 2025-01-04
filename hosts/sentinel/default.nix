@@ -18,8 +18,11 @@ options: {
 					useDHCP = true;
 				};
 
-				services."shiposha.com".enable = true;
+				services = {
+					"shiposha.com".enable = true;
+				};
 			}
 		)
 	];
+	nixos.secrets.zitadel.owner = "zitadel";
 }

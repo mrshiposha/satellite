@@ -108,6 +108,9 @@ in
 
   nix.settings.trusted-users = [ "@wheel" ];
   nix.settings.trusted-public-keys = [ "satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY=" ];
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

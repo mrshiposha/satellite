@@ -8,6 +8,7 @@ pkgs:
     mgt19937.typst-preview
     myriad-dreamin.tinymist
     vscodevim.vim
+    mkhl.direnv
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
   {

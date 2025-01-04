@@ -31,7 +31,7 @@ in
 		programs = {
 			zsh.initExtra = ''
 				function navigate() {
-					echo "Navigating the fleet...\n" && sudo su navigator -c "PATH=$PATH $*"
+					echo "Navigating the fleet...\n" && sudo su navigator -c "PATH=$PATH NIX_ARGS=$NIX_ARGS $*"
 				}
 			'';
 
