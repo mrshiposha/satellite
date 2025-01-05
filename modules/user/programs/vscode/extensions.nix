@@ -1,11 +1,10 @@
 pkgs:
   with pkgs.vscode-extensions; [
     tamasfe.even-better-toml
-    matklad.rust-analyzer
+    rust-lang.rust-analyzer
     vadimcn.vscode-lldb
     dbaeumer.vscode-eslint
     jnoortheen.nix-ide
-    mgt19937.typst-preview
     myriad-dreamin.tinymist
     vscodevim.vim
     mkhl.direnv

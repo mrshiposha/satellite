@@ -52,32 +52,32 @@ in
 					wshowkeys.enable = true;
 				};
 
-				environment.systemPackages = with pkgs; [
-					greeterTheme.style.package
-					greeterTheme.cursors.package
-					greeterTheme.icons.package
+				xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 
+				environment.systemPackages = with pkgs; [
 					libsForQt5.qt5.qtwayland
 					qt6.qtwayland
 				];
 
 				programs.regreet = {
 					enable = true;
+					theme = greeterTheme.style;
+					iconTheme = greeterTheme.icons;
+					cursorTheme = {
+						name = greeterTheme.cursors.name;
+						package = greeterTheme.cursors.package;
+					};
+
 					settings = {
 						background = {
 							path = greeterTheme.wallpaper;
 							fit = "Contain";
 						};
-
-						GTK = {
-							theme_name = greeterTheme.style.name;
-							cursor_theme_name = greeterTheme.cursors.name;
-							icon_theme_name = greeterTheme.icons.name;
-						};
 					};
 				};
 
 				security.pam.services.swaylock = {};
+				security.rtkit.enable = true;
 
 				systemd = {
 					user.services.polkit-gnome-authentication-agent-1 = {

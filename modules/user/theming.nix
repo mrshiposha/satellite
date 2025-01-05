@@ -146,6 +146,10 @@ in
 			};
 		};
 
+		xdg.dataFile."fonts" = mkIf cfg.gui.fonts.defaults.enable {
+			source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/X11/fonts";
+		};
+
 		home.pointerCursor = mkIf cfg.gui.enable {
 			package = cfg.gui.cursors.package;
 			name = cfg.gui.cursors.name;
@@ -163,6 +167,16 @@ in
 			iconTheme = {
 				package = cfg.gui.icons.package;
 				name = cfg.gui.icons.name;
+			};
+
+			font.name = "Regular";
+
+			gtk3.extraConfig = {
+				gtk-application-prefer-dark-theme=1;
+			};
+
+			gtk4.extraConfig = {
+				gtk-application-prefer-dark-theme=1;
 			};
 
 			# FIXME use dconf

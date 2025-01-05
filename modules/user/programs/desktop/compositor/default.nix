@@ -49,7 +49,6 @@ in
 
 					layout = "dwindle";
 					allow_tearing = false;
-					cursor_inactive_timeout = 3;
 				};
 
 				dwindle = {
@@ -66,6 +65,8 @@ in
 						new_optimizations = true;
 					};
 				};
+
+				cursor.inactive_timeout = 3;
 
 				animations = {
 					enabled = true;

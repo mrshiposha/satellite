@@ -16,14 +16,14 @@ in
 	config = with pkgs; {
 		home.packages = mkMerge [
 			( mkIf cfg.telegram.enable [ tdesktop ] )
-			( mkIf cfg.discord.enable [ discord ] )
+			( mkIf cfg.discord.enable [ discord-canary ] )
 			( mkIf cfg.mattermost.enable [ mattermost-desktop ] )
 			( mkIf cfg.matrix.enable [ element-desktop ] )
 			( mkIf cfg.skype.enable [ skypeforlinux ] )
 		];
 
 		unfree.list = with pkgs; mkIf cfg.discord.enable [
-			discord
+			discord-canary
 			skypeforlinux
 		];
 	};

@@ -12,7 +12,7 @@ with lib;
 				local wezterm = require "wezterm"
 
 				return {
-					enable_wayland = false, -- https://github.com/wez/wezterm/issues/4483
+					enable_wayland = false, -- https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
 
 					color_scheme = "nord",
 					window_background_opacity = 0.7,
@@ -21,6 +21,8 @@ with lib;
 					window_close_confirmation = "NeverPrompt",
 
 					font = wezterm.font "monospace",
+					front_end = "WebGpu",
+					webgpu_power_preference = 'HighPerformance',
 
 					colors = {
 						tab_bar = {
