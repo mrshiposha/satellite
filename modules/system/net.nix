@@ -8,6 +8,7 @@ in
 	options.net = {
 		wireless.enable = mkEnableOption "wireless networking";
 		ssh.enable = mkEnableOption "ssh";
+		netbird.enable = mkEnableOption "netbird client";
 	};
 
 	config = {
@@ -32,6 +33,7 @@ in
 				LogLevel = "VERBOSE";
 			};
 		};
+		services.netbird.enable = cfg.netbird.enable;
 
 		services.fail2ban.enable = cfg.ssh.enable;
 	};

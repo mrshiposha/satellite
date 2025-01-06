@@ -26,4 +26,5 @@ with lib;
 	users.defaultUserShell = pkgs.zsh;
 
 	net.ssh.enable = mkDefault true;
+	net.netbird.enable = mkDefault true;
 }
