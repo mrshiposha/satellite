@@ -156,7 +156,6 @@ in
 
       management = {
         oidcConfigEndpoint = "https://id.shiposha.com/.well-known/openid-configuration";
-        disableSingleAccountMode = true;
         settings = {
           DataStoreEncryptionKey._secret = config.secrets.netbird-key.secret.path;
           TURNConfig.Secret._secret = config.secrets.netbird-turn.secret.path;
@@ -220,11 +219,6 @@ in
         passwordFile = config.secrets.coturn.secret.path;
         domain = "relay.shiposha.com";
       };
-    };
-
-    # See https://github.com/NixOS/nixpkgs/issues/371286
-    systemd.services.netbird-management = {
-      serviceConfig.StateDirectoryMode = 0750;
     };
   };
 }
