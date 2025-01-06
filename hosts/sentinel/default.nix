@@ -24,5 +24,11 @@ options: {
 			}
 		)
 	];
-	nixos.secrets.zitadel.owner = "zitadel";
+	nixos.secrets = {
+		zitadel.owner = "zitadel";
+		coturn.owner = "turnserver";
+		netbird-client.owner = "root";
+		netbird-key.owner = "root";
+		netbird-turn.owner = "root";
+	};
 }

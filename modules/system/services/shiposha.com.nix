@@ -3,7 +3,7 @@ with lib;
 
 let
   cfg = config.services."shiposha.com";
-  zitadelPort = 60110;
+  zitadelPort = 49000;
   zitadelDbAdminUser = "zitadel_admin";
   zitadelHome = "/home/zitadel";
   zitadelSecrets = "${zitadelHome}/secrets";
@@ -20,9 +20,13 @@ in
     ];
     security.acme = {
       acceptTerms = true;
-      defaults.email = "daniel@shiposha.com";
+      defaults = {
+        email = "daniel@shiposha.com";
+        webroot = "/var/lib/acme/acme-challenge";
+      };
       certs."shiposha.com".extraDomainNames = [
         "id.shiposha.com"
+        "vpn.shiposha.com"
       ];
     };
     services.nginx = {
@@ -47,6 +51,11 @@ in
             grpc_pass grpc://localhost:${builtins.toString zitadelPort};
             grpc_set_header Host $host;
           '';
+        };
+
+        "vpn.shiposha.com" = {
+          forceSSL = true;
+          useACMEHost = "shiposha.com";
         };
       };
     };
@@ -135,6 +144,87 @@ in
         };
       };
       masterKeyFile = config.secrets.zitadel.secret.path;
+    };
+
+    services.netbird.server =
+    let
+      cliendId = "301336611243753502";
+    in {
+      enable = true;
+      domain = "vpn.shiposha.com";
+      enableNginx = true;
+
+      management = {
+        oidcConfigEndpoint = "https://id.shiposha.com/.well-known/openid-configuration";
+        disableSingleAccountMode = true;
+        settings = {
+          DataStoreEncryptionKey._secret = config.secrets.netbird-key.secret.path;
+          TURNConfig.Secret._secret = config.secrets.netbird-turn.secret.path;
+
+          HttpConfig = {
+            AuthIssuer = "https://id.shiposha.com";
+            AuthAudience = cliendId;
+            IdpSignKeyRefreshEnabled = true;
+          };
+
+          IdpManagerConfig = {
+            ManagerType = "zitadel";
+            ClientConfig = {
+              Issuer = "https://id.shiposha.com";
+              TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+              ClientID = "netbird";
+              ClientSecret._secret = config.secrets.netbird-client.secret.path;
+              GrantType = "client_credentials";
+            };
+            ExtraConfig = {
+              ManagementEndpoint = "https://id.shiposha.com/management/v1";
+            };
+          };
+
+          DeviceAuthorizationFlow = {
+            Provider = "hosted";
+            ProviderConfig = {
+              ClientID = cliendId;
+              Audience = cliendId;
+              AuthorizationEndpoint = "https://id.shiposha.com/oauth/v2/device_authorization";
+              TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+              Scope = "openid profile email offline_access api";
+            };
+          };
+
+          PKCEAuthorizationFlow.ProviderConfig = {
+            Audience = cliendId;
+            ClientID = cliendId;
+            AuthorizationEndpoint = "https://id.shiposha.com/oauth/v2/authorize";
+            TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+            Scope = "openid profile email offline_access api";
+            RedirectURLs = [ "http://localhost:53000" ];
+          };
+        };
+      };
+
+      dashboard.settings = {
+        AUTH_AUDIENCE = cliendId;
+        AUTH_CLIENT_ID = cliendId;
+        USE_AUTH0 = false;
+        AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
+        NETBIRD_TOKEN_SOURCE = "idToken";
+        AUTH_AUTHORITY = "https://id.shiposha.com";
+        AUTH_REDIRECT_URI = "/peers";
+        AUTH_SILENT_REDIRECT_URI = "/add-peers";
+      };
+
+      coturn = {
+        enable = true;
+        useAcmeCertificates = true;
+        passwordFile = config.secrets.coturn.secret.path;
+        domain = "relay.shiposha.com";
+      };
+    };
+
+    # See https://github.com/NixOS/nixpkgs/issues/371286
+    systemd.services.netbird-management = {
+      serviceConfig.StateDirectoryMode = 0750;
     };
   };
 }
