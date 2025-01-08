@@ -50,9 +50,12 @@ in
 			};
 		};
 
-		home.packages = with pkgs; mkIf cfg.imageUtils.enable [
-			qrencode
-			inkscape
+		home.packages = with pkgs; mkMerge [
+			(mkIf cfg.imageUtils.enable [
+				qrencode
+				inkscape
+			])
+			[coturn]
 		];
 	};
 }

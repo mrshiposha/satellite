@@ -7,6 +7,10 @@ let
   zitadelDbAdminUser = "zitadel_admin";
   zitadelHome = "/home/zitadel";
   zitadelSecrets = "${zitadelHome}/secrets";
+
+  idDomain = "id.shiposha.com";
+  vpnDomain = "vpn.shiposha.com";
+  relayDomain = "relay.shiposha.com";
 in
 {
   options.services."shiposha.com" = {
@@ -14,6 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.mtr.enable = true;
     networking.firewall.allowedTCPPorts = [
       80
       443
@@ -25,8 +30,8 @@ in
         webroot = "/var/lib/acme/acme-challenge";
       };
       certs."shiposha.com".extraDomainNames = [
-        "id.shiposha.com"
-        "vpn.shiposha.com"
+        idDomain
+        vpnDomain
       ];
     };
     services.nginx = {
@@ -44,7 +49,7 @@ in
           };
         };
 
-        "id.shiposha.com" = {
+        ${idDomain} = {
           forceSSL = true;
           useACMEHost = "shiposha.com";
           locations."/".extraConfig = ''
@@ -53,7 +58,7 @@ in
           '';
         };
 
-        "vpn.shiposha.com" = {
+        ${vpnDomain} = {
           forceSSL = true;
           useACMEHost = "shiposha.com";
         };
@@ -116,7 +121,7 @@ in
       enable = true;
       tlsMode = "external";
       settings = {
-        ExternalDomain = "id.shiposha.com";
+        ExternalDomain = idDomain;
         ExternalPort = 443;
         ExternalSecure = true;
         Port = zitadelPort;
@@ -151,17 +156,30 @@ in
       cliendId = "301336611243753502";
     in {
       enable = true;
-      domain = "vpn.shiposha.com";
+      domain = vpnDomain;
       enableNginx = true;
 
       management = {
-        oidcConfigEndpoint = "https://id.shiposha.com/.well-known/openid-configuration";
+        oidcConfigEndpoint = "https://${idDomain}/.well-known/openid-configuration";
+        turnDomain = mkForce relayDomain;
         settings = {
           DataStoreEncryptionKey._secret = config.secrets.netbird-key.secret.path;
-          TURNConfig.Secret._secret = config.secrets.netbird-turn.secret.path;
+          TURNConfig = {
+            Secret._secret = config.secrets.netbird-turn.secret.path;
+            Turns = [
+              (let
+                turnPort = config.services.coturn.tls-listening-port;
+              in {
+                Proto = "udp";
+                URI = "turn:${relayDomain}:${builtins.toString turnPort}";
+                Username = "netbird";
+                Password = { _secret = config.secrets.coturn.secret.path; };
+              })
+            ];
+          };
 
           HttpConfig = {
-            AuthIssuer = "https://id.shiposha.com";
+            AuthIssuer = "https://${idDomain}";
             AuthAudience = cliendId;
             IdpSignKeyRefreshEnabled = true;
           };
@@ -169,14 +187,14 @@ in
           IdpManagerConfig = {
             ManagerType = "zitadel";
             ClientConfig = {
-              Issuer = "https://id.shiposha.com";
-              TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+              Issuer = "https://${idDomain}";
+              TokenEndpoint = "https://${idDomain}/oauth/v2/token";
               ClientID = "netbird";
               ClientSecret._secret = config.secrets.netbird-client.secret.path;
               GrantType = "client_credentials";
             };
             ExtraConfig = {
-              ManagementEndpoint = "https://id.shiposha.com/management/v1";
+              ManagementEndpoint = "https://${idDomain}/management/v1";
             };
           };
 
@@ -185,8 +203,8 @@ in
             ProviderConfig = {
               ClientID = cliendId;
               Audience = cliendId;
-              AuthorizationEndpoint = "https://id.shiposha.com/oauth/v2/device_authorization";
-              TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+              AuthorizationEndpoint = "https://${idDomain}/oauth/v2/device_authorization";
+              TokenEndpoint = "https://${idDomain}/oauth/v2/token";
               Scope = "openid profile email offline_access api";
             };
           };
@@ -194,8 +212,8 @@ in
           PKCEAuthorizationFlow.ProviderConfig = {
             Audience = cliendId;
             ClientID = cliendId;
-            AuthorizationEndpoint = "https://id.shiposha.com/oauth/v2/authorize";
-            TokenEndpoint = "https://id.shiposha.com/oauth/v2/token";
+            AuthorizationEndpoint = "https://${idDomain}/oauth/v2/authorize";
+            TokenEndpoint = "https://${idDomain}/oauth/v2/token";
             Scope = "openid profile email offline_access api";
             RedirectURLs = [ "http://localhost:53000" ];
           };
@@ -208,7 +226,7 @@ in
         USE_AUTH0 = false;
         AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
         NETBIRD_TOKEN_SOURCE = "idToken";
-        AUTH_AUTHORITY = "https://id.shiposha.com";
+        AUTH_AUTHORITY = "https://${idDomain}";
         AUTH_REDIRECT_URI = "/peers";
         AUTH_SILENT_REDIRECT_URI = "/add-peers";
       };
@@ -217,7 +235,7 @@ in
         enable = true;
         useAcmeCertificates = true;
         passwordFile = config.secrets.coturn.secret.path;
-        domain = "relay.shiposha.com";
+        domain = relayDomain;
       };
     };
   };
