@@ -28,6 +28,8 @@
 				style = theming.style;
 				cursors = theming.cursors;
 				icons = theming.icons;
-			};
+			} // (if theming.fonts.defaults.enable then {
+				font.name = builtins.head theming.fonts.defaults.serif;
+			} else {});
 	};
 }
