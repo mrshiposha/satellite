@@ -37,6 +37,7 @@ in
 
 			git = {
 				enable = mkDefault true;
+				package = pkgs.gitFull;
 				userName = "Daniel Shiposha";
 				userEmail = "ds@unique.network";
 				extraConfig = {

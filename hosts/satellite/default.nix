@@ -45,4 +45,6 @@
 			}
 		)
 	];
+
+	nixos.secrets.dev-email.owner = "mrshiposha";
 }

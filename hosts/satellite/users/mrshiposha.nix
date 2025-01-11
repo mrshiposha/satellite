@@ -1,4 +1,4 @@
-{ household, ... }:
+{ config, household, ... }:
 {
 	users.users.mrshiposha = {
 		isNormalUser = true;
@@ -22,5 +22,21 @@
 			imageUtils.enable = true;
 		};
 		stats.batsignal = true;
+
+		accounts.email.accounts = {
+			dev = {
+				primary = true;
+				realName = "Daniel Shiposha";
+				address = "dev@shiposha.com";
+				userName = "dev@shiposha.com";
+				passwordCommand = "cat ${config.secrets.dev-email.secret.path}";
+
+				aerc.enable = true;
+				smtp = {
+					host = "smtp.protonmail.ch";
+					port = 587;
+				};
+			};
+		};
 	};
 }
