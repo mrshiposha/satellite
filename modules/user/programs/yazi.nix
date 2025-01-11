@@ -1,9 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 {
 	options.yazi.enable = mkEnableOption "yazi";
 
 	config = mkIf config.yazi.enable {
+		home.packages = with pkgs; [ exiftool ];
 		programs.yazi = {
 			enable = true;
 			enableZshIntegration = true;
@@ -33,5 +34,6 @@ with lib;
 				}
 			'';
 		};
+		xdg.mimeApps.defaultApplications."inode/directory" = mkDefault [ "yazi.desktop" ];
 	};
 }
