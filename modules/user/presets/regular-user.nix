@@ -70,12 +70,6 @@ in
 					"image/webp" = mkDefault imageViewerDesktop;
 				};
 			};
-
-			desktopEntries.qview = {
-				name = "qview";
-				icon = household.image /logo/qview.png;
-				exec = "qview";
-			};
 		};
 
 		home.stateVersion = nixosConfig.system.stateVersion;

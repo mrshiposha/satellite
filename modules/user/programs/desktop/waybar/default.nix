@@ -51,6 +51,7 @@ in
 						"class<thunar>" = "";
 						"class<org.gnome.FileRoller>" = "";
 						"class<com.interversehq.qView>" = "";
+						"class<PureRef>" = "Ⓟ";
 						"class<org.wezfurlong.wezterm> title<nvim>" = "";
 						"class<VSCodium>" = "󰨞";
 						"class<Codium>" = "󰨞";

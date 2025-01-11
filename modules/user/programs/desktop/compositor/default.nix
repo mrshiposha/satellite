@@ -190,6 +190,10 @@ in
 						"opacity 0.7, class:${vscode_class}"
 
 						"float,class:com.interversehq.qView"
+
+						"float,class:PureRef"
+						"size 512,334,class:PureRef"
+						"move 100%-w-32 100%-w-64,class:PureRef"
 					];
 
 				exec-once = [
