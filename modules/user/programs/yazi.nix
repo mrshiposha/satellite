@@ -34,6 +34,5 @@ with lib;
 				}
 			'';
 		};
-		xdg.mimeApps.defaultApplications."inode/directory" = mkDefault [ "yazi.desktop" ];
 	};
 }

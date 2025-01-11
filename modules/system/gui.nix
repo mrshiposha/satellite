@@ -14,6 +14,8 @@ in
 
 		games.enable = mkEnableOption "games";
 
+		filemanager.enable = mkEnableOption "file manager";
+
 		greeter.seat0.theme = {
 			wallpaper = mkOption { type = path; };
 
@@ -109,6 +111,33 @@ in
 						};
 					};
 				};
+			})
+
+			(mkIf cfg.filemanager.enable {
+				programs = {
+					thunar = {
+						enable = true;
+						plugins = with pkgs; [
+							xfce.thunar-archive-plugin
+							xfce.thunar-volman
+						];
+					};
+					xfconf.enable = true;
+					file-roller.enable = true;
+				};
+				services = {
+					gvfs.enable = true;
+					tumbler.enable = true;
+				};
+				environment.systemPackages = with pkgs; [
+					ffmpegthumbnailer
+					webp-pixbuf-loader
+					poppler
+					freetype
+					libgsf
+					gnome-epub-thumbnailer
+					f3d
+				];
 			})
 
 			(mkIf config.laptop.enable {
