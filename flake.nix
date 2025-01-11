@@ -69,6 +69,8 @@
 							useUserPackages = true;
 						};
 
+						programs.nix-ld.enable = true;
+
 						security.sudo.extraConfig = ''
 							Defaults:root,%wheel timestamp_timeout=0
 						'';
