@@ -36,6 +36,15 @@ in
 
 				name = mkOption { type = str; };
 			};
+
+			font = {
+				name = mkOption { type = str; };
+
+				size = mkOption {
+					type = number;
+					default = 16;
+				};
+			};
 		};
 	};
 
@@ -59,6 +68,8 @@ in
 					qt6.qtwayland
 				];
 
+				programs.nix-ld.libraries = pkgs.steam-run.args.multiPkgs pkgs;
+
 				programs.regreet = {
 					enable = true;
 					theme = greeterTheme.style;
@@ -66,6 +77,10 @@ in
 					cursorTheme = {
 						name = greeterTheme.cursors.name;
 						package = greeterTheme.cursors.package;
+					};
+					font = {
+						name = greeterTheme.font.name;
+						size = greeterTheme.font.size;
 					};
 
 					settings = {
@@ -110,6 +125,36 @@ in
 						extraPackages = with pkgs; [
 							mangohud
 							# TODO obs-studio-plugins.obs-vkcapture
+
+							udev
+							alsa-lib
+							mono
+							dotnet-sdk
+							stdenv
+							clang_18
+							icu
+							openssl
+							zlib
+							SDL2
+							SDL2.dev
+							SDL2 SDL2_image SDL2_ttf SDL2_mixer
+							vulkan-loader
+							vulkan-tools
+							vulkan-validation-layers
+							glib
+							libxkbcommon
+							nss
+							nspr
+							atk
+							mesa
+							dbus
+							pango
+							cairo
+							libpulseaudio
+							libGL
+							expat
+							libdrm
+							wayland
 						];
 					};
 					gamemode.enable = true;
@@ -117,18 +162,18 @@ in
 
 				unfree.list = with pkgs; [
 					steam
-					steamPackages.steam
+					steam-unwrapped
 					steam-run
 				];
 
-				hardware.opengl = {
-					driSupport = true;
-					driSupport32Bit = true;
+				hardware.graphics = {
+					enable = true;
+					enable32Bit = true;
 				};
 
 				environment.systemPackages = with pkgs; [
 					(lutris.override {
-						extraPkgs = pkgs: [
+						extraPkgs = pkgs: with pkgs; [
 							wineWowPackages.stable
 							wine
 							(wine.override { wineBuild = "wine64"; })
