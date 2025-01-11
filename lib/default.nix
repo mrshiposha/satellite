@@ -1,7 +1,9 @@
 {
-	household = {
+	household = rec {
 		modules.system = ../modules/system;
-		modules.user = ../modules/user;
+		modules.user = import ../modules/user {
+			inherit image;
+		};
 		image = path: ../images + path;
 
 		eachSystemConfig = { nixpkgs, fleet, ... }: system:

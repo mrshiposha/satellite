@@ -188,6 +188,8 @@ in
 						"center,class:${terminal_class}"
 
 						"opacity 0.7, class:${vscode_class}"
+
+						"float,class:com.interversehq.qView"
 					];
 
 				exec-once = [
