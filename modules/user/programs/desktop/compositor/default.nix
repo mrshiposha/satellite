@@ -14,6 +14,7 @@ let
 		on = "hyprctl dispatch dpms on";
 	};
 	hibernate = "${pkgs.systemd}/bin/systemctl hibernate";
+	autoLock = "${pkgs.swayidle}/bin/swayidle -w lock '${screen.lock}' before-sleep '${screen.lock}; ${screen.off}' after-resume '${screen.on}' timeout 600 '${screen.lock}' timeout 900 '${hibernate}'";
 in
 {
 	options.compositor.enable = mkEnableOption "desktop (hyprland compositor and friends)";
@@ -230,14 +231,16 @@ in
 						"move 100%-w-32 100%-w-64,class:PureRef"
 					];
 
-				exec-once = [
-					(if nixosConfig.laptop.enable
-						then builtins.toString ./init-laptop-workspaces.sh
-						else builtins.toString ./init-desktop-workspaces.sh
-					)
-					"wpaperd"
-					"swayidle -w lock '${screen.lock}' before-sleep '${screen.lock}; ${screen.off}' after-resume '${screen.on}' timeout 600 '${screen.lock}' timeout 900 '${hibernate}'"
-				];
+				exec-once = [ "wpaperd" ] ++ (
+					if nixosConfig.laptop.enable
+					then [
+						(builtins.toString ./init-laptop-workspaces.sh)
+						autoLock
+					]
+					else [
+						builtins.toString ./init-desktop-workspaces.sh
+					]
+				);
 			};
 		};
 
@@ -283,7 +286,6 @@ in
 			grim
 			slurp
 			wl-clipboard
-			swayidle
 		];
 	};
 }
