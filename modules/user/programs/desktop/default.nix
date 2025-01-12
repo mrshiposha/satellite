@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ nixosConfig, config, lib, ... }:
 with lib;
 {
 	imports = [
@@ -12,7 +12,11 @@ with lib;
 
 	config = {
 		compositor.enable = mkDefault config.desktop.enable;
-		waybar.enable = mkDefault config.desktop.enable;
+		waybar.enable = mkDefault (
+			if nixosConfig.laptop.enable
+			then config.desktop.enable
+			else false
+		);
 		mako.enable = mkDefault config.desktop.enable;
 		rofi.enable = mkDefault config.desktop.enable;
 	};

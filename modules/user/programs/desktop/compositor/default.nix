@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ nixosConfig, config, pkgs, lib, ... }:
 with lib;
 let
 	swaylock = rec {
@@ -72,13 +72,17 @@ in
 					enabled = true;
 
 					bezier = "openBezier, 0.05, 0.9, 0.1, 1.05";
-					animation = [
+					animation = let
+						workspaces = if nixosConfig.laptop.enable
+							then "workspaces, 1, 6, default"
+							else "workspaces, 1, 8, default, fade";
+					in [
 						"windows, 1, 7, openBezier"
 						"windowsOut, 1, 7, default, popin 80%"
 						"border, 1, 10, default"
 						"borderangle, 1, 8, default"
 						"fade, 1, 7, default"
-						"workspaces, 1, 6, default"
+						"${workspaces}"
 					];
 				};
 
@@ -86,23 +90,74 @@ in
 					force_zero_scaling = true;
 				};
 
-				workspace = [
-					"1,persistent:true, monitor:eDP-1, default:true"
-					"2,persistent:true, monitor:eDP-1"
-					"3,persistent:true, monitor:eDP-1"
-					"4,persistent:true, monitor:eDP-1"
+				workspace =
+				let
+					desktopRules = [
+						"name:Down,persistent:true, monitor:DP-1, default:true"
+						"name:Up,persistent:true, monitor:DP-1"
+						"name:Left,persistent:true, monitor:DP-1"
+						"name:Right,persistent:true, monitor:DP-1"
+					];
+					laptopRules = [
+						"1,persistent:true, monitor:eDP-1, default:true"
+						"2,persistent:true, monitor:eDP-1"
+						"3,persistent:true, monitor:eDP-1"
+						"4,persistent:true, monitor:eDP-1"
 
-					"5,persistent:true, monitor:HDMI-A-1, default:true"
-					"6,persistent:true, monitor:HDMI-A-1"
-					"7,persistent:true, monitor:HDMI-A-1"
-					"8,persistent:true, monitor:HDMI-A-1"
-				];
+						"5,persistent:true, monitor:HDMI-A-1, default:true"
+						"6,persistent:true, monitor:HDMI-A-1"
+						"7,persistent:true, monitor:HDMI-A-1"
+						"8,persistent:true, monitor:HDMI-A-1"
+					];
+				in if nixosConfig.laptop.enable
+					then laptopRules else desktopRules;
 
 				"$mainMod" = "Super";
 				"$terminal" = "wezterm";
 				"$reloadWaybar" = "pkill waybar ; waybar";
 
-				bind = [
+				bind =
+				let
+					desktopRules = [
+						"$mainMod, Up, workspace, name:Up"
+						"$mainMod, Down, workspace, name:Down"
+						"$mainMod, Left, workspace, name:Left"
+						"$mainMod, Right, workspace, name:Right"
+
+						"$mainMod+Shift, Up, movetoworkspacesilent, name:Up"
+						"$mainMod+Shift, Down, movetoworkspacesilent, name:Down"
+						"$mainMod+Shift, Left, movetoworkspacesilent, name:Left"
+						"$mainMod+Shift, Right, movetoworkspacesilent, name:Right"
+					];
+					laptopRules = [
+						"$mainMod, 1, workspace, 1"
+						"$mainMod, 2, workspace, 2"
+						"$mainMod, 3, workspace, 3"
+						"$mainMod, 4, workspace, 4"
+
+						"$mainMod, 5, workspace, 5"
+						"$mainMod, 6, workspace, 6"
+						"$mainMod, 7, workspace, 7"
+						"$mainMod, 8, workspace, 8"
+
+						"$mainMod+Shift, 1, movetoworkspacesilent, 1"
+						"$mainMod+Shift, 2, movetoworkspacesilent, 2"
+						"$mainMod+Shift, 3, movetoworkspacesilent, 3"
+						"$mainMod+Shift, 4, movetoworkspacesilent, 4"
+
+						"$mainMod+Shift, 5, movetoworkspacesilent, 5"
+						"$mainMod+Shift, 6, movetoworkspacesilent, 6"
+						"$mainMod+Shift, 7, movetoworkspacesilent, 7"
+						"$mainMod+Shift, 8, movetoworkspacesilent, 8"
+
+						"$mainMod, Right, workspace, e+1"
+						"$mainMod, Left, workspace, e-1"
+
+						"$mainMod+Shift, Right, movetoworkspace, e+1"
+						"$mainMod+Shift, Left, movetoworkspace, e-1"
+					];
+					printscreen = "grim -g \"$(slurp -d)\" - | wl-copy --type image/png";
+				in [
 					"$mainMod+Shift, Return, exec, $terminal"
 					"Super_L, P, exec, $terminal"
 
@@ -126,46 +181,25 @@ in
 
 					", XF86Calculator, exec, rofi -show calc"
 
-					''Super_L+Shift_L, S, exec, grim -g "$(slurp -d)" - | wl-copy --type image/png''
-
-					"$mainMod, 1, workspace, 1"
-					"$mainMod, 2, workspace, 2"
-					"$mainMod, 3, workspace, 3"
-					"$mainMod, 4, workspace, 4"
-
-					"$mainMod, 5, workspace, 5"
-					"$mainMod, 6, workspace, 6"
-					"$mainMod, 7, workspace, 7"
-					"$mainMod, 8, workspace, 8"
-
-					"$mainMod+Shift, 1, movetoworkspacesilent, 1"
-					"$mainMod+Shift, 2, movetoworkspacesilent, 2"
-					"$mainMod+Shift, 3, movetoworkspacesilent, 3"
-					"$mainMod+Shift, 4, movetoworkspacesilent, 4"
-
-					"$mainMod+Shift, 5, movetoworkspacesilent, 5"
-					"$mainMod+Shift, 6, movetoworkspacesilent, 6"
-					"$mainMod+Shift, 7, movetoworkspacesilent, 7"
-					"$mainMod+Shift, 8, movetoworkspacesilent, 8"
-
-					"$mainMod, Right, workspace, e+1"
-					"$mainMod, Left, workspace, e-1"
-
-					"$mainMod+Shift, Right, movetoworkspace, e+1"
-					"$mainMod+Shift, Left, movetoworkspace, e-1"
+					"Super_L+Shift_L, S, exec, ${printscreen}"
+					", XF86Tools, exec, ${printscreen}"
+					", Print, exec, ${printscreen}"
 
 					"$mainMod+Alt, Right, movefocus, r"
 					"$mainMod+Alt, Left, movefocus, l"
 					"$mainMod+Alt, Up, movefocus, u"
 					"$mainMod+Alt, Down, movefocus, d"
 
-
 					"$mainMod+Ctrl, Right, movewindow, r"
 					"$mainMod+Ctrl, Left, movewindow, l"
 					"$mainMod+Ctrl, Up, movewindow, u"
 					"$mainMod+Ctrl, Down, movewindow, d"
 
-				];
+				] ++ (
+					if nixosConfig.laptop.enable
+						then laptopRules
+						else desktopRules
+				);
 
 				gestures = {
 					workspace_swipe = true;
@@ -197,7 +231,10 @@ in
 					];
 
 				exec-once = [
-					(builtins.toString ./init-workspaces.sh)
+					(if nixosConfig.laptop.enable
+						then builtins.toString ./init-laptop-workspaces.sh
+						else builtins.toString ./init-desktop-workspaces.sh
+					)
 					"wpaperd"
 					"swayidle -w lock '${screen.lock}' before-sleep '${screen.lock}; ${screen.off}' after-resume '${screen.on}' timeout 600 '${screen.lock}' timeout 900 '${hibernate}'"
 				];
