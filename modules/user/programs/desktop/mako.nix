@@ -26,6 +26,7 @@ in
 			anchor = "bottom-right";
 			margin = builtins.toString (gapsout + 20);
 			width = 426;
+			extraConfig = "outer-margin=32";
 		};
 	};
 }
