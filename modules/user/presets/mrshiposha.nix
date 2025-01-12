@@ -39,7 +39,7 @@ in
 				enable = mkDefault true;
 				package = pkgs.gitFull;
 				userName = "Daniel Shiposha";
-				userEmail = "ds@unique.network";
+				userEmail = "dev@shiposha.com";
 				extraConfig = {
 					safe.directory = ["/household"];
 				};
