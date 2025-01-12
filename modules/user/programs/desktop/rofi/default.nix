@@ -10,9 +10,10 @@ with lib;
 			terminal = "wezterm";
 			theme = ./theme.rasi;
 			pass.enable = config.crypto.enable;
-			plugins = [
+			plugins = with pkgs; [
 				# pkgs.rofi-calc -- broken, see https://github.com/NixOS/nixpkgs/issues/298539
-				pkgs.rofi-power-menu
+				(rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+				rofi-power-menu
 			];
 			# "calc" -- broken
 			# extraConfig.modes = "drun,power-menu:${pkgs.rofi-power-menu}/bin/rofi-power-menu,calc";
