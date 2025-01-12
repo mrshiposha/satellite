@@ -56,7 +56,7 @@ in
 				qrencode
 				inkscape
 			])
-			[coturn]
+			[coturn jq fx]
 		];
 	};
 }
