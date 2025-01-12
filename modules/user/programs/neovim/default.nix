@@ -35,18 +35,18 @@ with lib;
 			]
 		];
 
-    xdg.configFile.nvim = {
-      recursive = true;
-      source = pkgs.fetchFromGitLab {
-        owner = "gabmus";
-        repo = "nvpunk";
-        rev = "b6356fe1ded4a063ea30220d78f47008d2ad8d31";
-        sha256 = "sha256-hX1DyYKPDn4Lur9lSuHtfX/ChJnSunEHwEnMJe09PGU=";
-      };
-    };
-    xdg.configFile.nvpunk-prefs = {
-      target = "nvim/org.gabmus.nvpunk.preferences.json";
-      source = ./org.gabmus.nvpunk.preferences.json;
-    };
-	};	
+        xdg.configFile.nvim = {
+          recursive = true;
+          source = pkgs.fetchFromGitLab {
+            owner = "gabmus";
+            repo = "nvpunk";
+            rev = "b6356fe1ded4a063ea30220d78f47008d2ad8d31";
+            sha256 = "sha256-hX1DyYKPDn4Lur9lSuHtfX/ChJnSunEHwEnMJe09PGU=";
+          };
+        };
+        xdg.configFile.nvpunk-prefs = {
+          target = "nvim/org.gabmus.nvpunk.preferences.json";
+          source = ./org.gabmus.nvpunk.preferences.json;
+        };
+	};
 }
