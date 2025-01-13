@@ -52,7 +52,7 @@ in
 						"class<org.gnome.FileRoller>" = "";
 						"class<com.interversehq.qView>" = "";
 						"class<PureRef>" = "Ⓟ";
-						"class<org.wezfurlong.wezterm> title<nvim>" = "";
+						"class<org.wezfurlong.wezterm> title<hx>" = "";
 						"class<VSCodium>" = "󰨞";
 						"class<Codium>" = "󰨞";
 						"class<neovide>" = "";

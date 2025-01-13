@@ -9,7 +9,7 @@
 		./yazi.nix
 		./zathura.nix
 		./logseq.nix
-		./neovim
+		./helix.nix
 		./lazygit.nix
 		./vscode
 		./audio.nix
