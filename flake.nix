@@ -92,5 +92,12 @@
 					};
 				};
 			};
+
+			flake.templates = {
+				rust = {
+					description = "Rust Template";
+					path = ./templates/rust;
+				};
+			};
 		};
 }
