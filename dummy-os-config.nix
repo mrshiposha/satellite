@@ -67,11 +67,11 @@ in
   };
   home-manager.users = {
     mrshiposha = {
-      home.stateVersion = "24.05";
+      home.stateVersion = "24.11";
       programs.zsh.enable = true;
     };
     navigator = {
-      home.stateVersion = "24.05";
+      home.stateVersion = "24.11";
       programs.zsh.enable = true;
     };
   };
@@ -124,5 +124,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
