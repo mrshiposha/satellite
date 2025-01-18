@@ -68,6 +68,7 @@ in
 				};
 
 				cursor.inactive_timeout = 3;
+				debug.disable_logs = true;
 
 				animations = {
 					enabled = true;
@@ -227,8 +228,12 @@ in
 						"float,class:com.interversehq.qView"
 
 						"float,class:PureRef"
-						"size 512,334,class:PureRef"
+						"size 512 512,class:PureRef"
 						"move 100%-w-32 100%-w-64,class:PureRef"
+
+						"float,class:io.gitlab.adhami3310.Converter"
+						"float,class:com.belmoussaoui.Decoder"
+						"size 620 710,class:com.belmoussaoui.Decoder"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
