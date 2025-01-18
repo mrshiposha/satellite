@@ -1,6 +1,7 @@
 { config
 , lib
 , pkgs
+, flakeInputs
 , ...
 }:
 with lib;
@@ -74,6 +75,7 @@ in
 
 				programs.regreet = {
 					enable = true;
+					package = flakeInputs.multiseat.packages."x86_64-linux".regreet;
 					theme = greeterTheme.style;
 					iconTheme = greeterTheme.icons;
 					cursorTheme = {
@@ -92,6 +94,7 @@ in
 						};
 					};
 				};
+				services.greetd.package = flakeInputs.multiseat.packages."x86_64-linux".greetd;
 
 				security.pam.services.swaylock = {};
 				security.rtkit.enable = true;

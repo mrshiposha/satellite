@@ -10,9 +10,13 @@
 			url = "github:CertainLach/fleet";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		multiseat = {
+			url = "github:mrshiposha/nixos-fullwayland-multiseat";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
-	outputs = inputs@{ nixpkgs, flake-parts, fleet, home-manager, ... }:
+	outputs = inputs@{ nixpkgs, flake-parts, home-manager, fleet, multiseat, ... }:
 	let
 		household = (import ./lib).household;
 		navigatorUser = import ./navigator.nix;
@@ -32,12 +36,23 @@
 			fleetConfigurations.default = {
 				nixpkgs.buildUsing = nixpkgs;
 
-				nixos.config._module.args.household = household;
+				nixos.config._module.args = {
+					flakeInputs = inputs;
+					inherit household;
+				};
 				nixos.imports = [
 					household.modules.system
+					multiseat.nixosModules.poly
+					multiseat.nixosModules.greetd
+					multiseat.nixosModules.regreet
 					home-manager.nixosModules.home-manager
 					navigatorUser
 					{
+						disabledModules = [
+							"services/display-managers/greetd.nix"
+							"programs/regreet.nix"
+						];
+
 						# Make `nix shell nixpkgs#thing` use the same nixpkgs, as used to build the system.
 						nix = {
 							registry.nixpkgs = {
