@@ -70,6 +70,7 @@ in
 						"class<ghidra-Ghidra>" = "";
 						"class<steam>" = "";
 						"class<Logseq>" = "";
+						"class<usbimager>" = "";
 
 						"class<pavucontrol>" = "<sub></sub>";
 						"class<nm-connection-editor>" = "<sub></sub>";

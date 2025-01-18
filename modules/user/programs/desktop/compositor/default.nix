@@ -234,6 +234,9 @@ in
 						"float,class:io.gitlab.adhami3310.Converter"
 						"float,class:com.belmoussaoui.Decoder"
 						"size 620 710,class:com.belmoussaoui.Decoder"
+
+						"float,class:usbimager"
+						"size 480 190,class:usbimager"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (

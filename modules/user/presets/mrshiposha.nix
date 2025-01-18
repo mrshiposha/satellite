@@ -68,6 +68,7 @@ in
 		};
 
 		home.packages = with pkgs; mkMerge [
+			(mkIf nixosConfig.gui.enable [usbimager])
 			[coturn jq fx]
 		];
 	};
