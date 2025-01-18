@@ -6,7 +6,7 @@ in
 {
 	options.preset.mrshiposha = {
 		enable = mkEnableOption "mrshiposha user";
-		imageUtils.enable = mkEnableOption "image and qr utils";
+		devEmail = mkEnableOption "dev email sender";
 	};
 
 	config = mkIf cfg.enable {
@@ -51,11 +51,23 @@ in
 			};
 		};
 
+		accounts.email.accounts = mkIf cfg.devEmail {
+			dev = {
+				primary = true;
+				realName = "Daniel Shiposha";
+				address = "dev@shiposha.com";
+				userName = "dev@shiposha.com";
+				passwordCommand = "cat ${config.secrets.dev-email.secret.path}";
+
+				aerc.enable = true;
+				smtp = {
+					host = "smtp.protonmail.ch";
+					port = 587;
+				};
+			};
+		};
+
 		home.packages = with pkgs; mkMerge [
-			(mkIf cfg.imageUtils.enable [
-				qrencode
-				inkscape
-			])
 			[coturn jq fx]
 		];
 	};

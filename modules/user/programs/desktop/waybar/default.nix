@@ -53,6 +53,8 @@ in
 						"class<com.interversehq.qView>" = "";
 						"class<PureRef>" = "Ⓟ";
 						"class<org.wezfurlong.wezterm> title<hx>" = "";
+						"class<io.gitlab.adhami3310.Converter>" = "";
+						"class<com.belmoussaoui.Decoder>" = "";
 						"class<VSCodium>" = "󰨞";
 						"class<Codium>" = "󰨞";
 						"class<neovide>" = "";

@@ -22,7 +22,12 @@ in
 		};
 
 		home.packages = with pkgs; mkMerge [
-			( mkIf nixosConfig.gui.enable [ xdg-utils qview ] )
+			(mkIf nixosConfig.gui.enable [
+				xdg-utils
+				qview
+				switcheroo
+				gnome-decoder
+			])
 			[ trash-cli ]
 		];
 
