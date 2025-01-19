@@ -2,6 +2,7 @@
 {
 	users.users.mrshiposha = {
 		isNormalUser = true;
+		uid = 1000;
 		description = "Daniel Shiposha";
 		extraGroups = [ "wheel" ];
 		openssh.authorizedKeys.keys = [

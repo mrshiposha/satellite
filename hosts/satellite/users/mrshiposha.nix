@@ -1,13 +1,21 @@
 { household, ... }:
-{
+let uid = 1000; in {
 	users.users.mrshiposha = {
 		isNormalUser = true;
+		inherit uid;
 		description = "Daniel Shiposha";
 		extraGroups = [
 			"wheel"
 			"podman"
 		];
 	};
+	gui.games.mountSharedLibraryFor = [
+		{
+			ownerName = "mrshiposha";
+			ownerId = uid;
+			groupId = household.usersGid;
+		}
+	];
 
 	home-manager.users.mrshiposha = {
 		imports = [ household.modules.user ];

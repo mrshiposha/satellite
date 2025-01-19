@@ -105,11 +105,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737183627,
-        "narHash": "sha256-Nvwt7wpqy50jb1QGD0AfRiOpCNSwUpUemKZHbJLxJRc=",
+        "lastModified": 1737309749,
+        "narHash": "sha256-Qe98pc2sH5Ez3I0N+zNHO4BfsdBGOd/74qIGfOxr2zg=",
         "owner": "mrshiposha",
         "repo": "nixos-fullwayland-multiseat",
-        "rev": "d845a041def307cf4cea25a8f6895985db976cf7",
+        "rev": "f0294dbd684e27c208213b6a7994a6df8f170f0d",
         "type": "github"
       },
       "original": {

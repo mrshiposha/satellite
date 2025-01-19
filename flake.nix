@@ -45,6 +45,7 @@
 					multiseat.nixosModules.poly
 					multiseat.nixosModules.greetd
 					multiseat.nixosModules.regreet
+					multiseat.nixosModules.shared
 					home-manager.nixosModules.home-manager
 					navigatorUser
 					{
@@ -85,6 +86,8 @@
 						};
 
 						programs.nix-ld.enable = true;
+
+						users.groups.users.gid = household.usersGid;
 
 						security.sudo.extraConfig = ''
 							Defaults:root,%wheel timestamp_timeout=0

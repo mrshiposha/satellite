@@ -6,6 +6,8 @@
 		};
 		image = path: ../images + path;
 
+		usersGid = 100;
+
 		eachSystemConfig = { nixpkgs, fleet, ... }: system:
 			let pkgs = import nixpkgs { inherit system; }; in {
 				devShells.default = pkgs.mkShell {
