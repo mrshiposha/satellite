@@ -237,6 +237,8 @@ in
 
 						"float,class:usbimager"
 						"size 480 190,class:usbimager"
+
+						"float,class:steam"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
