@@ -1,4 +1,4 @@
-{ nixosConfig, config, pkgs, lib, household, ... }:
+{ nixosConfig, config, pkgs, lib, ... }:
 with lib;
 let
 	cfg = config.preset.regularUser;
@@ -39,7 +39,7 @@ in
 		in mkIf nixosConfig.gui.enable {
 			mimeApps = {
 				enable = true;
-				defaultApplications = mkIf nixosConfig.gui.filemanager.enable {
+				defaultApplications = mkIf nixosConfig.gui.enable {
 					"inode/directory" = mkDefault	filemanagerDesktop;
 
 					"application/x-7z-compressed" = mkDefault archiverDesktop;

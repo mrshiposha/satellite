@@ -20,8 +20,6 @@ in {
       };
     };
 
-    filemanager.enable = mkEnableOption "file manager";
-
     greeter.seat0.theme = {
       wallpaper = mkOption { type = path; };
 
@@ -120,7 +118,7 @@ in {
       };
     })
 
-    (mkIf cfg.filemanager.enable {
+    ({
       programs = {
         thunar = {
           enable = true;
@@ -221,7 +219,6 @@ in {
           group = "root";
           source = "/shared/steam/poly/compatdata";
           type = "user";
-          ignoreFor = [ "root" "greeter" ];
         }];
       };
 

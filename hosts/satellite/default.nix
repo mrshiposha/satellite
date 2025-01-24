@@ -31,7 +31,6 @@
 
       gui = {
         enable = true;
-        filemanager.enable = true;
         games.enable = true;
         greeter.seat0.theme = household.greeterThemeFromUserTheme
           config.home-manager.users.mrshiposha;
