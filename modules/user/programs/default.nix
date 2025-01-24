@@ -15,5 +15,6 @@
 		./audio.nix
 		./laptop.nix
 		./crypto.nix
+		./obs.nix
 	];
 }

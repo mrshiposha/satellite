@@ -14,12 +14,16 @@ in
 		firefox.addons = [ "grammarly-1" ];
 
 		home.packages = with pkgs; [
-      pureref
+			pureref
+			(blender-hip.overrideAttrs {
+				version = "4.2.3";
+			})
+			blockbench
 		];
 
-    unfree.list = with pkgs; [
-      pureref
-    ];
+		unfree.list = with pkgs; [
+			pureref
+		];
 
     xdg.desktopEntries.pureref = {
 			name = "PureRef";
