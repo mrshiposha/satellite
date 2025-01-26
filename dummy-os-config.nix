@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
 in
 {
   imports =
@@ -51,6 +51,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mrshiposha = {
     isNormalUser = true;
+    uid = 1000;
     description = "Daniel Shiposha";
     extraGroups = [ "wheel" ];
     packages = with pkgs; [];
@@ -58,6 +59,7 @@ in
   users.users.navigator = {
     description = "fleet navigator";
     isNormalUser = true;
+    uid = 1010;
     group = "wheel";
     shell = pkgs.zsh;
     hashedPassword = "!";

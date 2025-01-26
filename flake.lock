@@ -105,11 +105,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737309749,
-        "narHash": "sha256-Qe98pc2sH5Ez3I0N+zNHO4BfsdBGOd/74qIGfOxr2zg=",
+        "lastModified": 1737848201,
+        "narHash": "sha256-IWv/TN/Svns2nzhz6C6oNFXBOGH0lEOk1XtT+cz6byQ=",
         "owner": "mrshiposha",
         "repo": "nixos-fullwayland-multiseat",
-        "rev": "f0294dbd684e27c208213b6a7994a6df8f170f0d",
+        "rev": "fbcd89fcb2c8bcc4d3023bc944bcb67dc0128baf",
         "type": "github"
       },
       "original": {
@@ -120,11 +120,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1736157590,
-        "narHash": "sha256-g+ZmD2im7YQ9TVW7xSWSdXuwVAtzhEZ7MdyKnOaqOrk=",
+        "lastModified": 1737828179,
+        "narHash": "sha256-JbtUMTZ+9xcgzqrwWSgwj1NP0licn9+XGf4/br1eL08=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "08d50bdd3757fc50f05130a85ff91a901a5e5205",
+        "rev": "9e251c2f383923ed9498a280afc037c38bff2aa9",
         "type": "github"
       },
       "original": {

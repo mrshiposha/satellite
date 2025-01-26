@@ -248,7 +248,7 @@ in
 						autoLock
 					]
 					else [
-						builtins.toString ./init-desktop-workspaces.sh
+						(builtins.toString ./init-desktop-workspaces.sh)
 					]
 				);
 			};

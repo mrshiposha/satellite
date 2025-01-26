@@ -15,7 +15,7 @@ in
 
 	config = with pkgs; {
 		home.packages = mkMerge [
-			( mkIf cfg.telegram.enable [ tdesktop ] )
+			( mkIf cfg.telegram.enable [ telegram-desktop ] )
 			( mkIf cfg.discord.enable [ discord-canary ] )
 			( mkIf cfg.mattermost.enable [ mattermost-desktop ] )
 			( mkIf cfg.matrix.enable [ element-desktop ] )

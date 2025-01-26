@@ -46,6 +46,7 @@
 					multiseat.nixosModules.greetd
 					multiseat.nixosModules.regreet
 					multiseat.nixosModules.shared
+					multiseat.nixosModules.multiseat
 					home-manager.nixosModules.home-manager
 					navigatorUser
 					{
@@ -96,6 +97,17 @@
 				];
 
 				hosts = {
+					hearthstone = import ./hosts/hearthstone {
+						ip.addr = {
+							v6 = [];
+							v4 = [
+								{
+									address = "192.168.0.10";
+									prefixLength = 24;
+								}
+							];
+						};
+					};
 					satellite = import ./hosts/satellite;
 					sentinel = import ./hosts/sentinel {
 						ip.addr = {

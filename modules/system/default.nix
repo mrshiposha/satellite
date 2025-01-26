@@ -12,6 +12,8 @@ with lib;
 		./container-mgmt.nix
 		./unfree.nix
 		./services
+		./razer.nix
+		./monitoring.nix
 	];
 
 	hardware.enableRedistributableFirmware = mkDefault true;

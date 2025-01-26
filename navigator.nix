@@ -1,7 +1,10 @@
-{ config, pkgs, household, ... }: {
+{ config, pkgs, household, ... }:
+let uid = 1010; in
+{
   users.users.navigator = {
     description = "fleet navigator";
     isNormalUser = true;
+    inherit uid;
     group = "wheel";
     shell = pkgs.zsh;
     hashedPassword = "!";
